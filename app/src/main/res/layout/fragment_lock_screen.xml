@@ -1,0 +1,263 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.Fragment.LockScreenFragment">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:id="@+id/info_view"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/lock_screen_menu"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/menu"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/txt_lock_title"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/lock_screen_setting"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/question"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e0e0e0"
+            android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/lock_screen_pre_double"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/next_double"
+                android:rotation="180" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/lock_screen_pre"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/previous" />
+
+            <TextView
+                android:id="@+id/txt_lock_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/lock_screen_nex"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/next" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/lock_screen_nex_double"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/next_double" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e0e0e0"
+            android:orientation="vertical"></LinearLayout>
+
+        <com.diallock.diallock.diallock.Activity.Layout.ViewPager.HorizontalViewPager
+            android:id="@+id/info_frag_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="-1dp"
+            android:background="#e0e0e0"
+            android:orientation="vertical" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/info_dial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:gravity="bottom">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentTop="true"
+            android:background="@null">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_call"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/selector_btn_call"
+                android:visibility="invisible" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_app"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/selector_btn_app"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+
+        <fragment
+            android:id="@+id/circleDial"
+            android:name="com.diallock.diallock.diallock.Activity.Fragment.CircleDial"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="circleDial" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_dial_pattern"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:background="@null" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_find_pass"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/password_find" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/info_slideView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <RelativeLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/info_slideView_cancle"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/selector_btn_slide_cancel" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="닫기"
+                        android:textColor="#ffffff"
+                        android:textSize="18dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txtImgSlideProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="1/1"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+
+            <com.diallock.diallock.diallock.Activity.Layout.ViewPager.HorizontalViewPager
+                android:id="@+id/info_slideView_viewPager_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="#be7c7c"
+                android:orientation="horizontal"></LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

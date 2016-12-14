@@ -1,0 +1,12 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.diallock.diallock.diallock.Activity.Fragment.TourismInfo">
+
+    <com.diallock.diallock.diallock.Activity.Layout.ViewPager.VerticalViewPager
+        android:id="@+id/tour_frag_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>
