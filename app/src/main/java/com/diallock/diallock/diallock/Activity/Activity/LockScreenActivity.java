@@ -106,6 +106,9 @@ public class LockScreenActivity extends AppCompatActivity implements EventInfoIt
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         setFindView();
+
+        backFlag = false;
+
         //init();
         //setOnClick();
         //setListView();
@@ -144,7 +147,7 @@ public class LockScreenActivity extends AppCompatActivity implements EventInfoIt
     }
 
     private void init() {
-        /*backFlag = false;
+       /* backFlag = false;
 
         mNowDate = CommonJava.getNowDate();
 
@@ -533,6 +536,7 @@ public class LockScreenActivity extends AppCompatActivity implements EventInfoIt
             case MotionEvent.ACTION_DOWN:
 
                 circleLayout.screenTouchLocationStart(xLocation, yLocation);
+                circleLayout.screenTouchLocationDrag(xLocation, yLocation);
                 break;
             case MotionEvent.ACTION_MOVE:
 

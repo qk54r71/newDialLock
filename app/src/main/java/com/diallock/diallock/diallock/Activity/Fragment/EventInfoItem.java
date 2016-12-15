@@ -156,7 +156,6 @@ public class EventInfoItem extends Fragment {
                     eventRemainDay_text.setText("" + mEventInfoData.getEventSlideImage().size());
                 }
 
-
             } else {
                 eventRemainDay_text.setText("D-" + strEventRemainDay);
             }
@@ -172,6 +171,9 @@ public class EventInfoItem extends Fragment {
             eventRemainDay_text.setVisibility(View.VISIBLE);
             eventRemainDay_bg.setVisibility(View.VISIBLE);
         } else if (mEventInfoData.getCode().equals("3001")) {
+            eventRemainDay_text.setVisibility(View.GONE);
+            eventRemainDay_bg.setVisibility(View.GONE);
+        } else if(mEventInfoData.getCode().equals("1001")){
             eventRemainDay_text.setVisibility(View.GONE);
             eventRemainDay_bg.setVisibility(View.GONE);
         }

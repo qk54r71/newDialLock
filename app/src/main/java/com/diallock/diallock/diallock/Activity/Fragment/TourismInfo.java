@@ -198,7 +198,9 @@ public class TourismInfo extends Fragment {
                 CommonJava.Loging.i(LOG_NAME, "JsonObjectRequest mTourismInfoDataArrayList :" + mTourismInfoDataArrayList.toString());
                 CommonJava.Loging.i(LOG_NAME, "JsonObjectRequest mTourismInfoDataArrayList getCode :" + mTourismInfoDataArrayList.get(0).getCode());
 
+
                 setFragment(mTourismInfoDataArrayList);
+
 
             }
         }, new Response.ErrorListener() {

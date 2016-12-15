@@ -386,7 +386,7 @@ public class CircleLayout extends View {
 
         float bitmapImgX = width / 2;
         float bitmapImgY = height / 2 + (int) (parentLinearHeight / 2);
-        int bitmapRadius = mOuterRadius;
+        int bitmapRadius = (int) (mOuterRadius * 1.2);
 
         mBigArcLocation.setxLocation(bitmapImgX);
         mBigArcLocation.setyLocation(bitmapImgY);
@@ -420,21 +420,25 @@ public class CircleLayout extends View {
                 mDialImageInfo.initDialImageInfo();
 
                 if (isDialInner) {
-                    int isImageInnerIndex = isImageInner(xLocation, yLocation);
+
+                    //int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                    int isImageInnerIndex = isDistance(xLocation, yLocation);
+
                     if (isImageInnerIndex != NUM_NULL) {
 
                         CommonJava.Loging.i(LOG_NAME, "screenTouchLocationStart Event start isImageInnerIndex : " + isImageInnerIndex);
                         mStartDial = true;
                         //mDialImageInfo.setCurrentClickBitmapImageIndex(isImageInnerIndex);
-
-                        mPassword = isImageInnerValue(xLocation, yLocation);
+/*
+                        mPassword = isImageInnerValue(xLocation, yLocation);*/
                         CommonJava.Loging.i(LOG_NAME, "screenTouchLocationStart isImageInnerValue : " + mPassword);
-                        if (LockScreenFragment.smSwitchRandom) {
+                        /*if (LockScreenFragment.smSwitchRandom) {
                             bitmapImageListShuffle();
                         }
                         CommonJava.Loging.i(LOG_NAME, "LockScreenFragment.smSwitchRandom : " + LockScreenFragment.smSwitchRandom);
                         invalidate();
-                        isVibrator();
+                        isVibrator();*/
+                        comebackBitmapImage(isImageInnerIndex);
 
                     }
                 }
@@ -446,12 +450,15 @@ public class CircleLayout extends View {
                 mDialImageInfo.initDialImageInfo();
 
                 if (isDialInnerZIG) {
-                    int isImageInnerIndex = isImageInner(xLocation, yLocation);
+
+                    //int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                    int isImageInnerIndex = isDistance(xLocation, yLocation);
+
                     if (isImageInnerIndex != NUM_NULL) {
 
                         CommonJava.Loging.i(LOG_NAME, "screenTouchLocationStart Dial ZIG isImageInnerIndex : " + isImageInnerIndex);
                         mStartDial = true;
-                        mDragIndex = isImageInnerIndex;
+                       /* mDragIndex = isImageInnerIndex;
                         mDialImageInfo.setPressBitmapImageIndex(isImageInnerIndex);
 
                         mPassword = isImageInnerValue(xLocation, yLocation);
@@ -462,15 +469,18 @@ public class CircleLayout extends View {
                         }
                         CommonJava.Loging.i(LOG_NAME, "LockScreenFragment.smSwitchRandom : " + LockScreenFragment.smSwitchRandom);
                         invalidate();
-                        isVibrator();
-                        comebackBitmapImage(isImageInnerIndex);
+                        isVibrator();*/
+                        //comebackBitmapImage(isImageInnerIndex);
 
                     }
                 }
 
                 break;
             case 2:
-                int isImageInnerIndex = isImageInner(xLocation, yLocation);
+
+                //int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                int isImageInnerIndex = isDistance(xLocation, yLocation);
+
                 if (isImageInnerIndex != NUM_NULL) {
 
                     CommonJava.Loging.i("CircleLayoutPassword", "screenTouchLocationStart Event start isImageInnerIndex : " + isImageInnerIndex);
@@ -521,7 +531,8 @@ public class CircleLayout extends View {
                     Boolean isDialInner = isDialInner(xLocation, yLocation);
 
                     if (isDialInner) {
-                        int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                        //int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                        int isImageInnerIndex = isDistance(xLocation, yLocation);
 
                         if (isImageInnerIndex != NUM_NULL && mDragIndex != isImageInnerIndex) {
 
@@ -556,6 +567,7 @@ public class CircleLayout extends View {
                                 CommonJava.Loging.i(LOG_NAME, "LockScreenFragment.smSwitchRandom : " + LockScreenFragment.smSwitchRandom);
                                 invalidate();
                                 isVibrator();
+                                comebackBitmapImage(isImageInnerIndex);
                             }
 
 
@@ -592,7 +604,8 @@ public class CircleLayout extends View {
                             mDragIndex = NUM_NULL;
                         }
 
-                        int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                        //int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                        int isImageInnerIndex = isDistance(xLocation, yLocation);
 
                         if (isImageInnerIndex != NUM_NULL && mDragIndex != isImageInnerIndex) {
 
@@ -671,8 +684,8 @@ public class CircleLayout extends View {
                         CommonJava.Loging.i(LOG_NAME, "맞는 비밀번호 입니다.");
                         if (mContext instanceof LockScreenViewActivity) {
                             LockScreenManager.getInstance((Activity) mContext).startTxtToast("맞는 비밀번호 입니다.");
-                        }else if(mContext instanceof LockScreenActivity){
-                            ((LockScreenActivity)mContext).isToast("맞는 비밀번호 입니다.");
+                        } else if (mContext instanceof LockScreenActivity) {
+                            ((LockScreenActivity) mContext).isToast("맞는 비밀번호 입니다.");
                         }
 
 
@@ -701,8 +714,8 @@ public class CircleLayout extends View {
 
                         if (mContext instanceof LockScreenViewActivity) {
                             LockScreenManager.getInstance((Activity) mContext).startTxtToast("잘못된 비밀번호 입니다.");
-                        }else if(mContext instanceof LockScreenActivity){
-                            ((LockScreenActivity)mContext).isToast("잘못된 비밀번호 입니다.");
+                        } else if (mContext instanceof LockScreenActivity) {
+                            ((LockScreenActivity) mContext).isToast("잘못된 비밀번호 입니다.");
                         }
 
                         CommonJava.Loging.i(LOG_NAME, "잘못된 비밀번호 입니다.");
@@ -750,8 +763,8 @@ public class CircleLayout extends View {
 
                             if (mContext instanceof LockScreenViewActivity) {
                                 LockScreenManager.getInstance((Activity) mContext).startTxtToast("맞는 비밀번호 입니다.");
-                            }else if(mContext instanceof LockScreenActivity){
-                                ((LockScreenActivity)mContext).isToast("맞는 비밀번호 입니다.");
+                            } else if (mContext instanceof LockScreenActivity) {
+                                ((LockScreenActivity) mContext).isToast("맞는 비밀번호 입니다.");
                             }
 
                             ((Activity) mContext).finish();
@@ -769,8 +782,8 @@ public class CircleLayout extends View {
 
                         if (mContext instanceof LockScreenViewActivity) {
                             LockScreenManager.getInstance((Activity) mContext).startTxtToast("잘못된 비밀번호 입니다.");
-                        }else if(mContext instanceof LockScreenActivity){
-                            ((LockScreenActivity)mContext).isToast("잘못된 비밀번호 입니다.");
+                        } else if (mContext instanceof LockScreenActivity) {
+                            ((LockScreenActivity) mContext).isToast("잘못된 비밀번호 입니다.");
                         }
 
                     }
@@ -943,6 +956,36 @@ public class CircleLayout extends View {
     }
 
     /**
+     * 현재 터치된 화면 값이 어느 버튼과 가까운지 체크
+     *
+     * @param xTouch
+     * @param yTouch
+     * @return 현재 제일 가까운 버튼의 인덱스
+     */
+    private int isDistance(float xTouch, float yTouch) {
+
+        int currentIndex = 0;
+        double currentDistance = 0;
+
+        for (int btnIndex = 0; btnIndex < mBitmapImages.size(); btnIndex++) {
+
+            float xLocation = mBitmapImages.get(btnIndex).getxLocation();
+            float yLocation = mBitmapImages.get(btnIndex).getyLocation();
+
+            double distance = Math.pow(Math.abs(xLocation - xTouch), 2) + Math.pow(Math.abs(yLocation - yTouch), 2);
+            CommonJava.Loging.i(LOG_NAME, "distance : " + distance);
+            CommonJava.Loging.i(LOG_NAME, "currentDistance : " + currentDistance);
+            if (currentDistance == 0) {
+                currentDistance = distance;
+            } else if (distance < currentDistance) {
+                currentDistance = distance;
+                currentIndex = btnIndex;
+            }
+        }
+        return currentIndex;
+    }
+
+    /**
      * 다이얼 모양 안에 터치됬는지 확인
      *
      * @param xTouch : 터치된 x값
@@ -1004,7 +1047,7 @@ public class CircleLayout extends View {
      * @return
      */
     private String isImageInnerValue(float xTouch, float yTouch) {
-        for (int i = 0; i < mBitmapImages.size(); i++) {
+        /*for (int i = 0; i < mBitmapImages.size(); i++) {
             Boolean isClick = isInnerLocation(
                     mBitmapImages.get(i).getxLocation(), mBitmapImages.get(i).getyLocation(),
                     xTouch, yTouch,
@@ -1013,8 +1056,14 @@ public class CircleLayout extends View {
             if (isClick) {
                 return mBitmapImages.get(i).getBitmapValue();
             }
-        }
-        return null;
+        }*/
+
+        int btnIndex = isDistance(xTouch, yTouch);
+
+        CommonJava.Loging.i(LOG_NAME, "btnIndex : " + btnIndex);
+        CommonJava.Loging.i(LOG_NAME, "mBitmapImages.get(btnIndex).getBitmapValue() : " + mBitmapImages.get(btnIndex).getBitmapValue());
+
+        return mBitmapImages.get(btnIndex).getBitmapValue();
     }
 
 

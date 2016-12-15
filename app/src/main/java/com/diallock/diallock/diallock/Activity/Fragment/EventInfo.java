@@ -233,7 +233,9 @@ public class EventInfo extends Fragment {
                 CommonJava.Loging.i(LOG_NAME, "JsonObjectRequest mEventInfoDataArrayList :" + mEventInfoDataArrayList.toString());
                 CommonJava.Loging.i(LOG_NAME, "JsonObjectRequest mEventInfoDataArrayList getCode :" + mEventInfoDataArrayList.get(0).getCode());
 
+
                 setFragment(mEventInfoDataArrayList);
+
 
             }
         }, new Response.ErrorListener() {
