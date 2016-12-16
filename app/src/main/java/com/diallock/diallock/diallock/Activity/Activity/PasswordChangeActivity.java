@@ -72,6 +72,9 @@ public class PasswordChangeActivity extends AppCompatActivity {
             case "veryfirst":
                 pass_btn_ok.setEnabled(false);
                 break;
+            case "verySecond":
+                strSwitch = "verySecond";
+                break;
             case "first":
                 strSwitch = "first";
                 break;
@@ -118,25 +121,23 @@ public class PasswordChangeActivity extends AppCompatActivity {
                     CommonJava.Loging.i(getLocalClassName(), "isPasswordLangth() : " + isPasswordLangth());
 
                     if (passProgress && isPasswordLangth()) {
-
                         switch (strSwitch) {
                             case "veryfirst":
+                                startSecondActivty("verySecond");
+                                break;
                             case "first":
-                                Intent intentSettingFirst = new Intent(PasswordChangeActivity.this, PasswordChangeActivity.class);
-                                intentSettingFirst.putExtra("strSwitch", "second");
-
-                                String strPasswordFirst = (String) pass_txt_lock.getText();
-                                intentSettingFirst.putExtra("password", strPasswordFirst);
-
-                                startActivity(intentSettingFirst);
-
-                                Toast.makeText(getApplicationContext(), "한번 더 패스워드를 입력하세요.", Toast.LENGTH_SHORT).show();
-
-                                finish();
+                                startSecondActivty("second");
+                                break;
+                            case "verySecond":
+                                if (isPasswordSame()) {
+                                    networkConnect("verySecond");
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "전 단계의 패스워드와 맞지 않습니다.", Toast.LENGTH_SHORT).show();
+                                }
                                 break;
                             case "second":
                                 if (isPasswordSame()) {
-                                    networkConnect("1000");
+                                    networkConnect("second");
                                 } else {
                                     Toast.makeText(getApplicationContext(), "전 단계의 패스워드와 맞지 않습니다.", Toast.LENGTH_SHORT).show();
                                 }
@@ -148,6 +149,21 @@ public class PasswordChangeActivity extends AppCompatActivity {
             }
         }
     };
+
+    private void startSecondActivty(String strSwitch) {
+
+        Intent intentSettingFirst = new Intent(PasswordChangeActivity.this, PasswordChangeActivity.class);
+        intentSettingFirst.putExtra("strSwitch", strSwitch);
+
+        String strPasswordFirst = (String) pass_txt_lock.getText();
+        intentSettingFirst.putExtra("password", strPasswordFirst);
+
+        startActivity(intentSettingFirst);
+
+        Toast.makeText(getApplicationContext(), "한번 더 패스워드를 입력하세요.", Toast.LENGTH_SHORT).show();
+
+        finish();
+    }
 
     /**
      * 패스워드 길이 조절
@@ -264,25 +280,42 @@ public class PasswordChangeActivity extends AppCompatActivity {
 
     }
 
-    private void networkConnect(String strCode) {
+    private void networkConnect(String strSwitch) {
         CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest networkConnect");
 
         JSONObject jsonObject = new JSONObject();
+        String strURL = null;
         try {
-            String strGoogleEmail = CommonJava.getGmail(PasswordChangeActivity.this);
-            String strPhoneNumber = CommonJava.getPhoneNumber(PasswordChangeActivity.this);
-            String strIMEI = CommonJava.getIMEI(PasswordChangeActivity.this);
-            String strPasswordSecond = (String) pass_txt_lock.getText();
+            if (strSwitch.equals("verySecond")) {
+                String strGoogleEmail = CommonJava.getGmail(PasswordChangeActivity.this);
+                String strPhoneNumber = CommonJava.getPhoneNumber(PasswordChangeActivity.this);
+                String strIMEI = CommonJava.getIMEI(PasswordChangeActivity.this);
+                String strPasswordSecond = (String) pass_txt_lock.getText();
+                CommonJava.Loging.i(LOG_NAME, "networkConnect strGoogleEmail : " + strGoogleEmail);
+                CommonJava.Loging.i(LOG_NAME, "networkConnect strPhoneNumber : " + strPhoneNumber);
+                CommonJava.Loging.i(LOG_NAME, "networkConnect strIMEI : " + strIMEI);
 
-            CommonJava.Loging.i(LOG_NAME, "networkConnect strGoogleEmail : " + strGoogleEmail);
-            CommonJava.Loging.i(LOG_NAME, "networkConnect strPhoneNumber : " + strPhoneNumber);
-            CommonJava.Loging.i(LOG_NAME, "networkConnect strIMEI : " + strIMEI);
+                jsonObject.put("googleEmail", strGoogleEmail);
+                jsonObject.put("phoneNumber", strPhoneNumber);
+                jsonObject.put("IMEI_IDX", strIMEI);
+                jsonObject.put("password", strPasswordSecond);
+                jsonObject.put("code", "1000");
 
-            jsonObject.put("googleEmail", strGoogleEmail);
-            jsonObject.put("phoneNumber", strPhoneNumber);
-            jsonObject.put("IMEI_IDX", strIMEI);
-            jsonObject.put("password", strPasswordSecond);
-            jsonObject.put("code", strCode);
+                strURL = "http://molppangmy.cafe24.com/APPAPI/memberAccession";
+
+            } else if (strSwitch.equals("second")) {
+                String strMemberIdx = CommonJava.loadSharedPreferences(PasswordChangeActivity.this, "memberIdx");
+                String strPasswordSecond = (String) pass_txt_lock.getText();
+
+                CommonJava.Loging.i(LOG_NAME, "networkConnect strMemberIdx : " + strMemberIdx);
+                CommonJava.Loging.i(LOG_NAME, "networkConnect strPasswordSecond : " + strPasswordSecond);
+
+                jsonObject.put("member_idx", strMemberIdx);
+                jsonObject.put("changePassword", strPasswordSecond);
+                jsonObject.put("code", "1000");
+
+                strURL = "http://molppangmy.cafe24.com/APPAPI/passwordChange";
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

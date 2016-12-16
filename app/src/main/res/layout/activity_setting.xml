@@ -251,7 +251,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:src="@drawable/call_on" />
+                android:src="@drawable/call_icon" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -283,7 +283,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:src="@drawable/app_on" />
+                android:src="@drawable/app_more_icon" />
 
             <TextView
                 android:id="@+id/textView8"
