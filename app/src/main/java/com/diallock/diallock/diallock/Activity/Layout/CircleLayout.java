@@ -21,6 +21,7 @@ import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -268,6 +269,11 @@ public class CircleLayout extends View {
         Point point = new Point();
         display.getSize(point);
 
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+
+        int dpi = metrics.densityDpi;
+
         Integer parentLinearWidth = point.x;
         Integer parentLinearHeight = point.y;
 
@@ -323,7 +329,7 @@ public class CircleLayout extends View {
                 bitmapClickImage = mBitmapImages.get(i).getNum();
             }*/
             CommonJava.Loging.i(LOG_NAME, "bitmapClickImage i :" + i);
-            if (mDialImageInfo.getPressBitmapImageIndex() != null && mDialImageInfo.getPressBitmapImageIndex().size() != 0 && LockScreenFragment.mSwitchValue != 0) {
+            if (mDialImageInfo.getPressBitmapImageIndex() != null && mDialImageInfo.getPressBitmapImageIndex().size() != 0) {
                 CommonJava.Loging.i(LOG_NAME, "bitmapClickImage  mDialImageInfo.getPressBitmapImageIndex() :" + mDialImageInfo.getPressBitmapImageIndex());
                 for (Integer bitmapIndex : mDialImageInfo.getPressBitmapImageIndex()) {
                     if (bitmapIndex == i) {
@@ -362,8 +368,8 @@ public class CircleLayout extends View {
             /**
              * 터치되는 버튼 영역 크기 조절
              */
-            mBitmapImages.get(i).setImgRadius((int) (bitmapRadius * 1.25 * width / 1440));
-            CommonJava.Loging.i(LOG_NAME, "(int) (bitmapRadius * 1.25 * width / 1440) :" + (int) (bitmapRadius * 1.25 * width / 1440));
+            mBitmapImages.get(i).setImgRadius((int) (bitmapRadius * 1.3 * width / 1440));
+            CommonJava.Loging.i(LOG_NAME, "(int) (bitmapRadius * 1.3 * width / 1440) :" + (int) (bitmapRadius * 1.3 * width / 1440));
         }
 
         mPaint.setColor(Color.WHITE);
@@ -392,7 +398,7 @@ public class CircleLayout extends View {
         mBigArcLocation.setyLocation(bitmapImgY);
         mBigArcLocation.setImgRadius(bitmapRadius);
 
-        bitmapRadius = mInnerRadius;
+        bitmapRadius = (int) (mInnerRadius * 0.9);
 
         mSmallArcLocation.setxLocation(bitmapImgX);
         mSmallArcLocation.setyLocation(bitmapImgY);
@@ -421,23 +427,25 @@ public class CircleLayout extends View {
 
                 if (isDialInner) {
 
-                    //int isImageInnerIndex = isImageInner(xLocation, yLocation);
-                    int isImageInnerIndex = isDistance(xLocation, yLocation);
+                    int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                    //int isImageInnerIndex = isDistance(xLocation, yLocation);
 
                     if (isImageInnerIndex != NUM_NULL) {
 
                         CommonJava.Loging.i(LOG_NAME, "screenTouchLocationStart Event start isImageInnerIndex : " + isImageInnerIndex);
                         mStartDial = true;
                         //mDialImageInfo.setCurrentClickBitmapImageIndex(isImageInnerIndex);
-/*
-                        mPassword = isImageInnerValue(xLocation, yLocation);*/
+                        mDialImageInfo.setPressBitmapImageIndex(isImageInnerIndex);
+                        mDialImageInfo.setPressBitmapImageIndexNumber(isImageInnerIndex);
+
+                        mPassword = isImageInnerValue(xLocation, yLocation);
                         CommonJava.Loging.i(LOG_NAME, "screenTouchLocationStart isImageInnerValue : " + mPassword);
-                        /*if (LockScreenFragment.smSwitchRandom) {
+                        if (LockScreenFragment.smSwitchRandom) {
                             bitmapImageListShuffle();
                         }
                         CommonJava.Loging.i(LOG_NAME, "LockScreenFragment.smSwitchRandom : " + LockScreenFragment.smSwitchRandom);
                         invalidate();
-                        isVibrator();*/
+                        isVibrator();
                         comebackBitmapImage(isImageInnerIndex);
 
                     }
@@ -451,14 +459,14 @@ public class CircleLayout extends View {
 
                 if (isDialInnerZIG) {
 
-                    //int isImageInnerIndex = isImageInner(xLocation, yLocation);
-                    int isImageInnerIndex = isDistance(xLocation, yLocation);
+                    int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                    //int isImageInnerIndex = isDistance(xLocation, yLocation);
 
                     if (isImageInnerIndex != NUM_NULL) {
 
                         CommonJava.Loging.i(LOG_NAME, "screenTouchLocationStart Dial ZIG isImageInnerIndex : " + isImageInnerIndex);
                         mStartDial = true;
-                       /* mDragIndex = isImageInnerIndex;
+                        mDragIndex = isImageInnerIndex;
                         mDialImageInfo.setPressBitmapImageIndex(isImageInnerIndex);
 
                         mPassword = isImageInnerValue(xLocation, yLocation);
@@ -469,8 +477,8 @@ public class CircleLayout extends View {
                         }
                         CommonJava.Loging.i(LOG_NAME, "LockScreenFragment.smSwitchRandom : " + LockScreenFragment.smSwitchRandom);
                         invalidate();
-                        isVibrator();*/
-                        //comebackBitmapImage(isImageInnerIndex);
+                        isVibrator();
+                        comebackBitmapImage(isImageInnerIndex);
 
                     }
                 }
@@ -478,8 +486,8 @@ public class CircleLayout extends View {
                 break;
             case 2:
 
-                //int isImageInnerIndex = isImageInner(xLocation, yLocation);
-                int isImageInnerIndex = isDistance(xLocation, yLocation);
+                int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                //int isImageInnerIndex = isDistance(xLocation, yLocation);
 
                 if (isImageInnerIndex != NUM_NULL) {
 
@@ -531,35 +539,41 @@ public class CircleLayout extends View {
                     Boolean isDialInner = isDialInner(xLocation, yLocation);
 
                     if (isDialInner) {
-                        //int isImageInnerIndex = isImageInner(xLocation, yLocation);
-                        int isImageInnerIndex = isDistance(xLocation, yLocation);
+                        int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                        //int isImageInnerIndex = isDistance(xLocation, yLocation);
 
-                        if (isImageInnerIndex != NUM_NULL && mDragIndex != isImageInnerIndex) {
-
-                            CommonJava.Loging.i(LOG_NAME, "screenTouchLocationDrag Event start isImageInnerIndex : " + isImageInnerIndex);
+                        if (isImageInnerIndex != NUM_NULL && mDragIndex != isImageInnerIndex && mDialImageInfo.getPressBitmapImageIndexNumber().get(0) != isImageInnerIndex) {
 
                             //mDialImageInfo.setCurrentClickBitmapImageIndex(isImageInnerIndex);
-                            mDialImageInfo.setPressBitmapImageIndex(isImageInnerIndex);
+                            //mDialImageInfo.setPressBitmapImageIndex(isImageInnerIndex);
+                            mDialImageInfo.setPressBitmapImageIndexNumber(isImageInnerIndex);
 
                             mStartDial = true;
                             mDragIndex = isImageInnerIndex;
                             //bitmapImageListShuffle();
                             invalidate();
 
+                            CommonJava.Loging.i(LOG_NAME, "screenTouchLocationDrag isImageInnerIndex : " + isImageInnerIndex);
+
                             Boolean vactorBl = dragIndexVactor();
                             CommonJava.Loging.i(LOG_NAME, "dragIndexVactor : " + vactorBl);
                             if (!vactorBl) {
-                                int preIndex = mDialImageInfo.getPressBitmapImageIndex().size() - 2;
+                                int preIndex = mDialImageInfo.getPressBitmapImageIndexNumber().size() - 2;
                                 if (mPassword == null) {
                                     //mPassword = mBitmapImages.get(mDialImageInfo.getPreClickBitmapImageIndex()).getBitmapValue();
-                                    mPassword = mBitmapImages.get(mDialImageInfo.getPressBitmapImageIndex().get(preIndex)).getBitmapValue();
-                                    CommonJava.Loging.i(LOG_NAME, "screenTouchLocationDrag isImageInnerValue : " + mPassword);
+                                    mPassword = mBitmapImages.get(mDialImageInfo.getPressBitmapImageIndexNumber().get(preIndex)).getBitmapValue();
+                                    CommonJava.Loging.i(LOG_NAME, "screenTouchLocationDrag !vactorBl isImageInnerValue : " + mPassword);
                                 } else {
                                     //mPassword += mBitmapImages.get(mDialImageInfo.getPreClickBitmapImageIndex()).getBitmapValue();
-                                    mPassword += mBitmapImages.get(mDialImageInfo.getPressBitmapImageIndex().get(preIndex)).getBitmapValue();
-                                    CommonJava.Loging.i(LOG_NAME, "screenTouchLocationDrag isImageInnerValue : " + mPassword);
+                                    mPassword += mBitmapImages.get(mDialImageInfo.getPressBitmapImageIndexNumber().get(preIndex)).getBitmapValue();
+                                    CommonJava.Loging.i(LOG_NAME, "screenTouchLocationDrag !vactorBl isImageInnerValue : " + mPassword);
                                 }
-                                mDialImageInfo.initDialImageInfo();
+
+                                int indexNumber = mDialImageInfo.getPressBitmapImageIndexNumber().get(mDialImageInfo.getPressBitmapImageIndexNumber().size() - 2);
+                                CommonJava.Loging.i(LOG_NAME, "screenTouchLocationDrag !vactorBl indexNumber : " + indexNumber);
+                                mDialImageInfo.setPressBitmapImageIndex(indexNumber);
+                                //mDialImageInfo.setPressBitmapImageIndexNumber(isImageInnerIndex);
+                                //mDialImageInfo.initDialImageInfo();
 
                                 if (LockScreenFragment.smSwitchRandom) {
                                     bitmapImageListShuffle();
@@ -567,7 +581,7 @@ public class CircleLayout extends View {
                                 CommonJava.Loging.i(LOG_NAME, "LockScreenFragment.smSwitchRandom : " + LockScreenFragment.smSwitchRandom);
                                 invalidate();
                                 isVibrator();
-                                comebackBitmapImage(isImageInnerIndex);
+                                comebackBitmapImage(indexNumber);
                             }
 
 
@@ -604,8 +618,8 @@ public class CircleLayout extends View {
                             mDragIndex = NUM_NULL;
                         }
 
-                        //int isImageInnerIndex = isImageInner(xLocation, yLocation);
-                        int isImageInnerIndex = isDistance(xLocation, yLocation);
+                        int isImageInnerIndex = isImageInner(xLocation, yLocation);
+                        //int isImageInnerIndex = isDistance(xLocation, yLocation);
 
                         if (isImageInnerIndex != NUM_NULL && mDragIndex != isImageInnerIndex) {
 
@@ -878,12 +892,14 @@ public class CircleLayout extends View {
         private int preClickBitmapImageIndex = NUM_NULL;
         private int prePreClickBitmapImageIndex = NUM_NULL;*/
         private static ArrayList<Integer> pressBitmapImageIndex = null;
+        private static ArrayList<Integer> pressBitmapImageIndexNumber = null;
 
         public static void initDialImageInfo() {/*
             this.currentClickBitmapImageIndex = NUM_NULL;
             this.preClickBitmapImageIndex = NUM_NULL;
             this.prePreClickBitmapImageIndex = NUM_NULL;*/
             pressBitmapImageIndex = new ArrayList<>();
+            pressBitmapImageIndexNumber = new ArrayList<>();
         }
 
        /* public int getCurrentClickBitmapImageIndex() {
@@ -926,8 +942,16 @@ public class CircleLayout extends View {
             return pressBitmapImageIndex;
         }
 
+        public ArrayList<Integer> getPressBitmapImageIndexNumber() {
+            return pressBitmapImageIndexNumber;
+        }
+
         public void setPressBitmapImageIndex(Integer pressBitmapImageIndexNumber) {
             this.pressBitmapImageIndex.add(pressBitmapImageIndexNumber);
+        }
+
+        public void setPressBitmapImageIndexNumber(Integer pressBitmapImageIndexNumber) {
+            this.pressBitmapImageIndexNumber.add(pressBitmapImageIndexNumber);
         }
 
         public void removePressBitmapImageIndex(Integer pressBitmapImageIndexNumber) {
@@ -962,7 +986,7 @@ public class CircleLayout extends View {
      * @param yTouch
      * @return 현재 제일 가까운 버튼의 인덱스
      */
-    private int isDistance(float xTouch, float yTouch) {
+   /* private int isDistance(float xTouch, float yTouch) {
 
         int currentIndex = 0;
         double currentDistance = 0;
@@ -983,7 +1007,7 @@ public class CircleLayout extends View {
             }
         }
         return currentIndex;
-    }
+    }*/
 
     /**
      * 다이얼 모양 안에 터치됬는지 확인
@@ -1047,7 +1071,7 @@ public class CircleLayout extends View {
      * @return
      */
     private String isImageInnerValue(float xTouch, float yTouch) {
-        /*for (int i = 0; i < mBitmapImages.size(); i++) {
+        for (int i = 0; i < mBitmapImages.size(); i++) {
             Boolean isClick = isInnerLocation(
                     mBitmapImages.get(i).getxLocation(), mBitmapImages.get(i).getyLocation(),
                     xTouch, yTouch,
@@ -1056,14 +1080,15 @@ public class CircleLayout extends View {
             if (isClick) {
                 return mBitmapImages.get(i).getBitmapValue();
             }
-        }*/
+        }
 
-        int btnIndex = isDistance(xTouch, yTouch);
+        /*int btnIndex = isDistance(xTouch, yTouch);
 
         CommonJava.Loging.i(LOG_NAME, "btnIndex : " + btnIndex);
         CommonJava.Loging.i(LOG_NAME, "mBitmapImages.get(btnIndex).getBitmapValue() : " + mBitmapImages.get(btnIndex).getBitmapValue());
 
-        return mBitmapImages.get(btnIndex).getBitmapValue();
+        return mBitmapImages.get(btnIndex).getBitmapValue();*/
+        return "";
     }
 
 
@@ -1148,27 +1173,57 @@ public class CircleLayout extends View {
      */
     private Boolean dragIndexVactor() {
 
-        int indexSize = mDialImageInfo.getPressBitmapImageIndex().size() - 1;
+        //int indexSize = mDialImageInfo.getPressBitmapImageIndex().size() - 1;
+        int indexSize = mDialImageInfo.getPressBitmapImageIndexNumber().size() - 1;
 
-        int currentIndex = mDialImageInfo.getPressBitmapImageIndex().get(indexSize);
-        CommonJava.Loging.i(LOG_NAME, "dragIndexVactor() indexSize : " + indexSize);
-        CommonJava.Loging.i(LOG_NAME, "dragIndexVactor() currentIndex : " + currentIndex);
-        int preIndex = 99;
-        int prePreIndex = 99;
-        if (indexSize != 0) {
-            preIndex = mDialImageInfo.getPressBitmapImageIndex().get(indexSize - 1);
-            if (indexSize != 1) {
-                prePreIndex = mDialImageInfo.getPressBitmapImageIndex().get(indexSize - 2);
+        if (indexSize != 2) {
+            //int currentIndex = mDialImageInfo.getPressBitmapImageIndex().get(indexSize);
+            int currentIndex = mDialImageInfo.getPressBitmapImageIndexNumber().get(indexSize);
+
+            CommonJava.Loging.i(LOG_NAME, "dragIndexVactor() indexSize : " + indexSize);
+            CommonJava.Loging.i(LOG_NAME, "dragIndexVactor() currentIndex : " + currentIndex);
+
+            int preIndex = 99;
+            int prePreIndex = 99;
+            if (indexSize != 0) {
+
+                //preIndex = mDialImageInfo.getPressBitmapImageIndex().get(indexSize - 1);
+                preIndex = mDialImageInfo.getPressBitmapImageIndexNumber().get(indexSize - 1);
+
+                if (indexSize != 1) {
+
+                    //prePreIndex = mDialImageInfo.getPressBitmapImageIndex().get(indexSize - 2);
+                    prePreIndex = mDialImageInfo.getPressBitmapImageIndexNumber().get(indexSize - 2);
+
+                }
             }
-        }
 
-        if (preIndex == 99 || prePreIndex == 99) {
+            CommonJava.Loging.i(LOG_NAME, "dragIndexVactor() preIndex : " + preIndex);
+            CommonJava.Loging.i(LOG_NAME, "dragIndexVactor() prePreIndex : " + prePreIndex);
+
+            if (preIndex == 99 || prePreIndex == 99) {
+                return true;
+            }
+
+            Boolean vactorBl = (currentIndex == (preIndex + 1) % 12) && (preIndex == (prePreIndex + 1) % 12) || (prePreIndex == (preIndex + 1) % 12) && (preIndex == (currentIndex + 1) % 12);
+
+            if (preIndex > prePreIndex) { // 시계방향
+                if (currentIndex > preIndex) {// 시계방향
+                    vactorBl = true;
+                } else if (currentIndex < preIndex) {
+                    vactorBl = false;
+                }
+            } else if (preIndex < prePreIndex) { // 반시계방향
+                if (currentIndex < preIndex) {// 반시계방향
+                    vactorBl = true;
+                } else if (currentIndex > preIndex) {
+                    vactorBl = false;
+                }
+            }
+            return vactorBl;
+        } else {
             return true;
         }
-
-        Boolean vactorBl = (currentIndex == (preIndex + 1) % 12) && (preIndex == (prePreIndex + 1) % 12) || (prePreIndex == (preIndex + 1) % 12) && (preIndex == (currentIndex + 1) % 12);
-
-        return vactorBl;
     }
 
     /**

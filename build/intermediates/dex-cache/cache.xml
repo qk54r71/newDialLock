@@ -39,12 +39,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-24.2.1_2fec05818771ed1374dad9dda6baca4d7f6848c0.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\park\StudioProjects\DialLockNew\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.1"
         sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
         <dex dex="C:\Users\park\StudioProjects\DialLockNew\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-24.2.1_fde0edf2a3b0056aa88c13cbd4a95ab9c7ed99e1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-24.2.1_b9d27822b95e6b638464f3364e3febbf05b61442.jar" />
     </item>
     <item
         is-multidex="false"
@@ -102,12 +120,39 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\0.14.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="e5bf70f3683146e4875c006624543cb0a13eac91">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fbcore-0.14.1_a7ee1ead5e40042d51dd7b576b647cbae53aa6f7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\libs\mail.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="428e267abff0d10802ccde86b915da2c20471160">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\mail_5a6562df2c8feabf27b5c2e2f0d658f6dabec2de.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\park\.gradle\caches\modules-2\files-2.1\net.sourceforge.jexcelapi\jxl\2.6.12\7faf62e0697f7a88954622dfe8c8de33ed142ac7\jxl-2.6.12.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.1"
         sha1="7faf62e0697f7a88954622dfe8c8de33ed142ac7">
         <dex dex="C:\Users\park\StudioProjects\DialLockNew\app\build\intermediates\pre-dexed\debug\jxl-2.6.12_2759fb1d822dc732031db75076e4698fdcd02bf5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\libs\activation.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="d1257cbff6faa44c1f325ae0d9413522d4644383">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\activation_c7de3ab0ee354bab69aa12426c2e22ca3449637a.jar" />
     </item>
     <item
         is-multidex="false"
@@ -147,6 +192,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-24.2.1_5a3d0bf50c4d214877255b538e96d1cacbb4c007.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\park\StudioProjects\DialLockNew\app\libs\activation.jar"
         jumboMode="false"
         optimize="true"
@@ -156,12 +210,39 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-24.2.1_d6ae57a3ee10bdce19aee0ece7663e303bea08d2.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\park\StudioProjects\DialLockNew\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.1"
         sha1="867dad63c33388ff8c7644b236579355036d075f">
         <dex dex="C:\Users\park\StudioProjects\DialLockNew\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_4b98478c1d4a0bafd6148e4292c9f0a10ced9891.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-24.2.1_bad2762cbebf6bc486aa03407e445960f7554ca7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-24.2.1_6ed35c816653aa71c6f56b5ba23c00152747c09f.jar" />
     </item>
     <item
         is-multidex="false"
@@ -192,6 +273,42 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.facebook.fresco\fresco\0.14.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="c77602d43223db798b1ca56cf307ab0ee3c0e63f">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fresco-0.14.1_4c19f6d391cb744b428a69948af969926777dd27.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.facebook.fresco\drawee\0.14.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="cf5e2940501f8f7b9175df6491cebb84f5690f14">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-drawee-0.14.1_4b42d6000327d63dc00103fb3e068fa4a6f681e3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_58a26c9039015383fae2841d483f5342114a3505.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_3630fc135e43fc5fe23802d75cc73ed2d1232039.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\park\StudioProjects\DialLockNew\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline\0.14.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -210,12 +327,48 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_cb4e1598914a3485a60cc8f9d05f5d17b2c50f2c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline\0.14.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="8795af3e130206443f2d5ed45f1b26067aff70dc">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-0.14.1_9b679d29c4b116cf745dcd6ee9238199c7324a08.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\park\StudioProjects\DialLockNew\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.1"
         sha1="d5c731fc64c03dfe04d51134955b483551c35849">
         <dex dex="C:\Users\park\StudioProjects\DialLockNew\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-24.2.1_9dd226e481fe5cf45a0365dcefc9300e3b067e38.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_ea59fd3fd5f701d763c529a457081ac1d3ba11d3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_77689bc70ad7b05db418fbdb03cc9c3579e42e38.jar" />
     </item>
     <item
         is-multidex="false"
@@ -237,6 +390,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-24.2.1_b3c08480200f884c1b3a4cab61bd6f0fa6efb838.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\park\StudioProjects\DialLockNew\app\build\intermediates\exploded-aar\com.facebook.fresco\fresco\0.14.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -246,12 +408,48 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\libs\additionnal.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="bd9e8dc422bb8c8405359947fe9f4282b49f57f4">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\additionnal_84dd1e4dd0ee0d8782d4d1287b16a38c17e3be39.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-24.2.1_dc8d70c0b7fd2fca6a44098deda9672f957a519f.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\park\StudioProjects\DialLockNew\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
         jumboMode="false"
         optimize="true"
         revision="24.0.1"
         sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
         <dex dex="C:\Users\park\StudioProjects\DialLockNew\app\build\intermediates\pre-dexed\debug\internal_impl-24.2.1_250a16ff8daa134b0b4c6ebb3db6be54603088f7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-24.2.1_73c0fd46a98b0eb918a528ec2a64295ed5029159.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\0.14.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="b881010e06dc39be15b7465cd16492eedbab246f">
+        <dex dex="C:\Users\park\StudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-base-0.14.1_9fb0b9840c173321dbff60bcb570def2a8799814.jar" />
     </item>
 
 </items>
