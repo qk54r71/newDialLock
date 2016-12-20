@@ -322,7 +322,7 @@ public class PasswordChangeActivity extends AppCompatActivity {
 
         CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest jsonObject : " + jsonObject.toString());
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "http://molppangmy.cafe24.com/APPAPI/memberAccession", jsonObject, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, strURL, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse :" + response);
@@ -333,12 +333,8 @@ public class PasswordChangeActivity extends AppCompatActivity {
 
                 try {
                     CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse code :" + response.get("code"));
-                    CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse password :" + response.get("password"));
-                    CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse member_idx :" + response.get("member_idx"));
 
                     strCode = response.getString("code");
-                    strMemberIdx = response.getString("member_idx");
-                    strPassword = response.getString("password");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -347,6 +343,20 @@ public class PasswordChangeActivity extends AppCompatActivity {
 
                 switch (strCode) {
                     case "1000":
+
+                        try {
+
+                            CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse password :" + response.get("password"));
+                            CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse member_idx :" + response.get("member_idx"));
+
+                            strMemberIdx = response.getString("member_idx");
+                            strPassword = response.getString("password");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            CommonJava.Loging.e(LOG_NAME, "jsonObjectRequest JSONException :" + e.toString());
+                        }
+
 
                         CommonJava.saveSharedPreferences(PasswordChangeActivity.this, "password", strPassword);
 
@@ -360,6 +370,29 @@ public class PasswordChangeActivity extends AppCompatActivity {
                         finish();
 
                         Toast.makeText(getApplicationContext(), "패스워드 설정이 완료 되었습니다.", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "4000":  try {
+
+                        CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse changePassword :" + response.get("changePassword"));
+                        CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse member_idx :" + response.get("member_idx"));
+
+                        strMemberIdx = response.getString("member_idx");
+                        strPassword = response.getString("changePassword");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        CommonJava.Loging.e(LOG_NAME, "jsonObjectRequest JSONException :" + e.toString());
+                    }
+
+
+                        CommonJava.saveSharedPreferences(PasswordChangeActivity.this, "password", strPassword);
+                        CommonJava.saveSharedPreferences(PasswordChangeActivity.this, "memberIdx", strMemberIdx);
+
+                        Intent intentPasswordChangeSettingSecond = new Intent(PasswordChangeActivity.this, SettingActivity.class);
+                        startActivity(intentPasswordChangeSettingSecond);
+                        finish();
+
+                        Toast.makeText(getApplicationContext(), "패스워드 수정이 완료 되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
                 }
 

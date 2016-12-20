@@ -536,7 +536,6 @@ public class LockScreenActivity extends AppCompatActivity implements EventInfoIt
             case MotionEvent.ACTION_DOWN:
 
                 circleLayout.screenTouchLocationStart(xLocation, yLocation);
-                circleLayout.screenTouchLocationDrag(xLocation, yLocation);
                 break;
             case MotionEvent.ACTION_MOVE:
 
@@ -663,7 +662,6 @@ public class LockScreenActivity extends AppCompatActivity implements EventInfoIt
 
         dbManageMent.close();
     }*/
-
     private void setTextDay(Date nowDate) {
         String strTxtLockDay =
                 CommonJava.getYear(nowDate) + ". " + CommonJava.getMonth(nowDate) + ". " + CommonJava.getDay(nowDate) + ". " + CommonJava.getDayOfWeek(nowDate);
