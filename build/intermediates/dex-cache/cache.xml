@@ -61,7 +61,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.1"
-        sha1="02cea2c505782422d329af19c2228a7954245194">
+        sha1="d897ff0b279e2926005711de8d65711ab3ed4272">
         <dex dex="C:\Users\park\AndroidStudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_0238942b287d2044c8db9e8ce84cf660b0cef53f.jar" />
     </item>
     <item
@@ -187,7 +187,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.1"
-        sha1="b1ac976509f6f2e2d6c5e428eb95f770d9844429">
+        sha1="049e5baa50a283755dc3ae2d4b60b6b1f42672aa">
         <dex dex="C:\Users\park\AndroidStudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\instant-run_fd495b892c44eefd6bf590a7ff40814ae90196a0.jar" />
     </item>
     <item
@@ -234,6 +234,15 @@
         revision="24.0.1"
         sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
         <dex dex="C:\Users\park\AndroidStudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-24.2.1_be9896f2b9eb7e2a0264bd92417b4e16bc522310.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\park\AndroidStudioProjects\newDialLock\app\build\intermediates\exploded-aar\com.ogaclejapan.arclayout\library\1.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="e73be64ef3e56ecc035bd298d274136e2ad66d20">
+        <dex dex="C:\Users\park\AndroidStudioProjects\newDialLock\app\build\intermediates\pre-dexed\debug\com.ogaclejapan.arclayout-library-1.1.0_0e15733ac85674c82b1ba8c3dacea6c3e89baa03.jar" />
     </item>
     <item
         is-multidex="false"

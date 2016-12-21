@@ -1,0 +1,105 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.diallock.diallock.diallock.Activity.Fragment.DialLayout">
+
+    <com.ogaclejapan.arclayout.ArcLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:arc_axisRadius="120dp"
+        app:arc_color="#4D000000"
+        app:arc_freeAngle="false"
+        app:arc_origin="bottom"
+        app:arc_radius="168dp"
+        app:arc_reverseAngle="false"
+        android:id="@+id/arcLayout">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_00"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_0"
+            app:arc_origin="center" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_01"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_1"
+            app:arc_origin="center" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_02"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_2"
+            app:arc_origin="center" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_03"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_3"
+            app:arc_origin="center" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_04"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_4"
+            app:arc_origin="center" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_05"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_5"
+            app:arc_origin="center" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_06"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_6"
+            app:arc_origin="center" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_07"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_7"
+            app:arc_origin="center" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_08"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_8"
+            app:arc_origin="center" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_9"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_9"
+            app:arc_origin="center" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_10"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_0"
+            app:arc_origin="center" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn_index_11"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/num_1"
+            app:arc_origin="center" />
+
+    </com.ogaclejapan.arclayout.ArcLayout>
+
+</FrameLayout>

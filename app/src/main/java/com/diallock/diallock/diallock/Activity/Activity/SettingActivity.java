@@ -25,6 +25,8 @@ public class SettingActivity extends AppCompatActivity {
     private LinearLayout linear_img_change;
     private LinearLayout linear_email_change;
     private LinearLayout linear_ad;
+    private LinearLayout linear_call_set;
+    private LinearLayout linear_app_more;
 
     private Boolean lockCheck;
     private Boolean backFlag;
@@ -129,6 +131,8 @@ public class SettingActivity extends AppCompatActivity {
         linear_img_change = (LinearLayout) findViewById(R.id.linear_img_change);
         linear_email_change = (LinearLayout) findViewById(R.id.linear_email_change);
         linear_ad = (LinearLayout) findViewById(R.id.linear_ad);
+        linear_call_set = (LinearLayout) findViewById(R.id.linear_call_set);
+        linear_app_more = (LinearLayout) findViewById(R.id.linear_app_more);
     }
 
     /**
@@ -170,6 +174,8 @@ public class SettingActivity extends AppCompatActivity {
         linear_img_change.setOnClickListener(onClickListener);
         linear_email_change.setOnClickListener(onClickListener);
         linear_ad.setOnClickListener(onClickListener);
+        linear_call_set.setOnClickListener(onClickListener);
+        linear_app_more.setOnClickListener(onClickListener);
     }
 
     /**
@@ -239,6 +245,13 @@ public class SettingActivity extends AppCompatActivity {
                     Intent intentAdRequest = new Intent(SettingActivity.this, AdRequestActivity.class);
                     startActivity(intentAdRequest);
 
+                    break;
+                case R.id.linear_call_set:
+
+                    Intent intentTestDialLayout = new Intent(SettingActivity.this, MainActivity.class);
+                    startActivity(intentTestDialLayout);
+                    break;
+                case R.id.linear_app_more:
                     break;
             }
 
@@ -422,7 +435,9 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
-  /*  *//**
+  /*  */
+
+    /**
      * assets 폴더에 존재하는 엑셀 파일을 db 에 넣음
      *//*
     private void copyExcelDataToDatabase() {
@@ -503,7 +518,6 @@ public class SettingActivity extends AppCompatActivity {
         }
 
     }*/
-
     @Override
     protected void onDestroy() {
         //dbManageMent.close();
