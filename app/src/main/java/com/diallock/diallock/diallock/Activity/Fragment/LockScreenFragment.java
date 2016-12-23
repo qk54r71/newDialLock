@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -20,7 +21,7 @@ import com.diallock.diallock.diallock.Activity.Activity.LockScreenViewActivity;
 import com.diallock.diallock.diallock.Activity.Adapter.WidgetPagerAdapter;
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
 import com.diallock.diallock.diallock.Activity.Common.GMailSender;
-import com.diallock.diallock.diallock.Activity.Layout.CircleLayout;
+import com.diallock.diallock.diallock.Activity.Layout.*;
 import com.diallock.diallock.diallock.Activity.Layout.ViewPager.HorizontalViewPager;
 import com.diallock.diallock.diallock.R;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -40,7 +41,7 @@ import java.util.Date;
 public class LockScreenFragment extends Fragment {
 
     private View mView;
-    private CircleLayout circleLayout;
+    private CircleDial circleDial;
     private Boolean backFlag;
 
     private TextView txt_lock_day;
@@ -127,7 +128,14 @@ public class LockScreenFragment extends Fragment {
     }
 
     private void findViewById() {
-        //circleLayout = (CircleLayout) mView.findViewById(R.id.circle_screen);
+
+        for (Fragment fragment : getChildFragmentManager().getFragments()) {
+            CommonJava.Loging.i(LOG_NAME, "fragment : " + fragment);
+            if (fragment instanceof CircleDial) {
+                circleDial = (CircleDial) fragment;
+            }
+        }
+
         btn_find_pass = (SimpleDraweeView) mView.findViewById(R.id.btn_find_pass);
         btn_dial_pattern = (SimpleDraweeView) mView.findViewById(R.id.btn_dial_pattern);
 
@@ -394,7 +402,6 @@ public class LockScreenFragment extends Fragment {
 
         //btn_dial_pattern.setBackgroundResource(mImageBtn.get(mSwitchValue));
         btn_dial_pattern.getHierarchy().setPlaceholderImage(mImageBtn.get(mSwitchValue));
-        circleLayout.isInitDial();
 
     }
 
@@ -485,20 +492,11 @@ public class LockScreenFragment extends Fragment {
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        /*if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }*/
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        /*if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
     }
 
     @Override
@@ -521,4 +519,9 @@ public class LockScreenFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public void setOnTouchEvent(MotionEvent onTouchEvent) {
+        circleDial.setOnTouchEvent(onTouchEvent);
+    }
+
 }

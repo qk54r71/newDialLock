@@ -4,7 +4,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.VelocityTrackerCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,17 +19,10 @@ import com.diallock.diallock.diallock.R;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CircleDial.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CircleDial#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CircleDial extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private VelocityTracker mVelocityTracker = null;
 
     static View mView;
 
@@ -117,7 +113,6 @@ public class CircleDial extends Fragment {
 
     private void setFindViewById() {
         mWidget_view = (HorizontalViewPager) mView.findViewById(R.id.widget_view);
-
     }
 
     private void init() {
@@ -134,4 +129,50 @@ public class CircleDial extends Fragment {
     private void setOnTouch() {
 
     }
+
+    /**
+     * mVelocityTracker 를 사용해서 처음 위치로부터 어느 위치로 이동하는지 추적
+     *
+     * @param onTouchEvent
+     */
+    public void setOnTouchEvent(MotionEvent onTouchEvent) {
+        int index = onTouchEvent.getActionIndex();
+        int action = onTouchEvent.getActionMasked();
+        int pointerId = onTouchEvent.getPointerId(index);
+
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                if (mVelocityTracker == null) {
+                    // Retrieve a new VelocityTracker object to watch the velocity of a motion.
+                    mVelocityTracker = VelocityTracker.obtain();
+                } else {
+                    // Reset the velocity tracker back to its initial state.
+                    mVelocityTracker.clear();
+                }
+                // Add a user's movement to the tracker.
+                mVelocityTracker.addMovement(onTouchEvent);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                mVelocityTracker.addMovement(onTouchEvent);
+                // When you want to determine the velocity, call
+                // computeCurrentVelocity(). Then call getXVelocity()
+                // and getYVelocity() to retrieve the velocity for each pointer ID.
+                mVelocityTracker.computeCurrentVelocity(1000);
+                // Log velocity of pixels per second
+                // Best practice to use VelocityTrackerCompat where possible.
+                CommonJava.Loging.d(LOG_NAME, "X velocity: " +
+                        VelocityTrackerCompat.getXVelocity(mVelocityTracker,
+                                pointerId));
+                CommonJava.Loging.d(LOG_NAME, "Y velocity: " +
+                        VelocityTrackerCompat.getYVelocity(mVelocityTracker,
+                                pointerId));
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                // Return a VelocityTracker object back to be re-used by others.
+                mVelocityTracker.clear();
+                break;
+        }
+    }
+
 }
