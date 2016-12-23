@@ -25,14 +25,6 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class CircleDial extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -42,37 +34,19 @@ public class CircleDial extends Fragment {
     private WidgetPagerAdapter mWidgetPagerAdapter;
     private final String LOG_NAME = "CircleDial";
 
-    //private GestureDetectorCompat gestureDetector;
-    /*private static GestureDetector gestureDetector;
-    private Boolean mDialInnerCheck;*/
-
     public CircleDial() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment CircleDial.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CircleDial newInstance() {
-        CircleDial fragment = new CircleDial();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            /*mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);*/
         }
 
-        CommonJava.Loging.i("CircleDial", "onCreate()");
+        CommonJava.Loging.i(LOG_NAME, "onCreate()");
 
     }
 
@@ -81,10 +55,10 @@ public class CircleDial extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        CommonJava.Loging.i("CircleDial", "onCreateView()");
+        CommonJava.Loging.i(LOG_NAME, "onCreateView()");
         mView = inflater.inflate(R.layout.fragment_circle_dial, container, false);
 
-        findViewById();
+        setFindViewById();
         init();
         setOnTouch();
         return mView;
@@ -141,109 +115,12 @@ public class CircleDial extends Fragment {
         }
     }
 
-    private void findViewById() {
+    private void setFindViewById() {
         mWidget_view = (HorizontalViewPager) mView.findViewById(R.id.widget_view);
 
     }
 
     private void init() {
-
-       /* mDialInnerCheck = false;*/
-        /*gestureDetector = new GestureDetectorCompat(getContext(), new GestureDetector.OnGestureListener() {
-            @Override
-            public boolean onDown(MotionEvent motionEvent) {
-                CommonJava.Loging.i(getContext(), "onDown()");
-                return false;
-            }
-
-            @Override
-            public void onShowPress(MotionEvent motionEvent) {
-                CommonJava.Loging.i(getContext(), "onShowPress()");
-
-            }
-
-            @Override
-            public boolean onSingleTapUp(MotionEvent motionEvent) {
-                CommonJava.Loging.i(getContext(), "onSingleTapUp()");
-                return false;
-            }
-
-            @Override
-            public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-                CommonJava.Loging.i(getContext(), "onScroll()");
-                return false;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent motionEvent) {
-                CommonJava.Loging.i(getContext(), "onLongPress()");
-
-            }
-
-            @Override
-            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-                CommonJava.Loging.i(getContext(), "onFling()");
-                return false;
-            }
-        });*/
-
-        /*gestureDetector = new GestureDetector(getContext(), new GestureDetector.OnGestureListener() {
-            @Override
-            public boolean onDown(MotionEvent motionEvent) {
-                return false;
-            }
-
-            @Override
-            public void onShowPress(MotionEvent motionEvent) {
-
-            }
-
-            @Override
-            public boolean onSingleTapUp(MotionEvent motionEvent) {
-                if (mDialInnerCheck) {
-                    CommonJava.Loging.i("CircleDial", "onSingleTapUp");
-                    mDialInnerCheck = false;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float x, float y) {
-                if (mDialInnerCheck) {
-                    CommonJava.Loging.i("CircleDial", "onScroll motionEvent : " + motionEvent);
-                    CommonJava.Loging.i("CircleDial", "onScroll motionEvent1 : " + motionEvent1);
-                    CommonJava.Loging.i("CircleDial", "onScroll x : " + x);
-                    CommonJava.Loging.i("CircleDial", "onScroll y : " + y);
-
-                    if (y > 0) {//위로
-
-                    } else if (y < 0) { // 아래로
-
-                    }
-
-                    mDialInnerCheck = false;
-                }
-                return false;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent motionEvent) {
-
-            }
-
-            @Override
-            public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-                if (mDialInnerCheck) {
-                    CommonJava.Loging.i("CircleDial", "onFling motionEvent : " + motionEvent);
-                    CommonJava.Loging.i("CircleDial", "onFling motionEvent1 : " + motionEvent1);
-                    CommonJava.Loging.i("CircleDial", "onFling v : " + v);
-                    CommonJava.Loging.i("CircleDial", "onFling v1 : " + v1);
-                    mDialInnerCheck = false;
-                }
-                return false;
-            }
-        });*/
-
 
         ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
         fragmentArrayList.add(new WidgetTimeBaseFragment());
@@ -251,54 +128,10 @@ public class CircleDial extends Fragment {
 
         mWidgetPagerAdapter = new WidgetPagerAdapter(getChildFragmentManager(), fragmentArrayList);
         mWidget_view.setAdapter(mWidgetPagerAdapter);
-        //mWidget_view.invalidate();
 
     }
 
     private void setOnTouch() {
 
-       /* widget_fragment.findViewById(R.id.slideImage).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                CommonJava.Loging.i("CircleDial", "onTouch");
-                CommonJava.Loging.i("CircleDial", "onTouch");
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        mDialInnerCheck = true;
-                        break;
-                }
-
-                return false;
-            }
-        });*/
     }
-/*
-
-    private void setOnClick() {
-        mWidget_view.setOnClickListener(onClickListener);
-    }
-
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            switch (view.getId()) {
-                case R.id.widget_view:
-
-                    CommonJava.Loging.i(LOG_NAME,"widget_view setOnClick");
-
-                    break;
-            }
-
-        }
-    };*/
-
-
-    /*public static void setOnTouchCircleDial(MotionEvent motionEvent) {*//*
-        CommonJava.Loging.i("CircleDial","setOnTouchCircleDial motionEvent : "+motionEvent);
-        CommonJava.Loging.i("CircleDial","setOnTouchCircleDial gestureDetector : "+gestureDetector);*//*
-        *//*gestureDetector.onTouchEvent(motionEvent);*//*
-    }*/
-
-
 }

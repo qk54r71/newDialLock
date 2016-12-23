@@ -51,11 +51,6 @@ public class DialLayout extends ArcLayout {
 
     }
 
-    public static synchronized DialLayout getInstance() {
-        CommonJava.Loging.i(LOG_NAME, "getInstance");
-        return dialLayout;
-    }
-
 
     public DialLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
@@ -67,7 +62,6 @@ public class DialLayout extends ArcLayout {
         CommonJava.Loging.i(LOG_NAME, "DialLayout defStyleRes : " + defStyleRes);
 
     }
-
 
 
     @Override
@@ -93,9 +87,9 @@ public class DialLayout extends ArcLayout {
             childBtnInfos.add(childBtnInfo);
         }
 
-        if (childBtnInfos.size() == 12) {
+        /*if (childBtnInfos.size() == 12) {
             ((MainActivity) mContext).setArrayList(childBtnInfos);
-        }
+        }*/
 
         super.childLayoutBy(child, childX, childY);
     }
@@ -103,27 +97,6 @@ public class DialLayout extends ArcLayout {
 
     private void init() {
         childBtnInfos = new ArrayList<>();
-    }
-
-    public void setTouch(){
-        dialLayout.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                CommonJava.Loging.i(LOG_NAME,"onTouch View : "+view);
-                CommonJava.Loging.i(LOG_NAME,"onTouch MotionEvent : "+motionEvent);
-                return false;
-            }
-        });
-
-        dialLayout.setOnGenericMotionListener(new OnGenericMotionListener() {
-            @Override
-            public boolean onGenericMotion(View view, MotionEvent motionEvent) {
-                CommonJava.Loging.i(LOG_NAME,"onGenericMotion View : "+view);
-                CommonJava.Loging.i(LOG_NAME,"onGenericMotion MotionEvent : "+motionEvent);
-                return false;
-            }
-        });
-
     }
 
 }

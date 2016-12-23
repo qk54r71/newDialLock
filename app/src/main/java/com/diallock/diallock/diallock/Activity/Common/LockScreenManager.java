@@ -181,7 +181,7 @@ public class LockScreenManager {
                 float yLocation = event.getY(0);
 
                 switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
+                  /*  case MotionEvent.ACTION_DOWN:
                         ((CircleLayout) mLockView.findViewById(R.id.circle_screen)).screenTouchLocationStart(xLocation, yLocation);
                         break;
                     case MotionEvent.ACTION_MOVE:
@@ -191,7 +191,7 @@ public class LockScreenManager {
                     case MotionEvent.ACTION_UP:
 
                         ((CircleLayout) mLockView.findViewById(R.id.circle_screen)).screenTouchLocationEnd(xLocation, yLocation);
-                        break;
+                        break;*/
                 }
 /*
                 CircleDial.newInstance().setOnTouchCircleDial(event);*/
@@ -209,7 +209,7 @@ public class LockScreenManager {
     }
 
     private void setFindView() {
-        circleLayout = (CircleLayout) mLockView.findViewById(R.id.circle_screen);
+        //circleLayout = (CircleLayout) mLockView.findViewById(R.id.circle_screen);
         btn_find_pass = (SimpleDraweeView) mLockView.findViewById(R.id.btn_find_pass);
         /*txt_lock_day = (TextView) mLockView.findViewById(R.id.txt_lock_day);
         lock_screen_pre = (SimpleDraweeView) mLockView.findViewById(R.id.lock_screen_pre);

@@ -107,7 +107,7 @@ public class ImageFragment extends Fragment {
     private void findViewById() {
         image_layout = (LinearLayout) mView.findViewById(R.id.image_layout);
         sildeImage = (ImageView) mView.findViewById(R.id.slideImage);
-        circle_screen = (CircleLayout) mView.findViewById(R.id.circle_screen);
+        //circle_screen = (CircleLayout) mView.findViewById(R.id.circle_screen);
     }
 
     private void init() {

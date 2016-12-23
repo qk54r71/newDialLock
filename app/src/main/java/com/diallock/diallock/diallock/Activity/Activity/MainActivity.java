@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
     }
 
     private void setFindViewById() {
-        dialLayout = com.diallock.diallock.diallock.Activity.Layout.DialLayout.getInstance();
+        dialLayout = (com.diallock.diallock.diallock.Activity.Layout.DialLayout) findViewById(R.id.dialLayout);
         btn_index_00 = (SimpleDraweeView) findViewById(R.id.btn_index_00);
     }
 
@@ -111,16 +111,16 @@ public class MainActivity extends Activity {
 
         CommonJava.Loging.i(LOG_NAME, "dialLayout.getX() : " + dialLayout.getX() + " getY() : " + dialLayout.getY() + " Right : " + dialLayout.getRight() + " Left : " + dialLayout.getLeft() + " Top :" + dialLayout.getTop() + " Bottom : " + dialLayout.getBottom());
 
-        dialLayout.setTouch();
+        //dialLayout.setTouch();
 
-        dialLayout.setOnTouchListener(new View.OnTouchListener() {
+        /*dialLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 CommonJava.Loging.i(LOG_NAME, "onTouch View : " + view);
                 CommonJava.Loging.i(LOG_NAME, "onTouch MotionEvent : " + motionEvent);
                 return false;
             }
-        });
+        });*/
 
     }
 }

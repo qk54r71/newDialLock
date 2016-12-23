@@ -13,6 +13,7 @@
         android:background="@drawable/dial_image"
         app:arc_axisRadius="106.5dp"
         app:arc_freeAngle="false"
+
         app:arc_origin="center"
         app:arc_radius="135dp"
         app:arc_reverseAngle="false">
@@ -23,6 +24,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/num_0"
+            app:arc_angle="15"
             app:arc_origin="center" />
 
 
@@ -94,6 +96,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/num_0"
+            app:arc_angle="315"
             app:arc_origin="center" />
 
         <com.facebook.drawee.view.SimpleDraweeView

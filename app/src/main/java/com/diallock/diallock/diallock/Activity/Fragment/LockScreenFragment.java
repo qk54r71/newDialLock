@@ -127,7 +127,7 @@ public class LockScreenFragment extends Fragment {
     }
 
     private void findViewById() {
-        circleLayout = (CircleLayout) mView.findViewById(R.id.circle_screen);
+        //circleLayout = (CircleLayout) mView.findViewById(R.id.circle_screen);
         btn_find_pass = (SimpleDraweeView) mView.findViewById(R.id.btn_find_pass);
         btn_dial_pattern = (SimpleDraweeView) mView.findViewById(R.id.btn_dial_pattern);
 
@@ -177,7 +177,7 @@ public class LockScreenFragment extends Fragment {
 
         btn_dial_pattern.getHierarchy().setPlaceholderImage(mImageBtn.get(mSwitchValue));
 
-        circleLayout.isInitDial();
+        //circleLayout.isInitDial();
 
         smSwitchRandom = true;
 

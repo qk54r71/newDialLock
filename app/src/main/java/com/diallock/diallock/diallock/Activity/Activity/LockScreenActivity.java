@@ -120,7 +120,7 @@ public class LockScreenActivity extends AppCompatActivity implements EventInfoIt
 
 
     private void setFindView() {
-        circleLayout = (CircleLayout) findViewById(R.id.circle_screen);
+        //circleLayout = (CircleLayout) findViewById(R.id.circle_screen);
        /* btn_find_pass = (SimpleDraweeView) findViewById(R.id.btn_find_pass);*/
         /*txt_lock_day = (TextView) findViewById(R.id.txt_lock_day);
         lock_screen_pre = (SimpleDraweeView) findViewById(R.id.lock_screen_pre);
@@ -532,7 +532,7 @@ public class LockScreenActivity extends AppCompatActivity implements EventInfoIt
         float xLocation = event.getX(0);
         float yLocation = event.getY(0);
 
-        switch (event.getAction()) {
+       /* switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
 
                 circleLayout.screenTouchLocationStart(xLocation, yLocation);
@@ -545,7 +545,7 @@ public class LockScreenActivity extends AppCompatActivity implements EventInfoIt
 
                 circleLayout.screenTouchLocationEnd(xLocation, yLocation);
                 break;
-        }
+        }*/
 /*
         CircleDial.setOnTouchCircleDial(event);*/
 
