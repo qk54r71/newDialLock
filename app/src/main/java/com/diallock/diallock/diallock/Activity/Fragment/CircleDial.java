@@ -10,12 +10,15 @@ import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 
 import com.diallock.diallock.diallock.Activity.Adapter.WidgetPagerAdapter;
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
+import com.diallock.diallock.diallock.Activity.Layout.*;
 import com.diallock.diallock.diallock.Activity.Layout.ViewPager.CustomViewPager;
 import com.diallock.diallock.diallock.Activity.Layout.ViewPager.HorizontalViewPager;
 import com.diallock.diallock.diallock.R;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 
@@ -28,6 +31,11 @@ public class CircleDial extends Fragment {
 
     private HorizontalViewPager mWidget_view;
     private WidgetPagerAdapter mWidgetPagerAdapter;
+
+    private com.diallock.diallock.diallock.Activity.Layout.DialLayout dialLayout;
+    private SimpleDraweeView btn_index_00;
+
+
     private final String LOG_NAME = "CircleDial";
 
     public CircleDial() {
@@ -84,7 +92,6 @@ public class CircleDial extends Fragment {
         mListener = null;
     }
 
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -113,6 +120,9 @@ public class CircleDial extends Fragment {
 
     private void setFindViewById() {
         mWidget_view = (HorizontalViewPager) mView.findViewById(R.id.widget_view);
+        dialLayout = (com.diallock.diallock.diallock.Activity.Layout.DialLayout) mView.findViewById(R.id.dialLayout);
+        btn_index_00 = (SimpleDraweeView) mView.findViewById(R.id.btn_index_00);
+
     }
 
     private void init() {
@@ -174,5 +184,6 @@ public class CircleDial extends Fragment {
                 break;
         }
     }
+
 
 }

@@ -1,19 +1,15 @@
 package com.diallock.diallock.diallock.Activity.Layout;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
+import android.view.GestureDetector;
 import android.view.View;
 
-import com.diallock.diallock.diallock.Activity.Activity.MainActivity;
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
 import com.diallock.diallock.diallock.Activity.Data.ChildBtnInfo;
-import com.diallock.diallock.diallock.R;
 import com.ogaclejapan.arclayout.ArcLayout;
 
 import java.util.ArrayList;
-import java.util.TreeSet;
 
 /**
  * Created by park on 2016-12-21.
@@ -22,6 +18,9 @@ import java.util.TreeSet;
 public class DialLayout extends ArcLayout {
 
     private ArrayList<ChildBtnInfo> childBtnInfos;
+
+    private GestureDetector mGestureDetector;
+
     private static final String LOG_NAME = "DialLayout";
 
     private Context mContext;
@@ -33,6 +32,7 @@ public class DialLayout extends ArcLayout {
             mContext = context;
             dialLayout = this;
         }
+
 
         CommonJava.Loging.i(LOG_NAME, "DialLayout construct");
         CommonJava.Loging.i(LOG_NAME, "DialLayout context : " + context);
@@ -98,5 +98,4 @@ public class DialLayout extends ArcLayout {
     private void init() {
         childBtnInfos = new ArrayList<>();
     }
-
 }

@@ -42,13 +42,13 @@ public class MyViewGroup extends ViewGroup {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
 
     }
-
+/*
     public Boolean setOnInterceptTouchEvent(MotionEvent onInterceptTouchEvent) {
-          /*
+          *//*
          * This method JUST determines whether we want to intercept the motion.
          * If we return true, onTouchEvent will be called and we do the actual
          * scrolling there.
-         */
+         *//*
 
 
         final int action = MotionEventCompat.getActionMasked(ev);
@@ -89,5 +89,5 @@ public class MyViewGroup extends ViewGroup {
         // handled by the child view.
         return false;
 
-    }
+    }*/
 }
