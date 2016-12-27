@@ -1,13 +1,11 @@
 package com.diallock.diallock.diallock.Activity.Common;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -17,20 +15,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.diallock.diallock.diallock.Activity.Activity.LockScreenViewActivity;
-import com.diallock.diallock.diallock.Activity.Adapter.ListViewAdapter;
 import com.diallock.diallock.diallock.Activity.Adapter.WidgetPagerAdapter;
-import com.diallock.diallock.diallock.Activity.Fragment.CircleDial;
 import com.diallock.diallock.diallock.Activity.Fragment.EventInfo;
-import com.diallock.diallock.diallock.Activity.Fragment.EventInfoItem;
-import com.diallock.diallock.diallock.Activity.Fragment.SlideImage;
 import com.diallock.diallock.diallock.Activity.Fragment.TourismInfo;
-import com.diallock.diallock.diallock.Activity.Fragment.TourismInfoItem;
 import com.diallock.diallock.diallock.Activity.Layout.CircleLayout;
 import com.diallock.diallock.diallock.Activity.Layout.ViewPager.HorizontalViewPager;
 import com.diallock.diallock.diallock.Activity.taskAction.NoLockStatusListenerException;
@@ -38,13 +29,10 @@ import com.diallock.diallock.diallock.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by park on 2016-08-26.
@@ -194,7 +182,7 @@ public class LockScreenManager {
                         break;*/
                 }
 /*
-                CircleDial.newInstance().setOnTouchCircleDial(event);*/
+                CircleDial_slide.newInstance().setOnTouchCircleDial(event);*/
 
                 return false;
             }

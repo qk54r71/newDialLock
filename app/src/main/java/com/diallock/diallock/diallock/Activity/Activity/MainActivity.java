@@ -1,22 +1,14 @@
 package com.diallock.diallock.diallock.Activity.Activity;
 
 import android.app.Activity;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.DragEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
 import com.diallock.diallock.diallock.Activity.Data.ChildBtnInfo;
-import com.diallock.diallock.diallock.Activity.Fragment.DialLayout;
 import com.diallock.diallock.diallock.R;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -54,9 +46,9 @@ public class MainActivity extends Activity {
         Drawable drawable = null;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            drawable = getResources().getDrawable(R.drawable.dial_image, null);
+            drawable = getResources().getDrawable(R.drawable.dial_image_slide, null);
         } else {
-            drawable = getResources().getDrawable(R.drawable.dial_image);
+            drawable = getResources().getDrawable(R.drawable.dial_image_slide);
 
         }
 

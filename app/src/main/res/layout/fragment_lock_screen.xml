@@ -164,12 +164,12 @@
 
         </RelativeLayout>
 
-        <fragment
+        <!--<fragment
             android:id="@+id/circleDial"
-            android:name="com.diallock.diallock.diallock.Activity.Fragment.CircleDial"
+            android:name="com.diallock.diallock.diallock.Activity.Fragment.CircleDial_slide"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:tag="circleDial" />
+            android:tag="circleDial" />-->
 
         <RelativeLayout
             android:layout_width="match_parent"

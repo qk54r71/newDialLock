@@ -3,6 +3,7 @@ package com.diallock.diallock.diallock.Activity.Layout;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
@@ -19,7 +20,7 @@ public class DialLayout extends ArcLayout {
 
     private ArrayList<ChildBtnInfo> childBtnInfos;
 
-    private GestureDetector mGestureDetector;
+    private TouchBtnIndexInteractionListener mListener;
 
     private static final String LOG_NAME = "DialLayout";
 
@@ -31,6 +32,13 @@ public class DialLayout extends ArcLayout {
         if (mContext == null) {
             mContext = context;
             dialLayout = this;
+
+            if (context instanceof TouchBtnIndexInteractionListener) {
+                mListener = (TouchBtnIndexInteractionListener) context;
+            } else {
+                throw new RuntimeException(context.toString()
+                        + " must implement TouchBtnIndexInteractionListener");
+            }
         }
 
 
@@ -98,4 +106,19 @@ public class DialLayout extends ArcLayout {
     private void init() {
         childBtnInfos = new ArrayList<>();
     }
+
+    public interface TouchBtnIndexInteractionListener {
+        void touchBtnIndex(int btnIndex);
+    }
+
+    public void touchBtnIndex(int btnIndex) {
+        if (mListener != null) {
+            mListener.touchBtnIndex(btnIndex);
+        }
+    }
+
+    public void setOnTouchEvent(MotionEvent onTouchEvent) {
+        this.touchBtnIndex(44);
+    }
+
 }

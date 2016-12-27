@@ -10,10 +10,9 @@
         android:id="@+id/dialLayout"
         android:layout_width="290dp"
         android:layout_height="290dp"
-        android:background="@drawable/dial_image"
+        android:background="@drawable/dial_image_slide"
         app:arc_axisRadius="106.5dp"
         app:arc_freeAngle="false"
-
         app:arc_origin="center"
         app:arc_radius="135dp"
         app:arc_reverseAngle="false">

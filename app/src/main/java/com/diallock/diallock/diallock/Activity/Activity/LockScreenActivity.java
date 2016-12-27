@@ -14,9 +14,9 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
-import com.diallock.diallock.diallock.Activity.Fragment.CircleDial;
 import com.diallock.diallock.diallock.Activity.Fragment.LockScreenFragment;
 import com.diallock.diallock.diallock.Activity.Layout.DialLayout;
+import com.diallock.diallock.diallock.Activity.Layout.DialLayout.TouchBtnIndexInteractionListener;
 import com.diallock.diallock.diallock.R;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -24,7 +24,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
  * 이메일 보내기
  * 출처 : {Link :http://blog.naver.com/PostView.nhn?blogId=junhwen&logNo=130151732452 }
  */
-public class LockScreenActivity extends AppCompatActivity implements SensorEventListener {
+public class LockScreenActivity extends AppCompatActivity implements TouchBtnIndexInteractionListener {
 
     private Boolean mBackFlag;
     private LockScreenFragment mLockScreenFragment;
@@ -72,13 +72,13 @@ public class LockScreenActivity extends AppCompatActivity implements SensorEvent
     }
 
 
-    /*@Override
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         mLockScreenFragment.setOnTouchEvent(event);
 
         return super.onTouchEvent(event);
-    }*/
+    }
 
     /**
      * 뒤로가기 버튼 클릭 시 종료
@@ -124,8 +124,6 @@ public class LockScreenActivity extends AppCompatActivity implements SensorEvent
     protected void onPause() {
 
         super.onPause();
-        mSensorManager.unregisterListener(this);
-        CommonJava.Loging.i(LOG_NAME, "onPause mSensorManager.unregisterListener(this);");
 
     }
 
@@ -135,8 +133,6 @@ public class LockScreenActivity extends AppCompatActivity implements SensorEvent
     protected void onResume() {
 
         super.onResume();
-        mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
-        CommonJava.Loging.i(LOG_NAME, "onPause  mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);");
 
     }
 
@@ -144,16 +140,8 @@ public class LockScreenActivity extends AppCompatActivity implements SensorEvent
         Toast.makeText(LockScreenActivity.this, strMsg, Toast.LENGTH_SHORT).show();
     }
 
-
     @Override
-    public void onSensorChanged(SensorEvent event) {
-        CommonJava.Loging.i(LOG_NAME, "onSensorChanged : " + event);
-        float lux = event.values[0];
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        CommonJava.Loging.i(LOG_NAME, "onAccuracyChanged sensor : " + sensor);
-        CommonJava.Loging.i(LOG_NAME, "onAccuracyChanged accuracy : " + accuracy);
+    public void touchBtnIndex(int btnIndex) {
+        CommonJava.Loging.i(LOG_NAME, "touchBtnIndex : " + btnIndex);
     }
 }

@@ -1,0 +1,118 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.diallock.diallock.diallock.Activity.Fragment.CircleDial_press">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.diallock.diallock.diallock.Activity.Layout.DialLayout
+            android:id="@+id/dialLayout_press"
+            android:layout_width="290dp"
+            android:layout_height="290dp"
+            android:background="@drawable/dial_image_press_off"
+            app:arc_axisRadius="106.5dp"
+            app:arc_freeAngle="false"
+            app:arc_origin="center"
+            app:arc_radius="135dp"
+            app:arc_reverseAngle="false">
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_00"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_0"
+                app:arc_angle="15"
+                app:arc_origin="center" />
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_01"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_1"
+                app:arc_origin="center" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_02"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_2"
+                app:arc_origin="center" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_03"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_3"
+                app:arc_origin="center" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_04"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_4"
+                app:arc_origin="center" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_05"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_5"
+                app:arc_origin="center" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_06"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_6"
+                app:arc_origin="center" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_07"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_7"
+                app:arc_origin="center" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_08"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_8"
+                app:arc_origin="center" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_09"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_9"
+                app:arc_origin="center" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_10"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_0"
+                app:arc_angle="315"
+                app:arc_origin="center" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/btn_index_11"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/num_1"
+                app:arc_origin="center" />
+
+
+        </com.diallock.diallock.diallock.Activity.Layout.DialLayout>
+    </LinearLayout>
+</FrameLayout>
