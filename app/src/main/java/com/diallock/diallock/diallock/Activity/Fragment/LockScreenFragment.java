@@ -53,7 +53,6 @@ public class LockScreenFragment extends Fragment {
     private Date mNowDate;
     private Calendar mCalendar;
 
-    private WidgetPagerAdapter mWidgetPagerAdapter;
     private HorizontalViewPager mHorizontalViewPager;
 
     private ArrayList<Fragment> mInfoFragmentArrayList;
@@ -74,7 +73,7 @@ public class LockScreenFragment extends Fragment {
 
 
     /**
-     * dial control button
+     * dial view control button
      */
     private SimpleDraweeView btn_dial_pattern;
     private ArrayList<Integer> mImageBtn;
@@ -82,9 +81,12 @@ public class LockScreenFragment extends Fragment {
     private ArrayList<Integer> mImageBtnDefault;
     private ArrayList<String> mStrTitle;
     public static Integer mSwitchValue;
+    private final int DIAL_SLIDE = 0;
+    private final int DIAL_ZIGZAG = 1;
+    private final int DIAL_PRESS = 2;
 
     /**
-     * dail control button
+     * dail second control button
      */
     private SimpleDraweeView btn_call;
     private SimpleDraweeView btn_app;
@@ -93,6 +95,12 @@ public class LockScreenFragment extends Fragment {
      * random button
      */
     public static Boolean smSwitchRandom;
+
+    /**
+     * widget control
+     */
+    private HorizontalViewPager mWidget_view;
+    private WidgetPagerAdapter mWidgetPagerAdapter;
 
     private final String LOG_NAME = "LockScreenFragment";
 
@@ -157,6 +165,8 @@ public class LockScreenFragment extends Fragment {
         btn_app = (SimpleDraweeView) mView.findViewById(R.id.btn_app);
 
         txtImgSlideProgress = (TextView) mView.findViewById(R.id.txtImgSlideProgress);
+
+        mWidget_view = (HorizontalViewPager) mView.findViewById(R.id.widget_view);
     }
 
     private void init() {
@@ -170,14 +180,14 @@ public class LockScreenFragment extends Fragment {
         setTextDay(mNowDate);
 
         mImageBtnDefault = new ArrayList<>();
-        mImageBtnDefault.add(R.drawable.btn_num_1);
-        mImageBtnDefault.add(R.drawable.btn_num_2);
-        mImageBtnDefault.add(R.drawable.btn_num_3);
+        mImageBtnDefault.add(R.drawable.dial_slide);
+        mImageBtnDefault.add(R.drawable.dial_zigzag);
+        mImageBtnDefault.add(R.drawable.dial_press);
 
         mImageBtnRandom = new ArrayList<>();
-        mImageBtnRandom.add(R.drawable.btn_num_1_random);
-        mImageBtnRandom.add(R.drawable.btn_num_2_random);
-        mImageBtnRandom.add(R.drawable.btn_num_3_random);
+        mImageBtnRandom.add(R.drawable.dial_slide_random);
+        mImageBtnRandom.add(R.drawable.dial_zigzag_random);
+        mImageBtnRandom.add(R.drawable.dial_press_random);
 
         mImageBtn = mImageBtnRandom;
 
@@ -212,6 +222,13 @@ public class LockScreenFragment extends Fragment {
         setFragment();
 
         info_slideView.setVisibility(View.GONE);
+
+        ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
+        fragmentArrayList.add(new WidgetTimeBaseFragment());
+        fragmentArrayList.add(new ImageFragment());
+
+        mWidgetPagerAdapter = new WidgetPagerAdapter(getChildFragmentManager(), fragmentArrayList);
+        mWidget_view.setAdapter(mWidgetPagerAdapter);
     }
 
     private void setFragment() {

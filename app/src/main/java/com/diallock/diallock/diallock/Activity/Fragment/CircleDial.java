@@ -119,7 +119,7 @@ public class CircleDial extends Fragment {
     }
 
     private void setFindViewById() {
-        mWidget_view = (HorizontalViewPager) mView.findViewById(R.id.widget_view);
+        /*mWidget_view = (HorizontalViewPager) mView.findViewById(R.id.widget_view);*/
         dialLayout = (com.diallock.diallock.diallock.Activity.Layout.DialLayout) mView.findViewById(R.id.dialLayout);
         btn_index_00 = (SimpleDraweeView) mView.findViewById(R.id.btn_index_00);
 
@@ -127,12 +127,12 @@ public class CircleDial extends Fragment {
 
     private void init() {
 
-        ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
+        /*ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
         fragmentArrayList.add(new WidgetTimeBaseFragment());
         fragmentArrayList.add(new ImageFragment());
 
         mWidgetPagerAdapter = new WidgetPagerAdapter(getChildFragmentManager(), fragmentArrayList);
-        mWidget_view.setAdapter(mWidgetPagerAdapter);
+        mWidget_view.setAdapter(mWidgetPagerAdapter);*/
 
     }
 
