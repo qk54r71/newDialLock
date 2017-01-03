@@ -1,8 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.diallock.diallock.diallock.Activity.Fragment.CircleDial_zigzag">
 
 
@@ -12,12 +12,12 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.diallock.diallock.diallock.Activity.Layout.DialLayout
+        <com.ogaclejapan.arclayout.ArcLayout
             android:id="@+id/dialLayout_zigzag"
             android:layout_width="290dp"
             android:layout_height="290dp"
             android:background="@drawable/dial_image_zigzag"
-            app:arc_axisRadius="106.5dp"
+            app:arc_axisRadius="106dp"
             app:arc_freeAngle="false"
             app:arc_origin="center"
             app:arc_radius="135dp"
@@ -112,7 +112,8 @@
                 app:arc_origin="center" />
 
 
-        </com.diallock.diallock.diallock.Activity.Layout.DialLayout>
+        </com.ogaclejapan.arclayout.ArcLayout>
+        >
     </LinearLayout>
 
 </FrameLayout>

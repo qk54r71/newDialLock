@@ -82,7 +82,7 @@ public class DialLayout extends ArcLayout {
         CommonJava.Loging.i(LOG_NAME, "childLayoutBy x : " + childX);
         CommonJava.Loging.i(LOG_NAME, "childLayoutBy y : " + childY);
 
-        if (child.getRight() != 0) {
+        /*if (child.getRight() != 0) {
 
             ChildBtnInfo childBtnInfo = new ChildBtnInfo();
             childBtnInfo.setxPosition(childX);
@@ -93,7 +93,7 @@ public class DialLayout extends ArcLayout {
             childBtnInfo.setChildWidth(childWidth);
 
             childBtnInfos.add(childBtnInfo);
-        }
+        }*/
 
         /*if (childBtnInfos.size() == 12) {
             ((MainActivity) mContext).setArrayList(childBtnInfos);

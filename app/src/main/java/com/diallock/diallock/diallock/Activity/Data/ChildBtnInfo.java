@@ -4,40 +4,23 @@ package com.diallock.diallock.diallock.Activity.Data;
  * Created by park on 2016-12-22.
  */
 public class ChildBtnInfo {
-    private int xPosition;
-    private int yPosition;
-    private int childWidth;
-    private String childName;
 
-    public int getxPosition() {
-        return xPosition;
+    private String childValue;
+    private int childBtnImageId;
+
+    public String getChildValue() {
+        return childValue;
     }
 
-    public void setxPosition(int xPosition) {
-        this.xPosition = xPosition;
+    public void setChildValue(String childValue) {
+        this.childValue = childValue;
     }
 
-    public int getyPosition() {
-        return yPosition;
+    public int getChildBtnImageId() {
+        return childBtnImageId;
     }
 
-    public void setyPosition(int yPosition) {
-        this.yPosition = yPosition;
-    }
-
-    public String getChildName() {
-        return childName;
-    }
-
-    public void setChildName(String childName) {
-        this.childName = childName;
-    }
-
-    public int getChildWidth() {
-        return childWidth;
-    }
-
-    public void setChildWidth(int childWidth) {
-        this.childWidth = childWidth;
+    public void setChildBtnImageId(int childBtnImageId) {
+        this.childBtnImageId = childBtnImageId;
     }
 }

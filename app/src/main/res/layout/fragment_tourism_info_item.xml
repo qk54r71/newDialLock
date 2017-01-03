@@ -29,8 +29,9 @@
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/tourSlideBtn_bg"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/btn_lock_screen_today"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/btn_lock_screen_d_day_bg"
                 android:text="슬라이드"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
@@ -41,8 +42,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="false"
                 android:layout_centerInParent="true"
-                android:text="정보"
+                android:text=""
                 android:textColor="#ffffff"
+                android:textSize="22dp"
                 android:textStyle="bold" />
         </RelativeLayout>
     </RelativeLayout>

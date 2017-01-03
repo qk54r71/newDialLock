@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -288,9 +289,12 @@ public class LockScreenFragment extends Fragment {
     private void setOnClick() {
 
         lock_screen_pre.setOnClickListener(onClickListener);
-        lock_screen_pre_double.setOnClickListener(onClickListener);
+        lock_screen_pre.setOnLongClickListener(onLongClickListener);
+        //lock_screen_pre_double.setOnClickListener(onClickListener);
+
         lock_screen_nex.setOnClickListener(onClickListener);
-        lock_screen_nex_double.setOnClickListener(onClickListener);
+        lock_screen_nex.setOnLongClickListener(onLongClickListener);
+        //lock_screen_nex_double.setOnClickListener(onClickListener);
 
         btn_find_pass.setOnClickListener(onClickListener);
         btn_dial_pattern.setOnLongClickListener(onLongClickListener);
@@ -305,6 +309,7 @@ public class LockScreenFragment extends Fragment {
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            CommonJava.Loging.i(LOG_NAME, "onClickListener view.getId() : " + view.getId());
             switch (view.getId()) {
                 case R.id.lock_screen_pre:
 
@@ -333,6 +338,7 @@ public class LockScreenFragment extends Fragment {
                     setTextDay(mNowDate);
 
                     setFragmentChangeDay(mNowDate);
+
                     break;
 
                 case R.id.lock_screen_nex_double:
@@ -405,10 +411,88 @@ public class LockScreenFragment extends Fragment {
                     }, 500);
 
                     break;
+                case R.id.lock_screen_pre:
+
+                    mCalendar.add(Calendar.MONTH, -1);
+                    mNowDate = mCalendar.getTime();
+
+                    setTextDay(mNowDate);
+
+                    setFragmentChangeDay(mNowDate);
+
+                    lock_screen_pre.setSelected(true);
+                    lock_screen_pre.setOnClickListener(null);
+                    comebackLongBtnEanble(R.id.lock_screen_pre);
+                    break;
+
+                case R.id.lock_screen_nex:
+
+                    mCalendar.add(Calendar.MONTH, +1);
+                    mNowDate = mCalendar.getTime();
+
+                    setTextDay(mNowDate);
+
+                    setFragmentChangeDay(mNowDate);
+
+                    lock_screen_nex.setSelected(true);
+                    lock_screen_nex.setOnClickListener(null);
+                    comebackLongBtnEanble(R.id.lock_screen_nex);
+                    break;
+
             }
             return false;
         }
     };
+
+    /**
+     * click 되어 바뀐 이미지를 원상 복귀
+     *
+     * @param btnId change 된 btn 의 index 값
+     */
+    private void comebackBtnImage(final Integer btnId) {
+        new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (btnId) {
+                    case R.id.lock_screen_pre:
+
+                        lock_screen_pre.setBackgroundResource(R.drawable.previous);
+                        break;
+                    case R.id.lock_screen_nex:
+
+                        lock_screen_nex.setBackgroundResource(R.drawable.next);
+                        break;
+                }
+
+            }
+        }.sendEmptyMessageDelayed(0, 200);
+    }
+
+    /**
+     * @param btnId
+     */
+    private void comebackLongBtnEanble(final Integer btnId) {
+        new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (btnId) {
+                    case R.id.lock_screen_pre:
+
+                        lock_screen_pre.setSelected(false);
+                        lock_screen_pre.setOnClickListener(onClickListener);
+                        break;
+                    case R.id.lock_screen_nex:
+
+                        lock_screen_nex.setSelected(false);
+                        lock_screen_nex.setOnClickListener(onClickListener);
+                        break;
+                }
+
+            }
+        }.sendEmptyMessageDelayed(0, 500);
+    }
 
     private void changeDialPattern() {
 

@@ -37,8 +37,7 @@ public class EventInfoItem extends Fragment {
     private TextView eventDate;
     private TextView eventTime;
     private TextView eventLocal;
-    private SimpleDraweeView eventProgress_bg;
-    private TextView eventProgress_text;
+    private SimpleDraweeView eventProgress;
     private SimpleDraweeView eventRemainDay_bg;
     private TextView eventRemainDay_text;
     private SimpleDraweeView eventImgView;
@@ -89,8 +88,7 @@ public class EventInfoItem extends Fragment {
         eventDate = (TextView) mView.findViewById(R.id.eventDate);
         eventTime = (TextView) mView.findViewById(R.id.eventTime);
         eventLocal = (TextView) mView.findViewById(R.id.eventLocal);
-        eventProgress_bg = (SimpleDraweeView) mView.findViewById(R.id.eventProgress_bg);
-        eventProgress_text = (TextView) mView.findViewById(R.id.eventProgress_text);
+        eventProgress = (SimpleDraweeView) mView.findViewById(R.id.eventProgress);
         eventRemainDay_bg = (SimpleDraweeView) mView.findViewById(R.id.eventRemainDay_bg);
         eventRemainDay_text = (TextView) mView.findViewById(R.id.eventRemainDay_text);
         eventImgView = (SimpleDraweeView) mView.findViewById(R.id.view_evnet_imageView);
@@ -126,26 +124,25 @@ public class EventInfoItem extends Fragment {
             eventDate.setText(strEventDate);
             eventTime.setText(strEventTime);
             eventLocal.setText(strEventLocal);
-            eventProgress_text.setText(strEventProgress);
 
             switch (strEventProgress) {
                 case "끝":
-                    eventProgress_bg.setBackgroundResource(R.drawable.btn_lock_screen_end);
+                    eventProgress.setBackgroundResource(R.drawable.btn_lock_screen_end);
                     break;
                 case "예정":
-                    eventProgress_bg.setBackgroundResource(R.drawable.btn_lock_screen_end);
+                    eventProgress.setBackgroundResource(R.drawable.btn_lock_screen_schedule);
                     break;
                 case "당일":
-                    eventProgress_bg.setBackgroundResource(R.drawable.btn_lock_screen_today);
+                    eventProgress.setBackgroundResource(R.drawable.btn_lock_screen_today);
                     break;
                 case "시작":
-                    eventProgress_bg.setBackgroundResource(R.drawable.btn_lock_screen_start);
+                    eventProgress.setBackgroundResource(R.drawable.btn_lock_screen_start);
                     break;
                 case "종료":
-                    eventProgress_bg.setBackgroundResource(R.drawable.btn_lock_screen_end);
+                    eventProgress.setBackgroundResource(R.drawable.btn_lock_screen_d_end);
                     break;
                 case "진행":
-                    eventProgress_bg.setBackgroundResource(R.drawable.btn_lock_screen_pro);
+                    eventProgress.setBackgroundResource(R.drawable.btn_lock_screen_progress);
                     break;
             }
 
@@ -173,7 +170,7 @@ public class EventInfoItem extends Fragment {
         } else if (mEventInfoData.getCode().equals("3001")) {
             eventRemainDay_text.setVisibility(View.GONE);
             eventRemainDay_bg.setVisibility(View.GONE);
-        } else if(mEventInfoData.getCode().equals("1001")){
+        } else if (mEventInfoData.getCode().equals("1001")) {
             eventRemainDay_text.setVisibility(View.GONE);
             eventRemainDay_bg.setVisibility(View.GONE);
         }
@@ -190,9 +187,9 @@ public class EventInfoItem extends Fragment {
             switch (view.getId()) {
                 case R.id.eventRemainDay_bg:
                     onButtonPressed(mStrEventSlideImage);
-                    for(Fragment fragment : getActivity().getSupportFragmentManager().getFragments()){
-                        if(fragment instanceof LockScreenFragment){
-                            ((LockScreenFragment)fragment).setImageSildeView(mStrEventSlideImage);
+                    for (Fragment fragment : getActivity().getSupportFragmentManager().getFragments()) {
+                        if (fragment instanceof LockScreenFragment) {
+                            ((LockScreenFragment) fragment).setImageSildeView(mStrEventSlideImage);
                         }
                     }
                     break;

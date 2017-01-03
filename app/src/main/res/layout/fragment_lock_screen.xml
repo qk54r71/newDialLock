@@ -7,12 +7,12 @@
 
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/info_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        android:id="@+id/info_view"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,22 +57,23 @@
             android:layout_height="45dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/lock_screen_pre_double"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:background="@drawable/next_double"
-                android:rotation="180" />
+                android:rotation="180"
+                android:visibility="gone" />
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/lock_screen_pre"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="15dp"
-                android:background="@drawable/previous" />
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/selector_btn_pre" />
 
             <TextView
                 android:id="@+id/txt_lock_day"
@@ -85,16 +86,17 @@
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/lock_screen_nex"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/next" />
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/selector_btn_nex" />
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/lock_screen_nex_double"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:background="@drawable/next_double" />
+                android:background="@drawable/next_double"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -129,10 +131,10 @@
             android:id="@+id/widget_view"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:layout_gravity="center"
-            android:background="@drawable/widget_circle_bg"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_gravity="center"
+            android:background="@drawable/widget_circle_bg" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -188,14 +190,14 @@
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/btn_find_pass"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="right"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/password_find" />
 
         </RelativeLayout>
@@ -204,15 +206,15 @@
             android:id="@+id/txt_toast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:autoText="false"
             android:background="@drawable/txt_bg"
             android:padding="10dp"
             android:text="플레이스토어에 등록된 이메일로 패스워드가 발송됩니다."
             android:textColor="#FFFFFF"
-            android:visibility="invisible"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:visibility="invisible" />
 
     </RelativeLayout>
 

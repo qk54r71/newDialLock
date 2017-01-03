@@ -5,14 +5,14 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/list_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="5dp"
+        android:orientation="horizontal"
         android:paddingBottom="5dp"
-        android:id="@+id/list_item"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingRight="10dp"
+        android:paddingTop="5dp">
 
         <LinearLayout
             android:layout_width="70dp"
@@ -91,7 +91,7 @@
                 android:id="@+id/btn_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_lock_screen_today"
+                android:background="@drawable/btn_lock_screen_d_day_bg"
                 android:text="당일"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
@@ -99,9 +99,9 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/list_image"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:id="@+id/list_image"
         android:layout_gravity="center" />
 
 </LinearLayout>

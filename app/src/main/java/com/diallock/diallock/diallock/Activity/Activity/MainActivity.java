@@ -97,9 +97,9 @@ public class MainActivity extends Activity {
     public void setArrayList(ArrayList<ChildBtnInfo> childBtnInfos) {
         mChildBtnInfos = childBtnInfos;
 
-        for (ChildBtnInfo childBtnInfo : childBtnInfos) {
+       /* for (ChildBtnInfo childBtnInfo : childBtnInfos) {
             CommonJava.Loging.i(LOG_NAME, "getChildName : " + childBtnInfo.getChildName() + " getxPosition : " + childBtnInfo.getxPosition() + " getyPosition : " + childBtnInfo.getyPosition() + " childWidth : " + childBtnInfo.getChildWidth());
-        }
+        }*/
 
         CommonJava.Loging.i(LOG_NAME, "dialLayout.getX() : " + dialLayout.getX() + " getY() : " + dialLayout.getY() + " Right : " + dialLayout.getRight() + " Left : " + dialLayout.getLeft() + " Top :" + dialLayout.getTop() + " Bottom : " + dialLayout.getBottom());
 

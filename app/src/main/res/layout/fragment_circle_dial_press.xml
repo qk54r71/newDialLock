@@ -13,12 +13,12 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <com.diallock.diallock.diallock.Activity.Layout.DialLayout
+        <com.ogaclejapan.arclayout.ArcLayout
             android:id="@+id/dialLayout_press"
             android:layout_width="290dp"
             android:layout_height="290dp"
             android:background="@drawable/dial_image_press_off"
-            app:arc_axisRadius="106.5dp"
+            app:arc_axisRadius="106dp"
             app:arc_freeAngle="false"
             app:arc_origin="center"
             app:arc_radius="135dp"
@@ -113,6 +113,6 @@
                 app:arc_origin="center" />
 
 
-        </com.diallock.diallock.diallock.Activity.Layout.DialLayout>
+        </com.ogaclejapan.arclayout.ArcLayout>>
     </LinearLayout>
 </FrameLayout>

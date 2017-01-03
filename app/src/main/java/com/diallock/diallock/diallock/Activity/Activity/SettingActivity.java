@@ -4,8 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -16,17 +18,23 @@ import android.widget.Toast;
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
 import com.diallock.diallock.diallock.Activity.taskAction.ScreenService;
 import com.diallock.diallock.diallock.R;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 public class SettingActivity extends AppCompatActivity {
 
-    private LinearLayout linear_lock;
-    private LinearLayout linear_unlock;
-    private LinearLayout linear_pass_change;
-    private LinearLayout linear_img_change;
-    private LinearLayout linear_email_change;
-    private LinearLayout linear_ad;
-    private LinearLayout linear_call_set;
-    private LinearLayout linear_app_more;
+    private SimpleDraweeView image_lock;
+    private SimpleDraweeView image_unlock;
+    private SimpleDraweeView image_password_change;
+    private SimpleDraweeView image_image_change;
+    private SimpleDraweeView image_email_change;
+    private SimpleDraweeView image_ad;
+    private SimpleDraweeView image_call;
+    private SimpleDraweeView image_app_more;
 
     private Boolean lockCheck;
     private Boolean backFlag;
@@ -37,11 +45,17 @@ public class SettingActivity extends AppCompatActivity {
     //private DBManageMent dbManageMent;
 
     private static final String LOG_NAME = "SettingActivty";
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fresco.initialize(SettingActivity.this);
         setContentView(R.layout.activity_setting);
 
         Boolean isAuthorityCheck = isAuthorityCheck();
@@ -56,6 +70,9 @@ public class SettingActivity extends AppCompatActivity {
 
         //networkConnect();//네트워크 테스트
         //copyExcelDataToDatabase();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     /**
@@ -87,7 +104,7 @@ public class SettingActivity extends AppCompatActivity {
         int checkReadExternalStorage = 99;
         int checkReadPhoneState = 99;
         Boolean checkOverlays = false;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkGetAccounts = checkSelfPermission(Manifest.permission.GET_ACCOUNTS);
             checkReadExternalStorage = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
             checkReadPhoneState = checkSelfPermission(Manifest.permission.READ_PHONE_STATE);
@@ -108,7 +125,7 @@ public class SettingActivity extends AppCompatActivity {
 
         } else if (!checkOverlays) {
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 CommonJava.Loging.i(LOG_NAME, "checkOverlays : " + checkOverlays);
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getPackageName()));
@@ -125,14 +142,16 @@ public class SettingActivity extends AppCompatActivity {
      * 레이아웃과 연결
      */
     private void setFindView() {
-        linear_lock = (LinearLayout) findViewById(R.id.linear_lock);
-        linear_unlock = (LinearLayout) findViewById(R.id.linear_unlock);
-        linear_pass_change = (LinearLayout) findViewById(R.id.linear_pass_change);
-        linear_img_change = (LinearLayout) findViewById(R.id.linear_img_change);
-        linear_email_change = (LinearLayout) findViewById(R.id.linear_email_change);
-        linear_ad = (LinearLayout) findViewById(R.id.linear_ad);
-        linear_call_set = (LinearLayout) findViewById(R.id.linear_call_set);
-        linear_app_more = (LinearLayout) findViewById(R.id.linear_app_more);
+
+        image_lock = (SimpleDraweeView) findViewById(R.id.image_lock);
+        image_unlock = (SimpleDraweeView) findViewById(R.id.image_unlock);
+        image_password_change = (SimpleDraweeView) findViewById(R.id.image_password_change);
+        image_image_change = (SimpleDraweeView) findViewById(R.id.image_image_change);
+        image_email_change = (SimpleDraweeView) findViewById(R.id.image_email_change);
+        image_ad = (SimpleDraweeView) findViewById(R.id.image_ad);
+        image_call = (SimpleDraweeView) findViewById(R.id.image_call);
+        image_app_more = (SimpleDraweeView) findViewById(R.id.image_app_more);
+
     }
 
     /**
@@ -145,22 +164,33 @@ public class SettingActivity extends AppCompatActivity {
         switch (strLockCheck) {
             case "true":
                 lockCheck = true;
-                linear_lock.setBackgroundResource(R.drawable.btn_click);
-                linear_unlock.setBackgroundResource(R.drawable.btn_bg);
+
+                image_lock.setSelected(true);
+                image_unlock.setSelected(false);
                 break;
             case "false":
                 lockCheck = false;
-                linear_lock.setBackgroundResource(R.drawable.btn_bg);
-                linear_unlock.setBackgroundResource(R.drawable.btn_click);
+
+                image_lock.setSelected(false);
+                image_unlock.setSelected(true);
                 break;
             default:
                 lockCheck = false;
-                linear_lock.setBackgroundResource(R.drawable.btn_bg);
-                linear_unlock.setBackgroundResource(R.drawable.btn_click);
+                image_lock.setSelected(false);
+                image_unlock.setSelected(true);
         }
 
         backFlag = false;
 
+
+        image_lock.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_lock);
+        image_unlock.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_unlock);
+        image_password_change.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_password_change);
+        image_image_change.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_image_change);
+        image_email_change.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_email_change);
+        image_ad.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_ad);
+        image_call.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_call);
+        image_app_more.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_app_more);
 
     }
 
@@ -168,14 +198,14 @@ public class SettingActivity extends AppCompatActivity {
      * 클릭 이벤트 연결
      */
     private void setOnClick() {
-        linear_lock.setOnClickListener(onClickListener);
-        linear_unlock.setOnClickListener(onClickListener);
-        linear_pass_change.setOnClickListener(onClickListener);
-        linear_img_change.setOnClickListener(onClickListener);
-        linear_email_change.setOnClickListener(onClickListener);
-        linear_ad.setOnClickListener(onClickListener);
-        linear_call_set.setOnClickListener(onClickListener);
-        linear_app_more.setOnClickListener(onClickListener);
+        image_lock.setOnClickListener(onClickListener);
+        image_unlock.setOnClickListener(onClickListener);
+        image_password_change.setOnClickListener(onClickListener);
+        image_image_change.setOnClickListener(onClickListener);
+        image_email_change.setOnClickListener(onClickListener);
+        image_ad.setOnClickListener(onClickListener);
+        image_call.setOnClickListener(onClickListener);
+        image_app_more.setOnClickListener(onClickListener);
     }
 
     /**
@@ -186,14 +216,14 @@ public class SettingActivity extends AppCompatActivity {
         public void onClick(View view) {
 
             switch (view.getId()) {
-                case R.id.linear_lock:
+                case R.id.image_lock:
                     String password = CommonJava.loadSharedPreferences(SettingActivity.this, "password");
                     if (password.isEmpty()) {
                         loadPassword();
                     } else if (lockCheck == false) {
 
-                        linear_lock.setBackgroundResource(R.drawable.btn_click);
-                        linear_unlock.setBackgroundResource(R.drawable.btn_bg);
+                        image_lock.setSelected(true);
+                        image_unlock.setSelected(false);
 
                         Intent intentLockScreen = new Intent(SettingActivity.this, LockScreenActivity.class);
                         intentLockScreen.putExtra("strSwitch", "SettingActivity");
@@ -205,12 +235,12 @@ public class SettingActivity extends AppCompatActivity {
                     }
 
                     break;
-                case R.id.linear_unlock:
+                case R.id.image_unlock:
 
                     if (lockCheck == true) {
                         CommonJava.saveSharedPreferences(SettingActivity.this, "lockCheck", "false");
-                        linear_lock.setBackgroundResource(R.drawable.btn_bg);
-                        linear_unlock.setBackgroundResource(R.drawable.btn_click);
+                        image_lock.setSelected(true);
+                        image_unlock.setSelected(false);
                         lockCheck = false;
 
                         Intent intentStopService = new Intent(SettingActivity.this, ScreenService.class);
@@ -219,39 +249,39 @@ public class SettingActivity extends AppCompatActivity {
                     }
 
                     break;
-                case R.id.linear_pass_change:
+                case R.id.image_password_change:
 
                     Intent intentPassChange = new Intent(SettingActivity.this, PasswordChangeActivity.class);
                     intentPassChange.putExtra("strSwitch", "first");
                     startActivity(intentPassChange);
 
                     break;
-                case R.id.linear_img_change:
+                case R.id.image_image_change:
 
                     Intent intent = new Intent(Intent.ACTION_PICK);
-                    intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-                    intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                    intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(intent, REQ_CODE_SELECT_IMAGE);
 
                     break;
-                case R.id.linear_email_change:
+                case R.id.image_email_change:
 
                     Intent intentEmailChange = new Intent(SettingActivity.this, EmailChangeActivity.class);
                     startActivity(intentEmailChange);
 
                     break;
-                case R.id.linear_ad:
+                case R.id.image_ad:
 
                     Intent intentAdRequest = new Intent(SettingActivity.this, AdRequestActivity.class);
                     startActivity(intentAdRequest);
 
                     break;
-                case R.id.linear_call_set:
+                case R.id.image_call:
 
                     Intent intentTestDialLayout = new Intent(SettingActivity.this, MainActivity.class);
                     startActivity(intentTestDialLayout);
                     break;
-                case R.id.linear_app_more:
+                case R.id.image_app_more:
                     break;
             }
 
@@ -271,7 +301,7 @@ public class SettingActivity extends AppCompatActivity {
             int checkReadExternalStorage = 99;
             int checkReadPhoneState = 99;
             Boolean checkOverlays = false;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 checkReadExternalStorage = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
                 checkReadPhoneState = checkSelfPermission(Manifest.permission.READ_PHONE_STATE);
                 checkOverlays = Settings.canDrawOverlays(this);
@@ -382,7 +412,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
                 break;
             case PERMISSIONS_REQ_NUM:
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (!Settings.canDrawOverlays(this)) {
                         finish();
                     } else {
@@ -425,11 +455,11 @@ public class SettingActivity extends AppCompatActivity {
         CommonJava.Loging.i(LOG_NAME, "lockCheck : " + lockCheck);
 
         if (lockCheck) {
-            linear_lock.setBackgroundResource(R.drawable.btn_click);
-            linear_unlock.setBackgroundResource(R.drawable.btn_bg);
+            image_lock.setSelected(true);
+            image_unlock.setSelected(false);
         } else {
-            linear_lock.setBackgroundResource(R.drawable.btn_bg);
-            linear_unlock.setBackgroundResource(R.drawable.btn_click);
+            image_lock.setSelected(false);
+            image_unlock.setSelected(true);
         }
 
 
@@ -524,4 +554,39 @@ public class SettingActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Setting Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
+    }
 }

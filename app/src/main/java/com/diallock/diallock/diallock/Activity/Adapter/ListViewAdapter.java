@@ -145,7 +145,7 @@ public class ListViewAdapter extends BaseAdapter {
             btn_item.setBackgroundResource(R.drawable.btn_lock_screen_end);
             btn_item.setText("종료");
         } else {
-            btn_item.setBackgroundResource(R.drawable.btn_lock_screen_pro);
+            btn_item.setBackgroundResource(R.drawable.btn_lock_screen_progress);
             btn_item.setText("진행");
         }
 
