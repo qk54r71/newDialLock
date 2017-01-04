@@ -20,15 +20,18 @@ import com.diallock.diallock.diallock.Activity.Common.CommonJava;
 import com.diallock.diallock.diallock.Activity.Common.VolleyNetwork;
 import com.diallock.diallock.diallock.Activity.Layout.CircleLayout;
 import com.diallock.diallock.diallock.Activity.Layout.CircleLayoutPassword;
+import com.diallock.diallock.diallock.Activity.Layout.DialLayout;
 import com.diallock.diallock.diallock.R;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.ogaclejapan.arclayout.ArcLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class PasswordChangeActivity extends AppCompatActivity {
 
-    private CircleLayoutPassword circleLayoutPassword;
+    private ArcLayout dial_password_change;
 
     private String passNumber;
     private Button pass_btn_cancle;
@@ -37,6 +40,17 @@ public class PasswordChangeActivity extends AppCompatActivity {
     private Boolean passProgress;
     private String strSwitch;
     private Boolean backFlag;
+
+    private SimpleDraweeView pass_change_btn_index_00;
+    private SimpleDraweeView pass_change_btn_index_01;
+    private SimpleDraweeView pass_change_btn_index_02;
+    private SimpleDraweeView pass_change_btn_index_03;
+    private SimpleDraweeView pass_change_btn_index_04;
+    private SimpleDraweeView pass_change_btn_index_05;
+    private SimpleDraweeView pass_change_btn_index_06;
+    private SimpleDraweeView pass_change_btn_index_07;
+    private SimpleDraweeView pass_change_btn_index_08;
+    private SimpleDraweeView pass_change_btn_index_09;
 
     private final static String LOG_NAME = "PasswordChangeActivity";
 
@@ -56,10 +70,21 @@ public class PasswordChangeActivity extends AppCompatActivity {
     }
 
     private void setFindView() {
-        circleLayoutPassword = (CircleLayoutPassword) findViewById(R.id.circle_screen_password);
+        dial_password_change = (ArcLayout) findViewById(R.id.dial_password_change);
         pass_btn_cancle = (Button) findViewById(R.id.pass_btn_cancle);
         pass_btn_ok = (Button) findViewById(R.id.pass_btn_ok);
         pass_txt_lock = (TextView) findViewById(R.id.pass_txt_lock);
+
+        pass_change_btn_index_00 = (SimpleDraweeView) findViewById(R.id.pass_change_btn_index_00);
+        pass_change_btn_index_01 = (SimpleDraweeView) findViewById(R.id.pass_change_btn_index_01);
+        pass_change_btn_index_02 = (SimpleDraweeView) findViewById(R.id.pass_change_btn_index_02);
+        pass_change_btn_index_03 = (SimpleDraweeView) findViewById(R.id.pass_change_btn_index_03);
+        pass_change_btn_index_04 = (SimpleDraweeView) findViewById(R.id.pass_change_btn_index_04);
+        pass_change_btn_index_05 = (SimpleDraweeView) findViewById(R.id.pass_change_btn_index_05);
+        pass_change_btn_index_06 = (SimpleDraweeView) findViewById(R.id.pass_change_btn_index_06);
+        pass_change_btn_index_07 = (SimpleDraweeView) findViewById(R.id.pass_change_btn_index_07);
+        pass_change_btn_index_08 = (SimpleDraweeView) findViewById(R.id.pass_change_btn_index_08);
+        pass_change_btn_index_09 = (SimpleDraweeView) findViewById(R.id.pass_change_btn_index_09);
     }
 
     private void init() {
@@ -82,19 +107,87 @@ public class PasswordChangeActivity extends AppCompatActivity {
                 strSwitch = "second";
                 break;
         }
+
+        pass_change_btn_index_00.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_0);
+        pass_change_btn_index_01.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_1);
+        pass_change_btn_index_02.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_2);
+        pass_change_btn_index_03.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_3);
+        pass_change_btn_index_04.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_4);
+        pass_change_btn_index_05.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_5);
+        pass_change_btn_index_06.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_6);
+        pass_change_btn_index_07.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_7);
+        pass_change_btn_index_08.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_8);
+        pass_change_btn_index_09.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_9);
+
     }
 
     private void setOnClick() {
         pass_btn_cancle.setOnClickListener(onClickListener);
         pass_btn_ok.setOnClickListener(onClickListener);
+
+        pass_change_btn_index_00.setOnClickListener(onClickListenerBtnPasswordNumber);
+        pass_change_btn_index_01.setOnClickListener(onClickListenerBtnPasswordNumber);
+        pass_change_btn_index_02.setOnClickListener(onClickListenerBtnPasswordNumber);
+        pass_change_btn_index_03.setOnClickListener(onClickListenerBtnPasswordNumber);
+        pass_change_btn_index_04.setOnClickListener(onClickListenerBtnPasswordNumber);
+        pass_change_btn_index_05.setOnClickListener(onClickListenerBtnPasswordNumber);
+        pass_change_btn_index_06.setOnClickListener(onClickListenerBtnPasswordNumber);
+        pass_change_btn_index_07.setOnClickListener(onClickListenerBtnPasswordNumber);
+        pass_change_btn_index_08.setOnClickListener(onClickListenerBtnPasswordNumber);
+        pass_change_btn_index_09.setOnClickListener(onClickListenerBtnPasswordNumber);
     }
+
+    private View.OnClickListener onClickListenerBtnPasswordNumber = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            CommonJava.Loging.i(LOG_NAME, "onClickListenerBtnPasswordNumber()");
+            CommonJava.Loging.i(LOG_NAME, "view.getId() : " + view.getId());
+
+            String btnNumberStr = null;
+            switch (view.getId()) {
+                case R.id.pass_change_btn_index_00:
+                    btnNumberStr = "0";
+                    break;
+                case R.id.pass_change_btn_index_01:
+                    btnNumberStr = "1";
+                    break;
+                case R.id.pass_change_btn_index_02:
+                    btnNumberStr = "2";
+                    break;
+                case R.id.pass_change_btn_index_03:
+                    btnNumberStr = "3";
+                    break;
+                case R.id.pass_change_btn_index_04:
+                    btnNumberStr = "4";
+                    break;
+                case R.id.pass_change_btn_index_05:
+                    btnNumberStr = "5";
+                    break;
+                case R.id.pass_change_btn_index_06:
+                    btnNumberStr = "6";
+                    break;
+                case R.id.pass_change_btn_index_07:
+                    btnNumberStr = "7";
+                    break;
+                case R.id.pass_change_btn_index_08:
+                    btnNumberStr = "8";
+                    break;
+                case R.id.pass_change_btn_index_09:
+                    btnNumberStr = "9";
+                    break;
+            }
+            onBtnClick(btnNumberStr);
+
+        }
+    };
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
-            CommonJava.Loging.i(getLocalClassName(), "onClick()");
-            CommonJava.Loging.i(getLocalClassName(), "view.getId() : " + view.getId());
+            CommonJava.Loging.i(LOG_NAME, "onClick()");
+            CommonJava.Loging.i(LOG_NAME, "view.getId() : " + view.getId());
 
             switch (view.getId()) {
                 case R.id.pass_btn_cancle:
@@ -224,30 +317,6 @@ public class PasswordChangeActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        CommonJava.Loging.i("PasswordChange", "event : " + event);
-        float xLocation = event.getX(0);
-        float yLocation = event.getY(0);
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-
-                circleLayoutPassword.screenTouchLocationStart(xLocation, yLocation);
-
-                break;
-            case MotionEvent.ACTION_MOVE:
-                break;
-            case MotionEvent.ACTION_UP:
-
-                circleLayoutPassword.scrennTouchLocationUp(xLocation, yLocation);
-
-                break;
-        }
-
-        return super.onTouchEvent(event);
-    }
-
     /**
      * 뒤로가기 버튼 클릭 시 종료
      */
@@ -371,18 +440,19 @@ public class PasswordChangeActivity extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), "패스워드 설정이 완료 되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
-                    case "4000":  try {
+                    case "4000":
+                        try {
 
-                        CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse changePassword :" + response.get("changePassword"));
-                        CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse member_idx :" + response.get("member_idx"));
+                            CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse changePassword :" + response.get("changePassword"));
+                            CommonJava.Loging.i(LOG_NAME, "jsonObjectRequest onResponse member_idx :" + response.get("member_idx"));
 
-                        strMemberIdx = response.getString("member_idx");
-                        strPassword = response.getString("changePassword");
+                            strMemberIdx = response.getString("member_idx");
+                            strPassword = response.getString("changePassword");
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        CommonJava.Loging.e(LOG_NAME, "jsonObjectRequest JSONException :" + e.toString());
-                    }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            CommonJava.Loging.e(LOG_NAME, "jsonObjectRequest JSONException :" + e.toString());
+                        }
 
 
                         CommonJava.saveSharedPreferences(PasswordChangeActivity.this, "password", strPassword);

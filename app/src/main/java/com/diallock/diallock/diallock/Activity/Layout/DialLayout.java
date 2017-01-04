@@ -33,12 +33,12 @@ public class DialLayout extends ArcLayout {
             mContext = context;
             dialLayout = this;
 
-            if (context instanceof TouchBtnIndexInteractionListener) {
+           /* if (context instanceof TouchBtnIndexInteractionListener) {
                 mListener = (TouchBtnIndexInteractionListener) context;
             } else {
                 throw new RuntimeException(context.toString()
                         + " must implement TouchBtnIndexInteractionListener");
-            }
+            }*/
         }
 
 

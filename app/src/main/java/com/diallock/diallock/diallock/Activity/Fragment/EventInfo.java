@@ -140,9 +140,12 @@ public class EventInfo extends Fragment {
             for (EventInfoData eventInfoData : mEventInfoDataArrayList) {
                 fragmentArrayList.add(new EventInfoItem().newInstance(eventInfoData));
             }
-
-            mWidgetPagerAdapter = new WidgetPagerAdapter(getChildFragmentManager(), fragmentArrayList);
-            mVerticalViewPager.setAdapter(mWidgetPagerAdapter);
+            try {
+                mWidgetPagerAdapter = new WidgetPagerAdapter(getChildFragmentManager(), fragmentArrayList);
+                mVerticalViewPager.setAdapter(mWidgetPagerAdapter);
+            } catch (NullPointerException e) {
+                CommonJava.Loging.e(LOG_NAME, "NullPointerException : "+e.toString());
+            }
 
         } else if (mEventInfoDataArrayList == null) {
             CommonJava.Loging.e(LOG_NAME, "mEventInfoDataArrayList is Null");

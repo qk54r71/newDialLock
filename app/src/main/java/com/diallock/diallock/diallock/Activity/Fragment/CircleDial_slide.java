@@ -9,6 +9,7 @@ import android.os.Message;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.VelocityTrackerCompat;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,9 +21,12 @@ import android.widget.Toast;
 
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
 import com.diallock.diallock.diallock.Activity.Data.ChildBtnInfo;
+import com.diallock.diallock.diallock.Activity.Layout.*;
+import com.diallock.diallock.diallock.Activity.Layout.DialLayout;
 import com.diallock.diallock.diallock.Activity.ParkSDK.Data.DialCircleInfo_Image;
 import com.diallock.diallock.diallock.Activity.ParkSDK.Data.DialCircleInfo_Location;
 import com.diallock.diallock.diallock.Activity.ParkSDK.Util.Circle;
+import com.diallock.diallock.diallock.Activity.ParkSDK.Util.Conversion;
 import com.diallock.diallock.diallock.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ogaclejapan.arclayout.ArcLayout;
@@ -36,7 +40,7 @@ public class CircleDial_slide extends Fragment {
 
     static View mView;
 
-    private ArcLayout mArcLayout_slide;
+    private com.diallock.diallock.diallock.Activity.Layout.DialLayout mArcLayout_slide;
     private SimpleDraweeView btn_index_00;
     private SimpleDraweeView btn_index_01;
     private SimpleDraweeView btn_index_02;
@@ -164,7 +168,7 @@ public class CircleDial_slide extends Fragment {
     }
 
     private void setFindViewById() {
-        mArcLayout_slide = (ArcLayout) mView.findViewById(R.id.arcLayout_slide);
+        mArcLayout_slide = (DialLayout) mView.findViewById(R.id.arcLayout_slide);
         btn_index_00 = (SimpleDraweeView) mView.findViewById(R.id.btn_index_00);
         btn_index_01 = (SimpleDraweeView) mView.findViewById(R.id.btn_index_01);
         btn_index_02 = (SimpleDraweeView) mView.findViewById(R.id.btn_index_02);
@@ -324,23 +328,36 @@ public class CircleDial_slide extends Fragment {
             CommonJava.Loging.i(LOG_NAME, "point.x : " + point.x);
             CommonJava.Loging.i(LOG_NAME, "point.y : " + point.y);
 
+            int[] location = new int[2];
+
+            btn_index_11.getLocationOnScreen(location);
+            int btn_index_11_x = location[0];
+            int btn_index_11_y = location[1];
+            int diff_x = point.x / 2 - btn_index_11_x;
+
+            btn_index_02.getLocationOnScreen(location);
+            int btn_index_02_x = location[0];
+            int btn_index_02_y = location[1];
+            int diff_y = point.y / 4 * 3 - btn_index_02_y;
+
+            int dialRadiusValue = point.y / 4 * 3 - btn_index_11_y-diff_y;
+
+            CommonJava.Loging.i(LOG_NAME, "diff_x : " + diff_x + " diff_y : " + diff_y + " dialRadiusValue : " + dialRadiusValue);
+
             // ------------------------ setting big dial location start ----------------------------
             int bigDial_X = point.x / 2;
             mBigDialImage_Location.set_xPosition(bigDial_X);
             CommonJava.Loging.i(LOG_NAME, "bigDial_X : " + bigDial_X);
 
-            int bigDial_Y = point.y / 2 + mView.getHeight() / 2;
+            int bigDial_Y = point.y / 4 * 3;
             mBigDialImage_Location.set_yPosition(bigDial_Y);
             CommonJava.Loging.i(LOG_NAME, "bigDial_Y : " + bigDial_Y);
 
 
-            int btn_index_11_getY_Big = (int) btn_index_11.getY();
             int btn_index_11_getHeight_Big = btn_index_11.getHeight() / 2;
-            int btn_pointY = point.y / 2;
-            int btn_index_11_centerY_Big = btn_index_11_getY_Big + btn_index_11_getHeight_Big;
-            CommonJava.Loging.i(LOG_NAME, "btn_index_11_centerY_Big : " + btn_index_11_centerY_Big);
+            CommonJava.Loging.i(LOG_NAME, "btn_index_11_getHeight_Big : " + btn_index_11_getHeight_Big);
 
-            int bigRadius = (int) (mView.getHeight() / 2 - btn_index_11_centerY_Big + (btn_index_11_getHeight_Big * 1.5)); // Dial 중심 값에서 Button 중심값 까지의 거리 값  + (Button 반지름 값*1.5)
+            int bigRadius = (int) (dialRadiusValue + (btn_index_11_getHeight_Big * 1.5)); // Dial 중심 값에서 Button 중심값 까지의 거리 값  + (Button 반지름 값*1.5)
 
             mBigDialImage_Location.setDialCircleRadius(bigRadius);
             CommonJava.Loging.i(LOG_NAME, "bigRadius : " + bigRadius);
@@ -351,32 +368,35 @@ public class CircleDial_slide extends Fragment {
             mSmallDialImage_Location.set_xPosition(smallDial_X);
             CommonJava.Loging.i(LOG_NAME, "smallDIal_X : " + smallDial_X);
 
-            int smallDial_Y = point.y / 2 + mView.getHeight() / 2;
+            int smallDial_Y = point.y / 4 * 3;
             mSmallDialImage_Location.set_yPosition(smallDial_Y);
             CommonJava.Loging.i(LOG_NAME, "smallDial_Y : " + smallDial_Y);
 
-
-            int btn_index_11_getY_Small = (int) btn_index_11.getY();
             int btn_index_11_getHeight_Small = btn_index_11.getHeight() / 2;
-            int btn_index_11_centerY_Small = btn_index_11_getY_Small + btn_index_11_getHeight_Small;
-            CommonJava.Loging.i(LOG_NAME, "btn_index_11_centerY_Small : " + btn_index_11_centerY_Small);
 
-            int smallRadius = (int) (mView.getHeight() / 2 - btn_index_11_centerY_Big - (btn_index_11_getHeight_Big * 1.5)); // Dial 중심 값에서 Button 중심값 까지의 거리 값  - (Button 반지름 값*1.5)
+            int smallRadius = (int) (dialRadiusValue - (btn_index_11_getHeight_Small * 1.5)); // Dial 중심 값에서 Button 중심값 까지의 거리 값  - (Button 반지름 값*1.5)
 
             mSmallDialImage_Location.setDialCircleRadius(smallRadius);
             CommonJava.Loging.i(LOG_NAME, "smallRadius : " + smallRadius);
             // ------------------------ setting small dial location end ----------------------------
 
             // ------------------------ setting child button location start-------------------------
-            int diff_x = (mView.getWidth() - mArcLayout_slide.getWidth()) / 2;
+
             int displayHeight = point.y / 2;
+            CommonJava.Loging.i(LOG_NAME, "displayHeight : " + displayHeight);
             mChildBtnInfo_Location = new ArrayList<>();
 
             for (int btn_index = 0; btn_index < mBtnIndexId.size(); btn_index++) {
-
                 SimpleDraweeView childBtn = (SimpleDraweeView) mArcLayout_slide.getChildAt(btn_index);
-                int childBtn_X = (int) childBtn.getX() + diff_x + childBtn.getWidth() / 2;
-                int childBtn_Y = (int) childBtn.getY() + childBtn.getHeight() / 2 + displayHeight;
+
+                //CommonJava.Loging.i(LOG_NAME, "(int) childBtn.getX() : " + (int) childBtn.getX() + " diff_x : " + diff_x + "  childBtn.getWidth() / 2 : " + childBtn.getWidth() / 2);
+                //CommonJava.Loging.i(LOG_NAME, " Conversion.dp_to_px(childBtn.getY(), getContext()) : " + Conversion.dp_to_px(childBtn.getY(), getContext()) + " childBtn.getHeight() / 2 : " + Conversion.dp_to_px(childBtn.getHeight() / 2, getContext()));
+                int[] childLocation = new int[2];
+                childBtn.getLocationOnScreen(childLocation);
+                CommonJava.Loging.i(LOG_NAME, "location[0] : " + childLocation[0] + " location[1] : " + childLocation[1]);
+                int childBtn_X = childLocation[0] + diff_x;
+                //int childBtn_Y = (int) childBtn.getY() + childBtn.getHeight() / 2 + displayHeight;
+                int childBtn_Y = childLocation[1] + diff_y;
                 DialCircleInfo_Location dialCircleInfo_location = new DialCircleInfo_Location();
                 dialCircleInfo_location.set_xPosition(childBtn_X);
                 dialCircleInfo_location.set_yPosition(childBtn_Y);
