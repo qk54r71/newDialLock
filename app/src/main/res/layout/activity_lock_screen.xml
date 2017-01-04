@@ -15,12 +15,12 @@
         android:orientation="vertical"
         android:visibility="visible">
 
-        <fragment
+        <!--<fragment
+            android:name="com.diallock.diallock.diallock.Activity.Fragment.LockScreenFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.diallock.diallock.diallock.Activity.Fragment.LockScreenFragment"
-            android:id="@+id/lockScreenFragment"
-            android:tag="lockScreenFragment" />
+            android:tag="lockScreenFragment"/>
+        //android:id="@+id/lockScreenFragment"-->
 
     </LinearLayout>
 </LinearLayout>

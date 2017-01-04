@@ -1,6 +1,7 @@
 package com.diallock.diallock.diallock.Activity.Common;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.net.Uri;
@@ -8,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 
 import com.diallock.diallock.diallock.Activity.Adapter.WidgetPagerAdapter;
 import com.diallock.diallock.diallock.Activity.Fragment.EventInfo;
+import com.diallock.diallock.diallock.Activity.Fragment.LockScreenFragment;
 import com.diallock.diallock.diallock.Activity.Fragment.TourismInfo;
 import com.diallock.diallock.diallock.Activity.Layout.CircleLayout;
 import com.diallock.diallock.diallock.Activity.Layout.ViewPager.HorizontalViewPager;
@@ -104,6 +107,10 @@ public class LockScreenManager {
 
     private TextView txtImgSlideProgress;
 
+    private LockScreenFragment mLockScreenFragment;
+    private Context mContext;
+    private FragmentManager getSuportFragmentManager;
+
     private final static String LOG_NAME = "LockScreenManager";
 
     public static synchronized LockScreenManager getInstance(Activity activity) {
@@ -127,8 +134,9 @@ public class LockScreenManager {
         initLock();
     }
 
-    public void updateActivity(Activity ac) {
+    public void updateActivity(Activity ac, FragmentManager fragmentManager) {
         this.mActivity = ac;
+        this.getSuportFragmentManager = fragmentManager;
     }
 
     private void initLock() {
@@ -187,6 +195,13 @@ public class LockScreenManager {
                 return false;
             }
         });
+
+
+        mLockScreenFragment = new LockScreenFragment();
+
+
+        FragmentTransaction transaction = getSuportFragmentManager.beginTransaction();
+        transaction.add(R.id.lock_screen_view, mLockScreenFragment, "lockScreenFragment").commit();
 
 
         /*setFindView();

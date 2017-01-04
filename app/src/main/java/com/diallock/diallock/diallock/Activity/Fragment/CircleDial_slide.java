@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
+import com.diallock.diallock.diallock.Activity.Activity.LockScreenActivity;
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
 import com.diallock.diallock.diallock.Activity.Data.ChildBtnInfo;
 import com.diallock.diallock.diallock.Activity.Layout.*;
@@ -84,6 +85,10 @@ public class CircleDial_slide extends Fragment {
      */
     private Boolean mDrection;
 
+    /**
+     * 현재 입력되는 패스워드 값
+     */
+    private String mInputPassword;
 
     private final String LOG_NAME = "CircleDial_slide";
 
@@ -94,13 +99,7 @@ public class CircleDial_slide extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            /*mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);*/
-        }
-
         CommonJava.Loging.i(LOG_NAME, "onCreate()");
-
     }
 
     @Override
@@ -340,7 +339,7 @@ public class CircleDial_slide extends Fragment {
             int btn_index_02_y = location[1];
             int diff_y = point.y / 4 * 3 - btn_index_02_y;
 
-            int dialRadiusValue = point.y / 4 * 3 - btn_index_11_y-diff_y;
+            int dialRadiusValue = point.y / 4 * 3 - btn_index_11_y - diff_y;
 
             CommonJava.Loging.i(LOG_NAME, "diff_x : " + diff_x + " diff_y : " + diff_y + " dialRadiusValue : " + dialRadiusValue);
 
@@ -455,11 +454,13 @@ public class CircleDial_slide extends Fragment {
                     mRegisterIndex.add(touchedIndex);
                     mRegisterPressIndex.add(touchedIndex);
                     CommonJava.Loging.i(LOG_NAME, "setOnTouchEvent(MotionEvent onTouchEvent) MotionEvent.ACTION_DOWN mRegisterIndex.add(touchedIndex) touchedIndex : " + touchedIndex);
+                    inputPassword(touchedIndex);
+                    isVibrator();
                     mDialTouch = true;
                     break;
                 case MotionEvent.ACTION_MOVE:
 
-                    if (mRegisterIndex.size() != 0 && mRegisterIndex.get(mRegisterIndex.size() - 1) != touchedIndex) {
+                    if (mDialTouch && mRegisterIndex.size() != 0 && mRegisterIndex.get(mRegisterIndex.size() - 1) != touchedIndex) {
                         mRegisterIndex.add(touchedIndex);
                         CommonJava.Loging.i(LOG_NAME, "setOnTouchEvent(MotionEvent onTouchEvent) MotionEvent.ACTION_MOVE mRegisterIndex.add(touchedIndex) touchedIndex : " + touchedIndex);
 
@@ -471,7 +472,9 @@ public class CircleDial_slide extends Fragment {
                             setDialCircleBg(mDrection);
                             int preIndex = mRegisterIndex.get(mRegisterIndex.size() - 2);
                             mRegisterPressIndex.add(preIndex);
+                            inputPassword(preIndex);
                             btnImageChange(preIndex);
+                            isVibrator();
                         }
 
                     }
@@ -479,12 +482,17 @@ public class CircleDial_slide extends Fragment {
                     break;
                 case MotionEvent.ACTION_UP:
 
-                    btnImageChange(touchedIndex);
+                    if (mDialTouch) {
+                        btnImageChange(touchedIndex);
 
-                    mRegisterPressIndex.add(touchedIndex);
-                    //TODO: 비밀번호 값 체크
+                        mRegisterPressIndex.add(touchedIndex);
+                        inputPassword(touchedIndex);
 
-                    initDialTouch();
+                        isCheckPassword(mInputPassword);
+                        isVibrator();
+
+                        initDialTouch();
+                    }
                     break;
             }
 
@@ -494,6 +502,59 @@ public class CircleDial_slide extends Fragment {
                 errorBtnImage(4);
             }
         }
+    }
+
+    /**
+     * 현재 입력된 password 값을 저장하는 함수
+     *
+     * @param inputIndexNumber 현재 눌린 index 값
+     */
+    private void inputPassword(int inputIndexNumber) {
+
+        String inputPasswordNumber = mChildBtnInfo_Images.get(inputIndexNumber).getDialCircleValue();
+
+        if (mInputPassword == null) {
+            mInputPassword = String.valueOf(inputPasswordNumber);
+        } else {
+            mInputPassword += String.valueOf(inputPasswordNumber);
+        }
+    }
+
+    /**
+     * 입력된 password 값이 실제 password 와 맞는지 체크
+     */
+    private void isCheckPassword(String strPassword) {
+        Boolean isCheckBl = null;
+        if (strPassword != null) {
+            isCheckBl = Circle._IsImaginaryCheck(getContext(), strPassword);
+        } else {
+            CommonJava.Loging.e(LOG_NAME, "strPassword is null");
+        }
+
+        if (isCheckBl != null && isCheckBl) {
+            CommonJava.Loging.i(LOG_NAME, "password is true");
+            unLock();
+            isToast("맞는 비밀번호 입니다.");
+        } else {
+            CommonJava.Loging.i(LOG_NAME, "password is false strPassword : " + strPassword);
+            isToast("잘못된 비밀번호 입니다.");
+        }
+    }
+
+    /**
+     * 잠금화면을 풀어줌
+     */
+    private void unLock() {
+        ((LockScreenFragment) getFragmentManager().findFragmentByTag("lockScreenFragment")).unLockDial();
+    }
+
+    /**
+     * 메세지를 띄워주는 함수
+     *
+     * @param strMsg 띄워줄 메세지
+     */
+    private void isToast(String strMsg) {
+        ((LockScreenFragment) getFragmentManager().findFragmentByTag("lockScreenFragment")).toastMsgShow(strMsg);
     }
 
     /**
@@ -519,6 +580,7 @@ public class CircleDial_slide extends Fragment {
         mDialTouch = false;
         mDrection = null;
         mRegisterIndex.clear();
+        mInputPassword = null;
     }
 
     /**
@@ -589,6 +651,7 @@ public class CircleDial_slide extends Fragment {
                     case 4:
                         mArcLayout_slide.setBackgroundResource(R.drawable.dial_image_slide_error);
                         isVibrator();
+                        isToast("다이얼 안에서 돌려 주세요.");
                         break;
                     case 3:
                         mArcLayout_slide.setBackgroundResource(R.drawable.dial_image_slide);

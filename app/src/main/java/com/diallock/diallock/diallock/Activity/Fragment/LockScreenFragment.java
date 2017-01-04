@@ -1,6 +1,7 @@
 package com.diallock.diallock.diallock.Activity.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.diallock.diallock.diallock.Activity.Adapter.WidgetPagerAdapter;
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
 import com.diallock.diallock.diallock.Activity.Common.GMailSender;
 import com.diallock.diallock.diallock.Activity.Layout.ViewPager.HorizontalViewPager;
+import com.diallock.diallock.diallock.Activity.taskAction.ScreenService;
 import com.diallock.diallock.diallock.R;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -127,12 +129,14 @@ public class LockScreenFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CommonJava.Loging.i(LOG_NAME, "onCreate()");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        CommonJava.Loging.i(LOG_NAME, "onCreateView()");
         mView = inflater.inflate(R.layout.fragment_lock_screen, container, false);
 
         findViewById();
@@ -354,8 +358,7 @@ public class LockScreenFragment extends Fragment {
                     CommonJava.Loging.i(LOG_NAME, "onClick()");
                     startEmailSend();
 
-                    Toast.makeText(getContext(), "플레이스토어에 등록된 gmail 로 비밀번호가 전송되었습니다.", Toast.LENGTH_SHORT).show();
-
+                    toastMsgShow("플레이스토어에 등록된 gmail 로 비밀번호가 전송되었습니다.");
                     break;
 
                 case R.id.btn_dial_pattern:
@@ -389,13 +392,13 @@ public class LockScreenFragment extends Fragment {
                     btn_dial_pattern.setOnClickListener(null);
                     CommonJava.Loging.i(LOG_NAME, "onLongClickListener btn_dial_pattern");
                     if (smSwitchRandom) {
-                        isToast("기본 으로 적용되었습니다.");
+                        toastMsgShow("기본 으로 적용되었습니다.");
                         //TODO: 랜덤 적용안된 이미지
                         mImageBtn = mImageBtnDefault;
                         btn_dial_pattern.getHierarchy().setPlaceholderImage(mImageBtn.get(mSwitchValue));
                         smSwitchRandom = false;
                     } else {
-                        isToast("랜덤 으로 적용되었습니다.");
+                        toastMsgShow("랜덤 으로 적용되었습니다.");
                         //TODO: 랜덤 적용된 이미지
                         mImageBtn = mImageBtnRandom;
                         btn_dial_pattern.getHierarchy().setPlaceholderImage(mImageBtn.get(mSwitchValue));
@@ -552,10 +555,6 @@ public class LockScreenFragment extends Fragment {
         asyncTask.execute();
     }
 
-    public void isToast(String strMsg) {
-        Toast.makeText(getContext(), strMsg, Toast.LENGTH_SHORT).show();
-    }
-
     private void setTextDay(Date nowDate) {
         String strTxtLockDay =
                 CommonJava.getYear(nowDate) + ". " + CommonJava.getMonth(nowDate) + ". " + CommonJava.getDay(nowDate) + ". " + CommonJava.getDayOfWeek(nowDate);
@@ -605,8 +604,38 @@ public class LockScreenFragment extends Fragment {
         });
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    /**
+     * 현재 Activity 에 따라서 Toast 방식을 달리 보여줌
+     *
+     * @param strMgs 보여줄 메세지
+     */
+    public void toastMsgShow(String strMgs) {
+        if (getContext() instanceof LockScreenActivity) {
+
+            Toast.makeText(getContext(), strMgs, Toast.LENGTH_SHORT).show();
+
+        } else if (getContext() instanceof LockScreenViewActivity) {
+
+        }
+    }
+
+    /**
+     * 현재 Activity에 따라서 화면을 finish 함
+     */
+    public void unLockDial() {
+        if (getContext() instanceof LockScreenActivity) {
+
+            Intent intentStartService = new Intent(getContext(), ScreenService.class);
+            getContext().startService(intentStartService);
+            CommonJava.saveSharedPreferences(getContext(), "lockCheck", "true");
+            ((LockScreenActivity) getContext()).finish();
+
+        } else if (getContext() instanceof LockScreenViewActivity) {
+
+            ((LockScreenViewActivity) getContext()).onUnlock();
+            ScreenService.mPhoneProgressLock = false;
+
+        }
     }
 
     @Override
@@ -620,16 +649,6 @@ public class LockScreenFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

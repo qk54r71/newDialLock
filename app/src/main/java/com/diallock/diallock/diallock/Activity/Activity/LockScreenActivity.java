@@ -8,6 +8,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -51,24 +52,14 @@ public class LockScreenActivity extends AppCompatActivity implements TouchBtnInd
 
 
     private void setFindView() {
-
-        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            if (fragment instanceof LockScreenFragment) {
-                mLockScreenFragment = (LockScreenFragment) fragment;
-            }
-        }
-
     }
 
     private void init() {
         mBackFlag = false;
 
-        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            CommonJava.Loging.i(LOG_NAME, "fragment : " + fragment);
-        }
-
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        mLockScreenFragment = new LockScreenFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.lock_screen_view, mLockScreenFragment, "lockScreenFragment").commit();
 
     }
 

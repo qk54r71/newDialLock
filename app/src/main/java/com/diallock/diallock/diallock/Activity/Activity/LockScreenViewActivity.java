@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -71,13 +72,15 @@ public class LockScreenViewActivity extends BaseActivity implements LockScreenMa
         CommonJava.Loging.i(LOG_NAME, "onCreate()");
 
 
-        setupView(R.layout.activity_lock_screen_view);
+        setupView(R.layout.activity_lock_screen);
         mLockScreenManager = LockScreenManager.getInstance(LockScreenViewActivity.this); // 한개의 액티비티만 생성 되게 함 싱글톤 방식
 
         mLockScreenManager.setLockStatusListener(this);
+
         mLockScreenManagerView = LayoutInflater.from(LockScreenViewActivity.this).inflate(R.layout.activity_lock_screen, null);
         mLockScreenManager.setLockScreen(mLockScreenManagerView);
-        mLockScreenManager.updateActivity(LockScreenViewActivity.this);
+        CommonJava.Loging.i(LOG_NAME, "getSupportFragmentManager() : " + getSupportFragmentManager());
+        mLockScreenManager.updateActivity(LockScreenViewActivity.this, getSupportFragmentManager());
 
        /* HomeKeyLocker homeKeyLoader = new HomeKeyLocker();
         homeKeyLoader.lock(this);*/
@@ -133,7 +136,7 @@ public class LockScreenViewActivity extends BaseActivity implements LockScreenMa
 
     protected void onDestroy() {
         mLockScreenManager.unLock();
-        mLockScreenManager.updateActivity(LockScreenViewActivity.this);
+        mLockScreenManager.updateActivity(LockScreenViewActivity.this, getSupportFragmentManager());
         //mLockScreenManager.timeCancle();
         super.onDestroy();
 

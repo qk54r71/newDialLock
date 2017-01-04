@@ -19,9 +19,11 @@ public class BaseActivity extends AppCompatActivity {
     FrameLayout container;
     View content;
 
+    private static final String LOG_NAME = "BaseActivity";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        CommonJava.Loging.i(getLocalClassName(), "onCreate()");
+        CommonJava.Loging.i(LOG_NAME, "onCreate()");
         super.onCreate(savedInstanceState);
 
         Fresco.initialize(BaseActivity.this);
@@ -31,7 +33,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
     public void setupView(int layoutId) {
-        CommonJava.Loging.i(getLocalClassName(), "setupView layoutId : " + layoutId);
+        CommonJava.Loging.i(LOG_NAME, "setupView layoutId : " + layoutId);
         content = LayoutInflater.from(this).inflate(layoutId, null);
         container.addView(content);
     }

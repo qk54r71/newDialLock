@@ -182,7 +182,6 @@ public class SettingActivity extends AppCompatActivity {
 
         backFlag = false;
 
-
         image_lock.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_lock);
         image_unlock.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_unlock);
         image_password_change.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_password_change);

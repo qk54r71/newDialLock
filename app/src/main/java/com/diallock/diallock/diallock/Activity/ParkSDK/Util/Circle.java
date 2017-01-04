@@ -1,5 +1,8 @@
 package com.diallock.diallock.diallock.Activity.ParkSDK.Util;
 
+import android.content.Context;
+
+import com.diallock.diallock.diallock.Activity.Common.CommonJava;
 import com.diallock.diallock.diallock.Activity.ParkSDK.Data.DialCircleInfo_Location;
 import com.diallock.diallock.diallock.Activity.ParkSDK.Debug.Loging;
 
@@ -77,4 +80,33 @@ public class Circle {
 
         return resultIndex;
     }
+
+    /**
+     * 허수 체크 함수
+     *
+     * @param context
+     * @param strPassword 현재까지 입력된 password 값
+     * @return 허수 적용이면 true , 아니면 false
+     */
+    public static Boolean _IsImaginaryCheck(Context context, String strPassword) {
+
+        String loadPassword = CommonJava.loadSharedPreferences(context, "password");
+        String strPass = strPassword;
+        int minimumPass = 2;
+        int maximumPass = loadPassword.length() * 2;
+
+        if (strPassword.length() >= minimumPass && strPassword.length() <= maximumPass) {
+
+            if (strPassword.contains(loadPassword)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+
+    }
+
 }
