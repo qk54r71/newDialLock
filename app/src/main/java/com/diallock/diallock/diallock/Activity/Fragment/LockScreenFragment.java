@@ -22,13 +22,18 @@ import android.widget.Toast;
 
 import com.diallock.diallock.diallock.Activity.Activity.LockScreenActivity;
 import com.diallock.diallock.diallock.Activity.Activity.LockScreenViewActivity;
+import com.diallock.diallock.diallock.Activity.Adapter.DialPagerAdapter;
 import com.diallock.diallock.diallock.Activity.Adapter.WidgetPagerAdapter;
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
 import com.diallock.diallock.diallock.Activity.Common.GMailSender;
+import com.diallock.diallock.diallock.Activity.Common.LockScreenManager;
+import com.diallock.diallock.diallock.Activity.Layout.ViewPager.DialViewPager;
 import com.diallock.diallock.diallock.Activity.Layout.ViewPager.HorizontalViewPager;
 import com.diallock.diallock.diallock.Activity.taskAction.ScreenService;
 import com.diallock.diallock.diallock.R;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -46,6 +51,8 @@ public class LockScreenFragment extends Fragment {
 
     private View mView;
     private Boolean backFlag;
+    private static Context mContext;
+    private static LockScreenFragment mLockScreenFragment;
 
     private TextView txt_lock_day;
     private TextView txt_lock_title;
@@ -56,7 +63,7 @@ public class LockScreenFragment extends Fragment {
     private Date mNowDate;
     private Calendar mCalendar;
 
-    private HorizontalViewPager mHorizontalViewPager;
+    private HorizontalViewPager mCategoryViewPager;
 
     private ArrayList<Fragment> mInfoFragmentArrayList;
     private EventInfo mEventInfo;
@@ -98,6 +105,7 @@ public class LockScreenFragment extends Fragment {
      */
     public static Boolean smSwitchRandom;
 
+
     /**
      * widget control
      */
@@ -107,9 +115,17 @@ public class LockScreenFragment extends Fragment {
     /**
      * dial fragment control
      */
+    private LinearLayout mDial_view;
+    private DialPagerAdapter mDialPagerAdpater;
+
     private CircleDial_slide mCircleDial_slide;
     private CircleDial_zigzag mCircleDial_zigzag;
     private CircleDial_press mCircleDial_press;
+
+    /**
+     * toast msg controll
+     */
+    private static TextView mTxt_toast;
 
     private final String LOG_NAME = "LockScreenFragment";
 
@@ -117,13 +133,16 @@ public class LockScreenFragment extends Fragment {
 
     public LockScreenFragment() {
         // Required empty public constructor
+        if (mContext == null) {
+            mContext = getContext();
+        }
     }
 
-    public static LockScreenFragment newInstance() {
-        LockScreenFragment fragment = new LockScreenFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+    public static synchronized LockScreenFragment newInstance() {
+        if (mLockScreenFragment == null) {
+            mLockScreenFragment = new LockScreenFragment();
+        }
+        return mLockScreenFragment;
     }
 
     @Override
@@ -157,7 +176,7 @@ public class LockScreenFragment extends Fragment {
         lock_screen_pre_double = (SimpleDraweeView) mView.findViewById(R.id.lock_screen_pre_double);
         lock_screen_nex = (SimpleDraweeView) mView.findViewById(R.id.lock_screen_nex);
         lock_screen_nex_double = (SimpleDraweeView) mView.findViewById(R.id.lock_screen_nex_double);
-        mHorizontalViewPager = (HorizontalViewPager) mView.findViewById(R.id.info_frag_horizontal);
+        mCategoryViewPager = (HorizontalViewPager) mView.findViewById(R.id.info_frag_horizontal);
 
         info_view = (LinearLayout) mView.findViewById(R.id.info_view);
         info_dial = (RelativeLayout) mView.findViewById(R.id.info_dial);
@@ -170,7 +189,14 @@ public class LockScreenFragment extends Fragment {
 
         txtImgSlideProgress = (TextView) mView.findViewById(R.id.txtImgSlideProgress);
 
+        mDial_view = (LinearLayout) mView.findViewById(R.id.dial_view);
         mWidget_view = (HorizontalViewPager) mView.findViewById(R.id.widget_view);
+
+        mCircleDial_slide = CircleDial_slide.getInstance(mLockScreenFragment);
+        mCircleDial_zigzag = new CircleDial_zigzag();
+        mCircleDial_press = new CircleDial_press();
+
+        mTxt_toast = (TextView) mView.findViewById(R.id.txt_toast);
     }
 
     private void init() {
@@ -223,31 +249,47 @@ public class LockScreenFragment extends Fragment {
 
         txt_lock_title.setText(mStrTitle.get(0));
 
-        setFragment();
 
         info_slideView.setVisibility(View.GONE);
 
+        setFragment();
+
+    }
+
+    private void setFragment() {
+        setCategoryFragment();
+        setDialFragment();
+        setWidgetFragment();
+    }
+
+    private void setDialFragment() {
+
+        ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
+        fragmentArrayList.add(mCircleDial_slide);
+        fragmentArrayList.add(mCircleDial_zigzag);
+        fragmentArrayList.add(mCircleDial_press);
+
+        /*mDialPagerAdpater = new DialPagerAdapter(getChildFragmentManager(), fragmentArrayList);
+        mDial_view.setAdapter(mDialPagerAdpater);*/
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.dial_view, mCircleDial_slide).commit();
+
+    }
+
+    private void setWidgetFragment() {
         ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
         fragmentArrayList.add(new WidgetTimeBaseFragment());
         fragmentArrayList.add(new ImageFragment());
 
         mWidgetPagerAdapter = new WidgetPagerAdapter(getChildFragmentManager(), fragmentArrayList);
         mWidget_view.setAdapter(mWidgetPagerAdapter);
-
-        mCircleDial_slide = new CircleDial_slide();
-        mCircleDial_zigzag = new CircleDial_zigzag();
-        mCircleDial_press = new CircleDial_press();
-
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.info_dial, mCircleDial_slide).commit();
-
     }
 
-    private void setFragment() {
-        mWidgetPagerAdapter = new WidgetPagerAdapter(getChildFragmentManager(), mInfoFragmentArrayList);
+    private void setCategoryFragment() {
+        WidgetPagerAdapter categoryPagerAdapter = new WidgetPagerAdapter(getChildFragmentManager(), mInfoFragmentArrayList);
 
-        mHorizontalViewPager.setAdapter(mWidgetPagerAdapter);
-        mHorizontalViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mCategoryViewPager.setAdapter(categoryPagerAdapter);
+        mCategoryViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {/*
                 CommonJava.Loging.i(LOG_NAME, "onPageScrolled position : " + position);
@@ -287,7 +329,7 @@ public class LockScreenFragment extends Fragment {
         mEventInfo.onResume();
         mTourismInfo.onResume();
 
-        mHorizontalViewPager.invalidate();
+        mCategoryViewPager.invalidate();
     }
 
     private void setOnClick() {
@@ -354,12 +396,6 @@ public class LockScreenFragment extends Fragment {
 
                     setFragmentChangeDay(mNowDate);
                     break;
-                case R.id.btn_find_pass:
-                    CommonJava.Loging.i(LOG_NAME, "onClick()");
-                    startEmailSend();
-
-                    toastMsgShow("플레이스토어에 등록된 gmail 로 비밀번호가 전송되었습니다.");
-                    break;
 
                 case R.id.btn_dial_pattern:
                     changeDialPattern();
@@ -414,6 +450,14 @@ public class LockScreenFragment extends Fragment {
                     }, 500);
 
                     break;
+
+                case R.id.btn_find_pass:
+                    CommonJava.Loging.i(LOG_NAME, "onClick()");
+                    startEmailSend();
+
+                    toastMsgShow("플레이스토어에 등록된 gmail 로 비밀번호가 전송되었습니다.");
+                    break;
+
                 case R.id.lock_screen_pre:
 
                     mCalendar.add(Calendar.MONTH, -1);
@@ -499,21 +543,21 @@ public class LockScreenFragment extends Fragment {
 
     private void changeDialPattern() {
 
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         switch (mSwitchValue) {
             case DIAL_SLIDE:
                 mSwitchValue = DIAL_ZIGZAG;
-                fragmentTransaction.replace(R.id.info_dial, mCircleDial_zigzag);
+                fragmentTransaction.replace(R.id.dial_view, mCircleDial_zigzag);
                 break;
             case DIAL_ZIGZAG:
                 mSwitchValue = DIAL_PRESS;
-                fragmentTransaction.replace(R.id.info_dial, mCircleDial_press);
+                fragmentTransaction.replace(R.id.dial_view, mCircleDial_press);
                 break;
             case DIAL_PRESS:
                 mSwitchValue = DIAL_SLIDE;
-                fragmentTransaction.replace(R.id.info_dial, mCircleDial_slide);
+                fragmentTransaction.replace(R.id.dial_view, mCircleDial_slide);
                 break;
         }
         fragmentTransaction.commit();
@@ -614,8 +658,17 @@ public class LockScreenFragment extends Fragment {
 
             Toast.makeText(getContext(), strMgs, Toast.LENGTH_SHORT).show();
 
-        } else if (getContext() instanceof LockScreenViewActivity) {
-
+        } else if (getContext() instanceof LockScreenViewActivity || getContext() == null) {
+            CommonJava.Loging.i(LOG_NAME, "mContext : " + mContext);
+            mTxt_toast.setText(strMgs);
+            mTxt_toast.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mTxt_toast.setVisibility(View.GONE);
+                    mTxt_toast.setText(null);
+                }
+            }, 2000);
         }
     }
 
@@ -623,6 +676,9 @@ public class LockScreenFragment extends Fragment {
      * 현재 Activity에 따라서 화면을 finish 함
      */
     public void unLockDial() {
+        CommonJava.Loging.i(LOG_NAME, "unLockDial()");
+        CommonJava.Loging.i(LOG_NAME, "getContext() : " + getContext());
+
         if (getContext() instanceof LockScreenActivity) {
 
             Intent intentStartService = new Intent(getContext(), ScreenService.class);
@@ -630,9 +686,9 @@ public class LockScreenFragment extends Fragment {
             CommonJava.saveSharedPreferences(getContext(), "lockCheck", "true");
             ((LockScreenActivity) getContext()).finish();
 
-        } else if (getContext() instanceof LockScreenViewActivity) {
-
-            ((LockScreenViewActivity) getContext()).onUnlock();
+        } else if (getContext() instanceof LockScreenViewActivity || getContext() == null) {
+            CommonJava.Loging.i(LOG_NAME, "unLockDial()");
+            LockScreenManager.getInstance(getActivity()).unLock();
             ScreenService.mPhoneProgressLock = false;
 
         }
@@ -655,16 +711,21 @@ public class LockScreenFragment extends Fragment {
     }
 
     public void setOnTouchEvent(MotionEvent onTouchEvent) {
-        for (Fragment fragment : getFragmentManager().getFragments()) {
-            //CommonJava.Loging.i(LOG_NAME,"fragment : "+fragment);
-            if (fragment instanceof CircleDial_slide) {
-                ((CircleDial_slide) fragment).setOnTouchEvent(onTouchEvent);
-            } else if (fragment instanceof CircleDial_zigzag) {
-                //((CircleDial_zigzag)fragment).setOnTouchEvent(onTouchEvent);
-            } else if (fragment instanceof CircleDial_press) {
-                //((CircleDial_press)fragment).setOnTouchEvent(onTouchEvent);
-            }
+
+        switch (mSwitchValue) {
+            case DIAL_SLIDE:
+                if (mCircleDial_slide == null) {
+                    mCircleDial_slide = CircleDial_slide.getInstance(mLockScreenFragment);
+                }
+                mCircleDial_slide.setOnTouchEvent(onTouchEvent);
+                break;
+            case DIAL_ZIGZAG:
+
+                break;
+            case DIAL_PRESS:
+                break;
         }
+
     }
 
 }

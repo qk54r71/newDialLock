@@ -3,16 +3,20 @@ package com.diallock.diallock.diallock.Activity.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
 import com.diallock.diallock.diallock.Activity.Common.LockScreenManager;
+import com.diallock.diallock.diallock.Activity.Fragment.LockScreenFragment;
 import com.diallock.diallock.diallock.Activity.Layout.CircleLayout;
 import com.diallock.diallock.diallock.Activity.taskAction.NoLockStatusListenerException;
 import com.diallock.diallock.diallock.R;
@@ -44,8 +48,9 @@ public class LockScreenViewActivity extends BaseActivity implements LockScreenMa
     public static Activity mLockScreenViewActivity;
     private static Context mContext;
 
-    private static FragmentManager mFragmentManager;
     private View mLockScreenManagerView;
+    private LockScreenFragment mLockScreenFragment;
+
     private final static String LOG_NAME = "LockScreenViewActivity";
 
     @Override
@@ -72,7 +77,7 @@ public class LockScreenViewActivity extends BaseActivity implements LockScreenMa
         CommonJava.Loging.i(LOG_NAME, "onCreate()");
 
 
-        setupView(R.layout.activity_lock_screen);
+        setupView(R.layout.activity_lock_screen_view);
         mLockScreenManager = LockScreenManager.getInstance(LockScreenViewActivity.this); // 한개의 액티비티만 생성 되게 함 싱글톤 방식
 
         mLockScreenManager.setLockStatusListener(this);
@@ -80,7 +85,7 @@ public class LockScreenViewActivity extends BaseActivity implements LockScreenMa
         mLockScreenManagerView = LayoutInflater.from(LockScreenViewActivity.this).inflate(R.layout.activity_lock_screen, null);
         mLockScreenManager.setLockScreen(mLockScreenManagerView);
         CommonJava.Loging.i(LOG_NAME, "getSupportFragmentManager() : " + getSupportFragmentManager());
-        mLockScreenManager.updateActivity(LockScreenViewActivity.this, getSupportFragmentManager());
+        mLockScreenManager.updateActivity(LockScreenViewActivity.this);
 
        /* HomeKeyLocker homeKeyLoader = new HomeKeyLocker();
         homeKeyLoader.lock(this);*/
@@ -99,6 +104,7 @@ public class LockScreenViewActivity extends BaseActivity implements LockScreenMa
         mLockScreenViewActivity = this;
         mContext = this;
     }
+
 
     private void setOnClick() {
 
@@ -136,7 +142,7 @@ public class LockScreenViewActivity extends BaseActivity implements LockScreenMa
 
     protected void onDestroy() {
         mLockScreenManager.unLock();
-        mLockScreenManager.updateActivity(LockScreenViewActivity.this, getSupportFragmentManager());
+        mLockScreenManager.updateActivity(LockScreenViewActivity.this);
         //mLockScreenManager.timeCancle();
         super.onDestroy();
 
@@ -147,7 +153,6 @@ public class LockScreenViewActivity extends BaseActivity implements LockScreenMa
 
     protected void onPause() {
 
-        //mLockScreenManager.timeCancle();
 
         super.onPause();
 
@@ -160,12 +165,7 @@ public class LockScreenViewActivity extends BaseActivity implements LockScreenMa
     protected void onResume() {
 
         super.onResume();
-        //mLockScreenManager.timeStart();
         CommonJava.Loging.i(LOG_NAME, "onResume");
-
-
-        mFragmentManager = getSupportFragmentManager();
-        CommonJava.Loging.i(LOG_NAME, "mFragmentManager " + mFragmentManager.getFragments());
     }
 
 
@@ -177,6 +177,7 @@ public class LockScreenViewActivity extends BaseActivity implements LockScreenMa
     @Override
     public void onUnlock() {
         // mLockScreenManager.timeCancle();
+        CommonJava.Loging.i(LOG_NAME, "onUnlock()");
         mLockScreenManager.unLock();
     }
 

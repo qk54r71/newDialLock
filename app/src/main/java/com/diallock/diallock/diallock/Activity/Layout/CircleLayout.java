@@ -690,12 +690,6 @@ public class CircleLayout extends View {
 
                     if (isImaginaryCheck(mPassword)) {
 
-                        CommonJava.Loging.i(LOG_NAME, "맞는 비밀번호 입니다.");
-                        if (mContext instanceof LockScreenViewActivity) {
-                            LockScreenManager.getInstance((Activity) mContext).startTxtToast("맞는 비밀번호 입니다.");
-                        } else if (mContext instanceof LockScreenActivity) {
-                            ((LockScreenActivity) mContext).isToast("맞는 비밀번호 입니다.");
-                        }
 
 
                 /*Intent intentSetting = new Intent(mContext, SettingActivity.class);
@@ -721,11 +715,6 @@ public class CircleLayout extends View {
                             errorDrow();
                         }
 
-                        if (mContext instanceof LockScreenViewActivity) {
-                            LockScreenManager.getInstance((Activity) mContext).startTxtToast("잘못된 비밀번호 입니다.");
-                        } else if (mContext instanceof LockScreenActivity) {
-                            ((LockScreenActivity) mContext).isToast("잘못된 비밀번호 입니다.");
-                        }
 
                         CommonJava.Loging.i(LOG_NAME, "잘못된 비밀번호 입니다.");
                     }
@@ -770,11 +759,6 @@ public class CircleLayout extends View {
                             Intent intentStartService = new Intent(mContext, ScreenService.class);
                             mContext.startService(intentStartService);
 
-                            if (mContext instanceof LockScreenViewActivity) {
-                                LockScreenManager.getInstance((Activity) mContext).startTxtToast("맞는 비밀번호 입니다.");
-                            } else if (mContext instanceof LockScreenActivity) {
-                                ((LockScreenActivity) mContext).isToast("맞는 비밀번호 입니다.");
-                            }
 
                             ((Activity) mContext).finish();
                         } else if (strSwitch != null && strSwitch.equals("ScreenReceiver")) {
@@ -788,12 +772,6 @@ public class CircleLayout extends View {
                         }
                         CommonJava.Loging.i(LOG_NAME, " Dial ZIG " +
                                 "틀린 비밀번호 입니다.");
-
-                        if (mContext instanceof LockScreenViewActivity) {
-                            LockScreenManager.getInstance((Activity) mContext).startTxtToast("잘못된 비밀번호 입니다.");
-                        } else if (mContext instanceof LockScreenActivity) {
-                            ((LockScreenActivity) mContext).isToast("잘못된 비밀번호 입니다.");
-                        }
 
                     }
 
@@ -1233,13 +1211,6 @@ public class CircleLayout extends View {
                         invalidate();
                         handlerError.sendEmptyMessageDelayed(0, 200);
 
-                        if (mContext instanceof LockScreenViewActivity) {
-
-                            mLockScreenManager = LockScreenManager.getInstance((Activity) mContext);
-                            mLockScreenManager.startTxtToast("잘못된 비밀번호 입니다.");
-                        } else if (mContext instanceof LockScreenActivity) {
-                            ((LockScreenActivity) mContext).isToast("잘못된 비밀번호 입니다.");
-                        }
 
                         break;
                     case 3:
@@ -1320,23 +1291,12 @@ public class CircleLayout extends View {
                 isInitDial();
                 CommonJava.saveSharedPreferences(mContext, "lockCheck", "true");
 
-                if (mContext instanceof LockScreenViewActivity) {
-                    LockScreenManager.getInstance((Activity) mContext).startTxtToast("맞는 비밀번호 입니다.");
-                } else if (mContext instanceof LockScreenActivity) {
-                    ((LockScreenActivity) mContext).isToast("잘못된 비밀번호 입니다.");
-                }
-
                 ((Activity) mContext).finish();
             } else if (strSwitch != null && strSwitch.equals("ScreenReceiver")) {
                 ((LockScreenViewActivity) mContext).onUnlock();
                 ScreenService.mPhoneProgressLock = false;
             }
         } else {
-            if (mContext instanceof LockScreenViewActivity) {
-                LockScreenManager.getInstance((Activity) mContext).startTxtToast("잘못된 비밀번호 입니다.");
-            } else if (mContext instanceof LockScreenActivity) {
-                ((LockScreenActivity) mContext).isToast("잘못된 비밀번호 입니다.");
-            }
 
             isInitDial();
             Vibrator vibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);

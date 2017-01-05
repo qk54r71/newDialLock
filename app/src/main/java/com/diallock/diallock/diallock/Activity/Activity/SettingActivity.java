@@ -158,8 +158,10 @@ public class SettingActivity extends AppCompatActivity {
      * 상태값 초기화
      */
     private void init() {
+        CommonJava.Loging.i(LOG_NAME, "init()");
 
         String strLockCheck = CommonJava.loadSharedPreferences(SettingActivity.this, "lockCheck");
+        CommonJava.Loging.i(LOG_NAME, "strLockCheck : " + strLockCheck);
 
         switch (strLockCheck) {
             case "true":
@@ -238,8 +240,8 @@ public class SettingActivity extends AppCompatActivity {
 
                     if (lockCheck == true) {
                         CommonJava.saveSharedPreferences(SettingActivity.this, "lockCheck", "false");
-                        image_lock.setSelected(true);
-                        image_unlock.setSelected(false);
+                        image_lock.setSelected(false);
+                        image_unlock.setSelected(true);
                         lockCheck = false;
 
                         Intent intentStopService = new Intent(SettingActivity.this, ScreenService.class);

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context="com.diallock.diallock.diallock.Activity.Activity.LockScreenActivity">
 
@@ -11,16 +10,14 @@
         android:id="@+id/lock_screen_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="vertical"
         android:visibility="visible">
 
-        <!--<fragment
+        <fragment
+            android:id="@+id/lockScreenFragment"
             android:name="com.diallock.diallock.diallock.Activity.Fragment.LockScreenFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:tag="lockScreenFragment"/>
-        //android:id="@+id/lockScreenFragment"-->
-
+            android:tag="lockScreenFragment" />
     </LinearLayout>
 </LinearLayout>

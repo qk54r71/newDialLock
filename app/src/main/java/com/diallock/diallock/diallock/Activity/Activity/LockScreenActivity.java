@@ -57,7 +57,7 @@ public class LockScreenActivity extends AppCompatActivity implements TouchBtnInd
     private void init() {
         mBackFlag = false;
 
-        mLockScreenFragment = new LockScreenFragment();
+        mLockScreenFragment = LockScreenFragment.newInstance();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.lock_screen_view, mLockScreenFragment, "lockScreenFragment").commit();
 

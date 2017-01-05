@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".Activity.Fragment.LockScreenFragment">
 
@@ -127,6 +128,16 @@
         android:layout_weight="1"
         android:gravity="bottom">
 
+        <!-- <com.diallock.diallock.diallock.Activity.Layout.ViewPager.DialViewPager
+             android:id="@+id/dial_view"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" />-->
+        <LinearLayout
+            android:id="@+id/dial_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
+
         <com.diallock.diallock.diallock.Activity.Layout.ViewPager.HorizontalViewPager
             android:id="@+id/widget_view"
             android:layout_width="140dp"
@@ -166,13 +177,6 @@
 
         </RelativeLayout>
 
-        <!--<fragment
-            android:id="@+id/circleDial"
-            android:name="com.diallock.diallock.diallock.Activity.Fragment.CircleDial_slide"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:tag="circleDial" />-->
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
@@ -209,12 +213,12 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:autoText="false"
             android:background="@drawable/txt_bg"
             android:padding="10dp"
             android:text="플레이스토어에 등록된 이메일로 패스워드가 발송됩니다."
             android:textColor="#FFFFFF"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:gravity="center" />
 
     </RelativeLayout>
 

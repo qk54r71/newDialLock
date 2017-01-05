@@ -41,6 +41,9 @@ public class CircleDial_slide extends Fragment {
 
     static View mView;
 
+    private static LockScreenFragment mLockScreenFragment;
+    private static CircleDial_slide mCircleDial_slide;
+
     private com.diallock.diallock.diallock.Activity.Layout.DialLayout mArcLayout_slide;
     private SimpleDraweeView btn_index_00;
     private SimpleDraweeView btn_index_01;
@@ -90,10 +93,20 @@ public class CircleDial_slide extends Fragment {
      */
     private String mInputPassword;
 
-    private final String LOG_NAME = "CircleDial_slide";
+    private static final String LOG_NAME = "CircleDial_slide";
 
     public CircleDial_slide() {
-        // Required empty public constructor
+
+    }
+
+    public static synchronized CircleDial_slide getInstance(Fragment fragment) {
+        CommonJava.Loging.i(LOG_NAME, " getInstance(Context context)");
+        if (mCircleDial_slide == null) {
+            mLockScreenFragment = (LockScreenFragment) fragment;
+            mCircleDial_slide = new CircleDial_slide();
+        }
+
+        return mCircleDial_slide;
     }
 
     @Override
@@ -248,7 +261,7 @@ public class CircleDial_slide extends Fragment {
             mChildBtnInfo_Images.add(dialCircleInfo_image);
             //CommonJava.Loging.i(LOG_NAME, "dialCircleInfo_image " + btn_index + " value: " + dialCircleInfo_image.getDialCircleValue());
         }
-
+        mChildBtnInfo_Images = setShuffle(mChildBtnInfo_Images);
         setBtnImage();
 
         mBigDialImage_Location = new DialCircleInfo_Location();
@@ -266,16 +279,31 @@ public class CircleDial_slide extends Fragment {
 
 
     private void setBtnImage() {
+        if (LockScreenFragment.smSwitchRandom) {
+            mChildBtnInfo_Images = setShuffle(mChildBtnInfo_Images);
+        }
 
-        mChildBtnInfo_Images = setShuffle(mChildBtnInfo_Images);
-
-        for (int btn_Index = 0; btn_Index < mChildBtnInfo_Images.size(); btn_Index++) {
+        /*for (int btn_Index = 0; btn_Index < mChildBtnInfo_Images.size(); btn_Index++) {
             int btnId = mBtnIndexId.get(btn_Index);
             SimpleDraweeView childBtn = (SimpleDraweeView) mView.findViewById(btnId);
             int imageId = mChildBtnInfo_Images.get(btn_Index).getDialCircleImage();
             childBtn.getHierarchy().setPlaceholderImage(imageId);
             CommonJava.Loging.i(LOG_NAME, "dialCircleInfo_image index : " + btn_Index + " value: " + mChildBtnInfo_Images.get(btn_Index).getDialCircleValue());
-        }
+        }*/
+
+        btn_index_00.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(0).getDialCircleImage());
+        btn_index_01.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(1).getDialCircleImage());
+        btn_index_02.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(2).getDialCircleImage());
+        btn_index_03.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(3).getDialCircleImage());
+        btn_index_04.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(4).getDialCircleImage());
+        btn_index_05.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(5).getDialCircleImage());
+        btn_index_06.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(6).getDialCircleImage());
+        btn_index_07.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(7).getDialCircleImage());
+        btn_index_08.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(8).getDialCircleImage());
+        btn_index_09.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(9).getDialCircleImage());
+        btn_index_10.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(10).getDialCircleImage());
+        btn_index_11.getHierarchy().setPlaceholderImage(mChildBtnInfo_Images.get(11).getDialCircleImage());
+
 
     }
 
@@ -417,7 +445,7 @@ public class CircleDial_slide extends Fragment {
      * @param onTouchEvent
      */
     public void setOnTouchEvent(MotionEvent onTouchEvent) {
-        CommonJava.Loging.i(LOG_NAME, "setOnTouchEvent(MotionEvent onTouchEvent) MotionEvent : " + onTouchEvent);
+        //CommonJava.Loging.i(LOG_NAME, "setOnTouchEvent(MotionEvent onTouchEvent) MotionEvent : " + onTouchEvent);
         dialTouchIndexCheckEvent(onTouchEvent);
     }
 
@@ -445,6 +473,8 @@ public class CircleDial_slide extends Fragment {
 
             switch (onTouchEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
+                    inputPassword(touchedIndex);
+                    setBtnImage();
                     btnImageChange(touchedIndex);
 
                     if (mRegisterIndex.size() != 0) {
@@ -453,8 +483,7 @@ public class CircleDial_slide extends Fragment {
 
                     mRegisterIndex.add(touchedIndex);
                     mRegisterPressIndex.add(touchedIndex);
-                    CommonJava.Loging.i(LOG_NAME, "setOnTouchEvent(MotionEvent onTouchEvent) MotionEvent.ACTION_DOWN mRegisterIndex.add(touchedIndex) touchedIndex : " + touchedIndex);
-                    inputPassword(touchedIndex);
+                    CommonJava.Loging.i(LOG_NAME, "setOnTouchEvent(MotionEvent onTouchEvent) MotionEvent.ACTION_DOWN mRegisterIndex.add(touchedIndex) input touchedIndex : " + touchedIndex);
                     isVibrator();
                     mDialTouch = true;
                     break;
@@ -462,17 +491,19 @@ public class CircleDial_slide extends Fragment {
 
                     if (mDialTouch && mRegisterIndex.size() != 0 && mRegisterIndex.get(mRegisterIndex.size() - 1) != touchedIndex) {
                         mRegisterIndex.add(touchedIndex);
-                        CommonJava.Loging.i(LOG_NAME, "setOnTouchEvent(MotionEvent onTouchEvent) MotionEvent.ACTION_MOVE mRegisterIndex.add(touchedIndex) touchedIndex : " + touchedIndex);
 
                         if (mDrection == null) {
+                            CommonJava.Loging.i(LOG_NAME, "setOnTouchEvent(MotionEvent onTouchEvent) MotionEvent.ACTION_MOVE mRegisterIndex.add(touchedIndex) touchedIndex : " + touchedIndex);
                             mDrection = checkDirection();
                             setDialCircleBg(mDrection);
                         } else if (mDrection != checkDirection()) {
+                            CommonJava.Loging.i(LOG_NAME, "setOnTouchEvent(MotionEvent onTouchEvent) MotionEvent.ACTION_MOVE mRegisterIndex.add(touchedIndex) input touchedIndex : " + touchedIndex);
                             mDrection = checkDirection();
                             setDialCircleBg(mDrection);
                             int preIndex = mRegisterIndex.get(mRegisterIndex.size() - 2);
                             mRegisterPressIndex.add(preIndex);
                             inputPassword(preIndex);
+                            setBtnImage();
                             btnImageChange(preIndex);
                             isVibrator();
                         }
@@ -483,10 +514,12 @@ public class CircleDial_slide extends Fragment {
                 case MotionEvent.ACTION_UP:
 
                     if (mDialTouch) {
+                        CommonJava.Loging.i(LOG_NAME, "setOnTouchEvent(MotionEvent onTouchEvent) MotionEvent.ACTION_MOVE mRegisterIndex.add(touchedIndex) input touchedIndex : " + touchedIndex);
+
+                        inputPassword(touchedIndex);
                         btnImageChange(touchedIndex);
 
                         mRegisterPressIndex.add(touchedIndex);
-                        inputPassword(touchedIndex);
 
                         isCheckPassword(mInputPassword);
                         isVibrator();
@@ -510,7 +543,6 @@ public class CircleDial_slide extends Fragment {
      * @param inputIndexNumber 현재 눌린 index 값
      */
     private void inputPassword(int inputIndexNumber) {
-
         String inputPasswordNumber = mChildBtnInfo_Images.get(inputIndexNumber).getDialCircleValue();
 
         if (mInputPassword == null) {
@@ -518,6 +550,8 @@ public class CircleDial_slide extends Fragment {
         } else {
             mInputPassword += String.valueOf(inputPasswordNumber);
         }
+
+        CommonJava.Loging.i(LOG_NAME, "mInputPassword : " + mInputPassword);
     }
 
     /**
@@ -545,7 +579,11 @@ public class CircleDial_slide extends Fragment {
      * 잠금화면을 풀어줌
      */
     private void unLock() {
-        ((LockScreenFragment) getFragmentManager().findFragmentByTag("lockScreenFragment")).unLockDial();
+        CommonJava.Loging.i(LOG_NAME, "unLock()");
+        if (mLockScreenFragment == null) {
+            mLockScreenFragment = LockScreenFragment.newInstance();
+        }
+        mLockScreenFragment.unLockDial();
     }
 
     /**
@@ -554,7 +592,10 @@ public class CircleDial_slide extends Fragment {
      * @param strMsg 띄워줄 메세지
      */
     private void isToast(String strMsg) {
-        ((LockScreenFragment) getFragmentManager().findFragmentByTag("lockScreenFragment")).toastMsgShow(strMsg);
+        if (mLockScreenFragment == null) {
+            mLockScreenFragment = LockScreenFragment.newInstance();
+        }
+        mLockScreenFragment.toastMsgShow(strMsg);
     }
 
     /**
@@ -581,6 +622,7 @@ public class CircleDial_slide extends Fragment {
         mDrection = null;
         mRegisterIndex.clear();
         mInputPassword = null;
+        setBtnImage();
     }
 
     /**
