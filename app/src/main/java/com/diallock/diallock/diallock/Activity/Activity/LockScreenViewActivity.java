@@ -63,13 +63,13 @@ public class LockScreenViewActivity extends BaseActivity implements LockScreenMa
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
-        getWindow().getDecorView().setSystemUiVisibility(
+        /*getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);*/
 
         super.onCreate(savedInstanceState);
 

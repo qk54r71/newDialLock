@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.diallock.diallock.diallock.Activity.Fragment.LockScreenFragment;
 import com.diallock.diallock.diallock.Activity.Layout.CircleLayout;
 import com.diallock.diallock.diallock.Activity.taskAction.NoLockStatusListenerException;
+import com.diallock.diallock.diallock.R;
 
 import java.lang.ref.WeakReference;
 
