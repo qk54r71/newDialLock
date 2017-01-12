@@ -8,36 +8,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
+import com.diallock.diallock.diallock.Activity.ParkSDK.Debug.Loging;
 import com.diallock.diallock.diallock.R;
 
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link WidgetTimeDigitalFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link WidgetTimeDigitalFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class WidgetTimeDigitalFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
 
     private View mView;
+    private LinearLayout fm_time_widget_digital_container;
     private TextView txt_time;
     private TextView txt_am_pm;
     private Timer mTimer;
@@ -59,8 +45,6 @@ public class WidgetTimeDigitalFragment extends Fragment {
     public static WidgetTimeDigitalFragment newInstance(String param1, String param2) {
         WidgetTimeDigitalFragment fragment = new WidgetTimeDigitalFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -69,8 +53,6 @@ public class WidgetTimeDigitalFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -82,11 +64,13 @@ public class WidgetTimeDigitalFragment extends Fragment {
 
         setFindById();
         init();
+        setEvent();
 
         return mView;
     }
 
     private void setFindById() {
+        fm_time_widget_digital_container = (LinearLayout) mView.findViewById(R.id.fm_time_widget_digital_container);
         txt_time = (TextView) mView.findViewById(R.id.txt_time);
         txt_am_pm = (TextView) mView.findViewById(R.id.txt_am_pm);
     }
@@ -113,8 +97,8 @@ public class WidgetTimeDigitalFragment extends Fragment {
             String strTxtTime = CommonJava.getHour(nowDate) + "시 " + CommonJava.getMinute(nowDate) + "분";
             txt_am_pm.setText(strTxtAmPm);
             txt_time.setText(strTxtTime);
-            CommonJava.Loging.i(LOG_NAME, "strTxtAmPm : " + strTxtAmPm);
-            CommonJava.Loging.i(LOG_NAME, "strTxtTime : " + strTxtTime);
+            //CommonJava.Loging.i(LOG_NAME, "strTxtAmPm : " + strTxtAmPm);
+            //CommonJava.Loging.i(LOG_NAME, "strTxtTime : " + strTxtTime);
         }
 
     };
@@ -129,42 +113,36 @@ public class WidgetTimeDigitalFragment extends Fragment {
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void setEvent() {
+        fm_time_widget_digital_container.setOnClickListener(onClickListener);
     }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Loging.i(LOG_NAME, "v.getId() : " + v.getId());
+            if (LockScreenFragment.mSwitchValue == 2) {
+                CircleDial_press.getInstance(LockScreenFragment.newInstance()).isCheckPassword();
+            }
+            switch (v.getId()) {
+                case R.id.fm_time_widget_digital_container:
+                    Loging.i(LOG_NAME, "fm_time_widget_digital_container onClick");
+                    break;
+                case R.id.txt_am_pm:
+                case R.id.txt_time:
+                    Loging.i(LOG_NAME, "txt_am_pm txt_time onClick");
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onAttach(Context context) {
-        super.onAttach(context);/*
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
+        super.onAttach(context);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

@@ -1,8 +1,10 @@
 package com.diallock.diallock.diallock.Activity.Activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,8 +36,8 @@ public class PasswordChangeActivity extends AppCompatActivity {
     private ArcLayout dial_password_change;
 
     private String passNumber;
-    private Button pass_btn_cancle;
-    private Button pass_btn_ok;
+    private SimpleDraweeView pass_btn_cancle;
+    private SimpleDraweeView pass_btn_ok;
     private TextView pass_txt_lock;
     private Boolean passProgress;
     private String strSwitch;
@@ -71,8 +73,8 @@ public class PasswordChangeActivity extends AppCompatActivity {
 
     private void setFindView() {
         dial_password_change = (ArcLayout) findViewById(R.id.dial_password_change);
-        pass_btn_cancle = (Button) findViewById(R.id.pass_btn_cancle);
-        pass_btn_ok = (Button) findViewById(R.id.pass_btn_ok);
+        pass_btn_cancle = (SimpleDraweeView) findViewById(R.id.pass_btn_cancle);
+        pass_btn_ok = (SimpleDraweeView) findViewById(R.id.pass_btn_ok);
         pass_txt_lock = (TextView) findViewById(R.id.pass_txt_lock);
 
         pass_change_btn_index_00 = (SimpleDraweeView) findViewById(R.id.pass_change_btn_index_00);
@@ -108,16 +110,19 @@ public class PasswordChangeActivity extends AppCompatActivity {
                 break;
         }
 
-        pass_change_btn_index_00.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_0);
-        pass_change_btn_index_01.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_1);
-        pass_change_btn_index_02.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_2);
-        pass_change_btn_index_03.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_3);
-        pass_change_btn_index_04.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_4);
-        pass_change_btn_index_05.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_5);
-        pass_change_btn_index_06.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_6);
-        pass_change_btn_index_07.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_7);
-        pass_change_btn_index_08.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_8);
-        pass_change_btn_index_09.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_num_9);
+        pass_change_btn_index_00.getHierarchy().setPlaceholderImage(R.drawable.pw_change_selector_btn_num_0);
+        pass_change_btn_index_01.getHierarchy().setPlaceholderImage(R.drawable.pw_change_selector_btn_num_1);
+        pass_change_btn_index_02.getHierarchy().setPlaceholderImage(R.drawable.pw_change_selector_btn_num_2);
+        pass_change_btn_index_03.getHierarchy().setPlaceholderImage(R.drawable.pw_change_selector_btn_num_3);
+        pass_change_btn_index_04.getHierarchy().setPlaceholderImage(R.drawable.pw_change_selector_btn_num_4);
+        pass_change_btn_index_05.getHierarchy().setPlaceholderImage(R.drawable.pw_change_selector_btn_num_5);
+        pass_change_btn_index_06.getHierarchy().setPlaceholderImage(R.drawable.pw_change_selector_btn_num_6);
+        pass_change_btn_index_07.getHierarchy().setPlaceholderImage(R.drawable.pw_change_selector_btn_num_7);
+        pass_change_btn_index_08.getHierarchy().setPlaceholderImage(R.drawable.pw_change_selector_btn_num_8);
+        pass_change_btn_index_09.getHierarchy().setPlaceholderImage(R.drawable.pw_change_selector_btn_num_9);
+
+        pass_btn_cancle.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_cancle);
+        pass_btn_ok.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_confirm);
 
     }
 
@@ -178,7 +183,7 @@ public class PasswordChangeActivity extends AppCompatActivity {
                     break;
             }
             onBtnClick(btnNumberStr);
-
+            isVibrator();
         }
     };
 
@@ -198,9 +203,7 @@ public class PasswordChangeActivity extends AppCompatActivity {
 
                         passNumber = null;
                         pass_txt_lock.setText(passNumber);
-
-                        pass_btn_cancle.setText("취소");
-
+                        pass_btn_cancle.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_cancle);
                         pass_btn_ok.setEnabled(false);
                     } else {
                         finish();
@@ -311,7 +314,7 @@ public class PasswordChangeActivity extends AppCompatActivity {
         }
         pass_txt_lock.setText(passNumber);
 
-        pass_btn_cancle.setText("다시하기");
+        pass_btn_cancle.getHierarchy().setPlaceholderImage(R.drawable.selector_btn_retry);
         pass_btn_ok.setEnabled(true);
 
     }
@@ -475,5 +478,13 @@ public class PasswordChangeActivity extends AppCompatActivity {
             }
         });
         VolleyNetwork.CustomVolleyRequestQueue.getInstance(PasswordChangeActivity.this).getRequestQueue().add(jsonObjectRequest);
+    }
+
+    /**
+     * 진동 함수
+     */
+    private void isVibrator() {
+        Vibrator vibrator = (Vibrator) PasswordChangeActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(100);
     }
 }

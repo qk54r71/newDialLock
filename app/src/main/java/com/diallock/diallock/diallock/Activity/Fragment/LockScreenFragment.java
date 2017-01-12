@@ -29,6 +29,7 @@ import com.diallock.diallock.diallock.Activity.Common.GMailSender;
 import com.diallock.diallock.diallock.Activity.Common.LockScreenManager;
 import com.diallock.diallock.diallock.Activity.Layout.ViewPager.DialViewPager;
 import com.diallock.diallock.diallock.Activity.Layout.ViewPager.HorizontalViewPager;
+import com.diallock.diallock.diallock.Activity.ParkSDK.Debug.Loging;
 import com.diallock.diallock.diallock.Activity.taskAction.ScreenService;
 import com.diallock.diallock.diallock.R;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -193,8 +194,8 @@ public class LockScreenFragment extends Fragment {
         mWidget_view = (HorizontalViewPager) mView.findViewById(R.id.widget_view);
 
         mCircleDial_slide = CircleDial_slide.getInstance(mLockScreenFragment);
-        mCircleDial_zigzag = new CircleDial_zigzag();
-        mCircleDial_press = new CircleDial_press();
+        mCircleDial_zigzag = CircleDial_zigzag.getInstance(mLockScreenFragment);
+        mCircleDial_press = CircleDial_press.getInstance(mLockScreenFragment);
 
         mTxt_toast = (TextView) mView.findViewById(R.id.txt_toast);
     }
@@ -209,6 +210,8 @@ public class LockScreenFragment extends Fragment {
 
         setTextDay(mNowDate);
 
+        smSwitchRandom = CommonJava.loadSharedPreferences_Boolean(getContext(), "smSwitchRandom");
+
         mImageBtnDefault = new ArrayList<>();
         mImageBtnDefault.add(R.drawable.dial_slide);
         mImageBtnDefault.add(R.drawable.dial_zigzag);
@@ -219,15 +222,17 @@ public class LockScreenFragment extends Fragment {
         mImageBtnRandom.add(R.drawable.dial_zigzag_random);
         mImageBtnRandom.add(R.drawable.dial_press_random);
 
-        mImageBtn = mImageBtnRandom;
+        if (smSwitchRandom) {
+            mImageBtn = mImageBtnRandom;
+        } else {
+            mImageBtn = mImageBtnDefault;
+        }
 
-        mSwitchValue = 0;
+        mSwitchValue = CommonJava.loadSharedPreferences_Integer(getContext(), "mSwitchValue");
 
         btn_dial_pattern.getHierarchy().setPlaceholderImage(mImageBtn.get(mSwitchValue));
 
         //circleLayout.isInitDial();
-
-        smSwitchRandom = true;
 
         mStrTitle = new ArrayList<>();
 
@@ -272,7 +277,7 @@ public class LockScreenFragment extends Fragment {
         /*mDialPagerAdpater = new DialPagerAdapter(getChildFragmentManager(), fragmentArrayList);
         mDial_view.setAdapter(mDialPagerAdpater);*/
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.dial_view, mCircleDial_slide).commit();
+        fragmentTransaction.add(R.id.dial_view, fragmentArrayList.get(mSwitchValue)).commit();
 
     }
 
@@ -342,12 +347,14 @@ public class LockScreenFragment extends Fragment {
         lock_screen_nex.setOnLongClickListener(onLongClickListener);
         //lock_screen_nex_double.setOnClickListener(onClickListener);
 
-        btn_find_pass.setOnClickListener(onClickListener);
+        btn_find_pass.setOnLongClickListener(onLongClickListener);
         btn_dial_pattern.setOnLongClickListener(onLongClickListener);
         btn_dial_pattern.setOnClickListener(onClickListener);
         info_slideView_cancle.setOnClickListener(onClickListener);
         btn_call.setOnClickListener(onClickListener);
         btn_app.setOnClickListener(onClickListener);
+
+        mWidget_view.setOnClickListener(onClickListener);
 
         info_slideView_cancle.setOnClickListener(onClickListener);
     }
@@ -414,6 +421,9 @@ public class LockScreenFragment extends Fragment {
                     /*if (getActivity() instanceof LockScreenViewActivity) {
                         ((LockScreenViewActivity) getActivity()).setInfoDialVisibility(View.VISIBLE);
                     }*/
+                    break;
+                case R.id.widget_view:
+                    Loging.i(LOG_NAME, "widget_view touch");
                     break;
             }
         }
@@ -720,12 +730,27 @@ public class LockScreenFragment extends Fragment {
                 mCircleDial_slide.setOnTouchEvent(onTouchEvent);
                 break;
             case DIAL_ZIGZAG:
+                if (mCircleDial_zigzag == null) {
+                    mCircleDial_zigzag = CircleDial_zigzag.getInstance(mLockScreenFragment);
+                }
+                mCircleDial_zigzag.setOnTouchEvent(onTouchEvent);
 
                 break;
             case DIAL_PRESS:
+                if (mCircleDial_press == null) {
+                    mCircleDial_press = CircleDial_press.getInstance(mLockScreenFragment);
+                }
+                mCircleDial_press.setOnTouchEvent(onTouchEvent);
                 break;
         }
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        CommonJava.Loging.i(LOG_NAME, "onDestroy()");
+        CommonJava.saveSharedPreferences_Integer(getContext(), "mSwitchValue", mSwitchValue);
+        CommonJava.saveSharedPreferences_Boolean(getContext(), "smSwitchRandom", smSwitchRandom);
+    }
 }

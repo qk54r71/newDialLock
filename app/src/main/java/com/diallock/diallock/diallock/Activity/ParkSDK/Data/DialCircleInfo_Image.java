@@ -10,6 +10,7 @@ public class DialCircleInfo_Image {
     private String dialCircleValue;
     private Integer dialCircleImage;
     private Integer dialCircleImage_click;
+    private Integer dialCircleImage_selector;
 
     public Integer getDialCircleImage() {
         return dialCircleImage;
@@ -33,5 +34,13 @@ public class DialCircleInfo_Image {
 
     public void setDialCircleValue(String dialCircleValue) {
         this.dialCircleValue = dialCircleValue;
+    }
+
+    public Integer getDialCircleImage_selector() {
+        return dialCircleImage_selector;
+    }
+
+    public void setDialCircleImage_selector(Integer dialCircleImage_selector) {
+        this.dialCircleImage_selector = dialCircleImage_selector;
     }
 }

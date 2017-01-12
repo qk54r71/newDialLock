@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.diallock.diallock.diallock.Activity.Activity.LockScreenActivity;
 import com.diallock.diallock.diallock.Activity.Common.CommonJava;
+import com.diallock.diallock.diallock.Activity.Fragment.CircleDial_press;
 import com.diallock.diallock.diallock.Activity.Fragment.LockScreenFragment;
 import com.diallock.diallock.diallock.Activity.Layout.CircleLayout;
 
@@ -52,10 +53,9 @@ public class VerticalViewPager extends ViewPager {
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CommonJava.Loging.i(LOG_NAME, "view  onClick");
-                    if (LockScreenFragment.mSwitchValue == 2) {
-                        CircleLayout.isPasswordCheck();
-                    }
+                    /*if (LockScreenFragment.mSwitchValue == 2) {
+                        CircleDial_press.getInstance(LockScreenFragment.newInstance()).isCheckPassword();
+                    }*/
                 }
             });
 

@@ -1,18 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fm_time_widget_image_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@null"
-    tools:context="com.diallock.diallock.diallock.Activity.Fragment.ImageFragment"
     android:gravity="center"
-    android:id="@+id/image_layout">
+    tools:context="com.diallock.diallock.diallock.Activity.Fragment.ImageFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
+        android:id="@+id/slideImage"
         android:layout_width="150dp"
         android:layout_height="180dp"
         android:background="@drawable/widget_circle_bg"
-        android:id="@+id/slideImage"
         android:src="@drawable/dialcenter" />
 </LinearLayout>

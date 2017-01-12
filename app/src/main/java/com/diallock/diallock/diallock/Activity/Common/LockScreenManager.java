@@ -1,42 +1,28 @@
 package com.diallock.diallock.diallock.Activity.Common;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.diallock.diallock.diallock.Activity.Activity.LockScreenViewActivity;
-import com.diallock.diallock.diallock.Activity.Adapter.WidgetPagerAdapter;
-import com.diallock.diallock.diallock.Activity.Fragment.EventInfo;
 import com.diallock.diallock.diallock.Activity.Fragment.LockScreenFragment;
-import com.diallock.diallock.diallock.Activity.Fragment.TourismInfo;
 import com.diallock.diallock.diallock.Activity.Layout.CircleLayout;
-import com.diallock.diallock.diallock.Activity.Layout.ViewPager.HorizontalViewPager;
 import com.diallock.diallock.diallock.Activity.taskAction.NoLockStatusListenerException;
-import com.diallock.diallock.diallock.R;
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Timer;
+
+import static android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD;
+import static android.view.WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN;
+import static android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN;
+import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
+import static android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
+import static android.view.WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG;
 
 /**
  * Created by park on 2016-08-26.
@@ -80,8 +66,8 @@ public class LockScreenManager {
         mIsLock = false;
         mWindowManagerRef = new WeakReference<WindowManager>(mActivity.getWindowManager());
         layoutParams = new WindowManager.LayoutParams();
-        //layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
-        //layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
 
         String strSwitch = mActivity.getIntent().getStringExtra("strSwitch");
         if (!strSwitch.equals("SettingActivity")) {
@@ -89,14 +75,15 @@ public class LockScreenManager {
         }
         //layoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR; // 이 기능임
 
-        CommonJava.Loging.i(LOG_NAME, "initLock layoutParams.height : " + layoutParams.height);
+        /*CommonJava.Loging.i(LOG_NAME, "initLock layoutParams.height : " + layoutParams.height);
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
         CommonJava.Loging.i(LOG_NAME, "initLock point.y : " + point.y);
         int disHeight = point.y;
         layoutParams.height = point.y - 100 * (disHeight / 2560);
-        layoutParams.verticalMargin = 200 * (disHeight / 2560);
-        layoutParams.flags = 1280;
+        layoutParams.verticalMargin = 200 * (disHeight / 2560);*/
+        //layoutParams.flags = FLAG_FORCE_NOT_FULLSCREEN;
+
 
     }
 

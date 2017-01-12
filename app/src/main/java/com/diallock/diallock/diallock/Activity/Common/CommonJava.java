@@ -1,11 +1,14 @@
 package com.diallock.diallock.diallock.Activity.Common;
 
+import android.Manifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.Patterns;
@@ -92,6 +95,36 @@ public class CommonJava {
     }
 
     /**
+     * 저장된 값을 요청해서 불러옴
+     *
+     * @param context    : 현재 화면
+     * @param strRequest : 불러올 값
+     * @return
+     */
+    public static Integer loadSharedPreferences_Integer(Context context, String strRequest) {
+        SharedPreferences prefs = context.getSharedPreferences("dialUser", context.MODE_PRIVATE);
+
+        CommonJava.Loging.i(context.getClass().getName(), strRequest + " : " + prefs.getInt(strRequest, 0));
+
+        return prefs.getInt(strRequest, 0);
+    }
+
+    /**
+     * 저장된 값을 요청해서 불러옴
+     *
+     * @param context    : 현재 화면
+     * @param strRequest : 불러올 값
+     * @return
+     */
+    public static Boolean loadSharedPreferences_Boolean(Context context, String strRequest) {
+        SharedPreferences prefs = context.getSharedPreferences("dialUser", context.MODE_PRIVATE);
+
+        CommonJava.Loging.i(context.getClass().getName(), strRequest + " : " + prefs.getBoolean(strRequest, false));
+
+        return prefs.getBoolean(strRequest, false);
+    }
+
+    /**
      * 요청하는 String 값을 저장
      *
      * @param context         : 현재 화면
@@ -115,10 +148,66 @@ public class CommonJava {
     }
 
     /**
+     * 요청하는 Integer 값을 저장
+     *
+     * @param context         : 현재 화면
+     * @param strRequestName  : 저장될 이름
+     * @param intRequestValue : 저장될 값
+     * @return
+     */
+    public static Boolean saveSharedPreferences_Integer(Context context, String strRequestName, Integer intRequestValue) {
+
+        SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences("dialUser", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(strRequestName);
+
+        editor.putInt(strRequestName, intRequestValue);
+
+        editor.commit();
+
+        CommonJava.Loging.i(context.getClass().getName(), "strRequestName : " + strRequestName + " // intRequestValue : " + intRequestValue);
+
+        return true;
+    }
+
+    /**
+     * 요청하는 Boolean 값을 저장
+     *
+     * @param context        : 현재 화면
+     * @param strRequestName : 저장될 이름
+     * @param blRequestValue : 저장될 값
+     * @return
+     */
+    public static Boolean saveSharedPreferences_Boolean(Context context, String strRequestName, Boolean blRequestValue) {
+
+        SharedPreferences sharedPreferences = context.getApplicationContext().getSharedPreferences("dialUser", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(strRequestName);
+
+        editor.putBoolean(strRequestName, blRequestValue);
+
+        editor.commit();
+
+        CommonJava.Loging.i(context.getClass().getName(), "strRequestName : " + strRequestName + " // blRequestValue : " + blRequestValue);
+
+        return true;
+    }
+
+
+    /**
      * Gmail 가져오기
      */
     public static String getGmail(Context context) {
         Pattern emailPattern = Patterns.EMAIL_ADDRESS;
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+        }
         Account[] accounts = AccountManager.get(context).getAccounts();
 
         String email = null;
@@ -299,7 +388,7 @@ public class CommonJava {
         if (strPhoneNumber.compareTo("+82") != 0) {
             CommonJava.Loging.i(context, "strPhoneNumber.compareTo : " + strPhoneNumber.compareTo("+82"));
 
-            strPhoneNumber = "0"+strPhoneNumber.substring(3,strPhoneNumber.length());
+            strPhoneNumber = "0" + strPhoneNumber.substring(3, strPhoneNumber.length());
         }
 
         CommonJava.Loging.i(context, "strPhoneNumber : " + strPhoneNumber);

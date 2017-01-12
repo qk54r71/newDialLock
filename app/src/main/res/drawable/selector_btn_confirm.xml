@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 이미지 눌렸을 때 -->
+    <item android:drawable="@drawable/confirm_click" android:state_pressed="true" />
+    <!-- 이미자가 선택 되었을 때 -->
+    <item android:drawable="@drawable/confirm_click" android:state_selected="true" />
+    <!-- 평상시 -->
+    <item android:drawable="@drawable/confirm" />
+</selector>

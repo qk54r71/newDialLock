@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <com.diallock.diallock.diallock.Activity.Layout.DialLayout
-            android:id="@+id/arcLayout_slide"
+            android:id="@+id/dialLayout_slide"
             android:layout_width="290dp"
             android:layout_height="290dp"
             android:background="@drawable/dial_image_slide"
@@ -86,7 +86,6 @@
                 android:id="@+id/btn_index_10"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:arc_angle="315"
                 app:arc_origin="center" />
 
             <com.facebook.drawee.view.SimpleDraweeView
@@ -95,96 +94,6 @@
                 android:layout_height="40dp"
                 app:arc_origin="center" />
         </com.diallock.diallock.diallock.Activity.Layout.DialLayout>
-        <!--<com.ogaclejapan.arclayout.ArcLayout
-            android:id="@+id/arcLayout_slide"
-            android:layout_width="290dp"
-            android:layout_height="290dp"
-            android:background="@drawable/dial_image_slide"
-            app:arc_axisRadius="106dp"
-            app:arc_freeAngle="false"
-            app:arc_origin="center"
-            app:arc_radius="135dp"
-            app:arc_reverseAngle="false">
-
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_00"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_angle="15"
-                app:arc_origin="center" />
-
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_01"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_origin="center" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_02"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_origin="center" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_03"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_origin="center" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_04"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_origin="center" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_05"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_origin="center" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_06"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_origin="center" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_07"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_origin="center" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_08"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_origin="center" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_09"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_origin="center" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_10"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_angle="315"
-                app:arc_origin="center" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/btn_index_11"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:arc_origin="center" />
-
-
-        </com.ogaclejapan.arclayout.ArcLayout>-->
-
     </LinearLayout>
 
 

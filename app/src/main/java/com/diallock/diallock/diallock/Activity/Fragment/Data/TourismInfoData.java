@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public class TourismInfoData implements Parcelable {
 
     private String code;
+    private String tourCategory;
+    private String tourSido;
+    private String tourGungu;
+    private String tourTitle;
     private String tourImgURL;
     private ArrayList<String> tourSlideImage;
 
@@ -20,10 +24,18 @@ public class TourismInfoData implements Parcelable {
 
     public TourismInfoData(
             String code,
+            String tourCategory,
+            String tourSido,
+            String tourGungu,
+            String tourTitle,
             String tourImgURL,
             ArrayList<String> tourSlideImage
     ) {
         this.code = code;
+        this.tourCategory = tourCategory;
+        this.tourSido = tourSido;
+        this.tourGungu = tourGungu;
+        this.tourTitle = tourTitle;
         this.tourImgURL = tourImgURL;
         this.tourSlideImage = tourSlideImage;
     }
@@ -52,6 +64,38 @@ public class TourismInfoData implements Parcelable {
         this.tourSlideImage = tourSlideImage;
     }
 
+    public String getTourCategory() {
+        return tourCategory;
+    }
+
+    public void setTourCategory(String tourCategory) {
+        this.tourCategory = tourCategory;
+    }
+
+    public String getTourGungu() {
+        return tourGungu;
+    }
+
+    public void setTourGungu(String tourGungu) {
+        this.tourGungu = tourGungu;
+    }
+
+    public String getTourSido() {
+        return tourSido;
+    }
+
+    public void setTourSido(String tourSido) {
+        this.tourSido = tourSido;
+    }
+
+    public String getTourTitle() {
+        return tourTitle;
+    }
+
+    public void setTourTitle(String tourTitle) {
+        this.tourTitle = tourTitle;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -60,12 +104,20 @@ public class TourismInfoData implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(code);
+        parcel.writeString(tourCategory);
+        parcel.writeString(tourSido);
+        parcel.writeString(tourGungu);
+        parcel.writeString(tourTitle);
         parcel.writeString(tourImgURL);
         parcel.writeStringList(tourSlideImage);
     }
 
     private void readFromParcel(Parcel parcel) {
         code = parcel.readString();
+        tourCategory = parcel.readString();
+        tourSido = parcel.readString();
+        tourGungu = parcel.readString();
+        tourTitle = parcel.readString();
         tourImgURL = parcel.readString();
         parcel.writeStringList(tourSlideImage);
     }

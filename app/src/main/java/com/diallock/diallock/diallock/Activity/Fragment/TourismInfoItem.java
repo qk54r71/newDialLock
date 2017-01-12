@@ -17,6 +17,11 @@ import java.util.ArrayList;
 
 public class TourismInfoItem extends Fragment {
 
+    private TextView mTourCategory;
+    private TextView mTourSido;
+    private TextView mTourGungu;
+    private TextView mTourTitle;
+
     private SimpleDraweeView mView_tour_imageView;
     private SimpleDraweeView mTourSlideBtn_bg;
     private TextView mTourSlideBtn_text;
@@ -66,12 +71,34 @@ public class TourismInfoItem extends Fragment {
     }
 
     private void findViewById() {
+        mTourCategory = (TextView) mView.findViewById(R.id.tourCategory);
+        mTourSido = (TextView) mView.findViewById(R.id.tourSido);
+        mTourGungu = (TextView) mView.findViewById(R.id.tourGungu);
+        mTourTitle = (TextView) mView.findViewById(R.id.tourTitle);
+
         mView_tour_imageView = (SimpleDraweeView) mView.findViewById(R.id.view_tour_imageView);
         mTourSlideBtn_bg = (SimpleDraweeView) mView.findViewById(R.id.tourSlideBtn_bg);
         mTourSlideBtn_text = (TextView) mView.findViewById(R.id.tourSlideBtn_text);
     }
 
     private void init() {
+
+        String strTourCategory = mTourismInfoData.getTourCategory();
+        String strTourSido = mTourismInfoData.getTourSido();
+        String strTourGungu = null;
+        try {
+            strTourGungu = mTourismInfoData.getTourGungu();
+        } catch (NullPointerException e) {
+            CommonJava.Loging.i(LOG_NAME, "NullPointerException strTourGungu is null");
+        }
+        String strTourTitle = mTourismInfoData.getTourTitle();
+
+        mTourCategory.setText(strTourCategory);
+        mTourSido.setText(strTourSido);
+        mTourGungu.setText(strTourGungu);
+        mTourTitle.setText(strTourTitle);
+
+
         try {
             String strTourImgURL = mTourismInfoData.getTourImgURL();
             CommonJava.Loging.i(LOG_NAME, "strTourImgURL : " + strTourImgURL);
@@ -99,10 +126,10 @@ public class TourismInfoItem extends Fragment {
             switch (view.getId()) {
                 case R.id.tourSlideBtn_bg:
                     //onButtonPressed(mStrTourSlideImage);
-                    for(Fragment fragment :  getActivity().getSupportFragmentManager().getFragments()){
-                        CommonJava.Loging.i(LOG_NAME,"fragment : "+fragment);
-                        if(fragment instanceof LockScreenFragment){
-                            ((LockScreenFragment)fragment).setImageSildeView(mStrTourSlideImage);
+                    for (Fragment fragment : getActivity().getSupportFragmentManager().getFragments()) {
+                        CommonJava.Loging.i(LOG_NAME, "fragment : " + fragment);
+                        if (fragment instanceof LockScreenFragment) {
+                            ((LockScreenFragment) fragment).setImageSildeView(mStrTourSlideImage);
                         }
                     }
 
