@@ -73,16 +73,6 @@ public class LockScreenManager {
         if (!strSwitch.equals("SettingActivity")) {
             layoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR; // 이 기능임
         }
-        //layoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR; // 이 기능임
-
-        /*CommonJava.Loging.i(LOG_NAME, "initLock layoutParams.height : " + layoutParams.height);
-        Point point = new Point();
-        getWindowManager().getDefaultDisplay().getSize(point);
-        CommonJava.Loging.i(LOG_NAME, "initLock point.y : " + point.y);
-        int disHeight = point.y;
-        layoutParams.height = point.y - 100 * (disHeight / 2560);
-        layoutParams.verticalMargin = 200 * (disHeight / 2560);*/
-        //layoutParams.flags = FLAG_FORCE_NOT_FULLSCREEN;
 
 
     }
